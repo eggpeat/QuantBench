@@ -1,0 +1,53 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/quant_var_expected_shortfall"
+description = "Calculate historical portfolio Value at Risk (VaR) and Expected Shortfall (ES) from CSV asset returns."
+requires_image = false
+keywords = ["finance", "risk", "var", "expected-shortfall", "historical-simulation"]
+
+[metadata]
+difficulty = "medium"
+category = "deep_quant"
+tags = ["finance", "risk-metrics", "var", "expected-shortfall", "portfolio"]
+risk_level = "money_impacting"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/MASTERING R FOR QUANTITATIVE FINANCE.pdf"]
+source_concepts = ["portfolio returns", "historical VaR", "expected shortfall/CVaR"]
+source_depth = "moderate"
+source_citations = [
+  "Mastering R for Quantitative Finance, read-extracted lines 9995-10001: defines 95% VaR from the lower fifth percentile; lines 10035-10055: describes historical simulation and shows VaR from sampled historical returns; lines 10080-10095: defines Expected Shortfall as tail expectation beyond VaR, notes CVaR terminology, and states ES treatment goes beyond the book's scope while referring to Acerbi and Tasche (2002).",
+  "Carlo Acerbi and Dirk Tasche (2002), 'Expected Shortfall for Coherent Risk Measures' (also arXiv:cond-mat/0104295), which defines Expected Shortfall mathematically to ensure coherence."
+]
+source_gaps = [
+  "Expected Shortfall (ES) calculation details are outside the scope of the cited Mastering R book, which refers to Acerbi & Tasche (2002).",
+  "This task explicitly implements a discrete historical ES approximation, defined as the average of all losses greater than or equal to the calculated VaR threshold (losses >= VaR nearest-rank threshold). This is an intentional finite-sample contract for the verifier, rather than a continuous or interpolated tail-distribution expectation."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring historical simulation of portfolio Value at Risk and Expected Shortfall, verifying nearest-rank VaR indexing and Expected Shortfall mean calculation on public CSV data and hidden inline cases."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

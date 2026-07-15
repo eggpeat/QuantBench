@@ -1,0 +1,57 @@
+[
+  {
+    "minute": "2026-06-26T14:32:00Z",
+    "sportsbook": "DraftKings",
+    "request_count": 4,
+    "error_count": 1,
+    "dropped_count": 1,
+    "drop_rate": 0.25,
+    "p50_ms": 15,
+    "p95_ms": 80,
+    "p99_ms": 80
+  },
+  {
+    "minute": "2026-06-26T14:32:00Z",
+    "sportsbook": "FanDuel",
+    "request_count": 4,
+    "error_count": 1,
+    "dropped_count": 0,
+    "drop_rate": 0.0,
+    "p50_ms": 10,
+    "p95_ms": 50,
+    "p99_ms": 50
+  },
+  {
+    "minute": "2026-06-26T14:33:00Z",
+    "sportsbook": "DraftKings",
+    "request_count": 11,
+    "error_count": 0,
+    "dropped_count": 1,
+    "drop_rate": 0.090909,
+    "p50_ms": 50,
+    "p95_ms": 100,
+    "p99_ms": 100
+  },
+  {
+    "minute": "2026-06-26T14:33:00Z",
+    "sportsbook": "FanDuel",
+    "request_count": 3,
+    "error_count": 1,
+    "dropped_count": 1,
+    "drop_rate": 0.333333,
+    "p50_ms": 15,
+    "p95_ms": 25,
+    "p99_ms": 25
+  },
+  {
+    "minute": "2026-06-26T14:34:00Z",
+    "sportsbook": "DraftKings",
+    "request_count": 1,
+    "error_count": 1,
+    "dropped_count": 1,
+    "drop_rate": 1.0,
+    "p50_ms": null,
+    "p95_ms": null,
+    "p99_ms": null
+  }
+]

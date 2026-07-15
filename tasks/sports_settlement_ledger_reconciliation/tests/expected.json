@@ -1,0 +1,79 @@
+{
+  "summary": {
+    "total_internal_rows_processed": 8,
+    "total_gateway_rows_processed": 8,
+    "total_matched_transactions": 6,
+    "total_missing_internal": 2,
+    "total_missing_gateway": 2,
+    "total_amount_mismatches": 1,
+    "total_fee_mismatches": 1,
+    "total_duplicates_internal": 1,
+    "total_duplicates_gateway": 1,
+    "total_late_adjustments": 1,
+    "net_unexplained_dollars": 75.0
+  },
+  "missing_internal": [
+    {
+      "correlation_id": "103",
+      "gateway_amount": 75.0,
+      "gateway_date_utc": "2026-06-27"
+    },
+    {
+      "correlation_id": "108",
+      "gateway_amount": 60.0,
+      "gateway_date_utc": "2026-06-27"
+    }
+  ],
+  "missing_gateway": [
+    {
+      "correlation_id": "107",
+      "internal_amount": 80.0,
+      "internal_date_utc": "2026-06-27"
+    },
+    {
+      "correlation_id": "104",
+      "internal_amount": 120.0,
+      "internal_date_utc": "2026-06-28"
+    }
+  ],
+  "amount_mismatches": [
+    {
+      "correlation_id": "105",
+      "internal_amount": 200.0,
+      "gateway_amount": 190.0,
+      "difference": 10.0
+    }
+  ],
+  "fee_mismatches": [
+    {
+      "correlation_id": "106",
+      "payment_method": "ach",
+      "amount": 500.0,
+      "expected_fee": 5.0,
+      "actual_fee": 4.5,
+      "difference": 0.5
+    }
+  ],
+  "duplicate_transactions": {
+    "internal": [
+      {
+        "correlation_id": "107",
+        "occurrences": 2
+      }
+    ],
+    "gateway": [
+      {
+        "correlation_id": "108",
+        "occurrences": 2
+      }
+    ]
+  },
+  "late_adjustments": [
+    {
+      "correlation_id": "109",
+      "internal_date_utc": "2026-06-25",
+      "gateway_date_utc": "2026-06-27",
+      "days_difference": 2
+    }
+  ]
+}

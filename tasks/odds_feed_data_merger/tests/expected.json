@@ -1,0 +1,271 @@
+{
+  "conflicts": [
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "market": "moneyline",
+      "outcome": "Boston Celtics",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": null,
+        "odds": 100,
+        "source_file": "csv_feed.csv",
+        "source_priority": 5,
+        "timestamp": "2026-01-05T12:05:00Z"
+      },
+      "winning": {
+        "line": null,
+        "odds": 107,
+        "source_file": "jsonl_feed.jsonl",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:10:00Z"
+      }
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "market": "moneyline",
+      "outcome": "Boston Celtics",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": null,
+        "odds": 105,
+        "source_file": "json_feed.json",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:00:00Z"
+      },
+      "winning": {
+        "line": null,
+        "odds": 107,
+        "source_file": "jsonl_feed.jsonl",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:10:00Z"
+      }
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "market": "moneyline",
+      "outcome": "New York Knicks",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": null,
+        "odds": -120,
+        "source_file": "csv_feed.csv",
+        "source_priority": 5,
+        "timestamp": "2026-01-05T12:05:00Z"
+      },
+      "winning": {
+        "line": null,
+        "odds": -125,
+        "source_file": "json_feed.json",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:00:00Z"
+      }
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "market": "spread",
+      "outcome": "New York Knicks",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": -2.5,
+        "odds": -112,
+        "source_file": "csv_feed.csv",
+        "source_priority": 5,
+        "timestamp": "2026-01-05T12:05:00Z"
+      },
+      "winning": {
+        "line": -2.5,
+        "odds": -110,
+        "source_file": "json_feed.json",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:00:00Z"
+      }
+    },
+    {
+      "away_team": "Golden State Warriors",
+      "book": "BetCo",
+      "event_id": "ev-2002",
+      "home_team": "Los Angeles Lakers",
+      "market": "total",
+      "outcome": "Over",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": 229.5,
+        "odds": -110,
+        "source_file": "csv_feed.csv",
+        "source_priority": 12,
+        "timestamp": "2026-01-05T12:10:00Z"
+      },
+      "winning": {
+        "line": 229.5,
+        "odds": -111,
+        "source_file": "jsonl_feed.jsonl",
+        "source_priority": 12,
+        "timestamp": "2026-01-05T12:11:00Z"
+      }
+    },
+    {
+      "away_team": "Golden State Warriors",
+      "book": "BetCo",
+      "event_id": "ev-2002",
+      "home_team": "Los Angeles Lakers",
+      "market": "total",
+      "outcome": "Over",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": 229.5,
+        "odds": -108,
+        "source_file": "json_feed.json",
+        "source_priority": 10,
+        "timestamp": "2026-01-05T12:05:00Z"
+      },
+      "winning": {
+        "line": 229.5,
+        "odds": -111,
+        "source_file": "jsonl_feed.jsonl",
+        "source_priority": 12,
+        "timestamp": "2026-01-05T12:11:00Z"
+      }
+    },
+    {
+      "away_team": "Phoenix Suns",
+      "book": "Sunset",
+      "event_id": "ev-3003",
+      "home_team": "Dallas Mavericks",
+      "market": "moneyline",
+      "outcome": "Dallas Mavericks",
+      "reason": "lower_priority_or_older_timestamp",
+      "rejected": {
+        "line": null,
+        "odds": -130,
+        "source_file": "csv_feed.csv",
+        "source_priority": 7,
+        "timestamp": "2026-01-05T12:00:00Z"
+      },
+      "winning": {
+        "line": null,
+        "odds": -135,
+        "source_file": "jsonl_feed.jsonl",
+        "source_priority": 7,
+        "timestamp": "2026-01-05T12:02:00Z"
+      }
+    }
+  ],
+  "merged_odds": [
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "line": null,
+      "market": "moneyline",
+      "odds": 107,
+      "outcome": "Boston Celtics",
+      "source_file": "jsonl_feed.jsonl",
+      "source_priority": 10,
+      "timestamp": "2026-01-05T12:10:00Z"
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "line": null,
+      "market": "moneyline",
+      "odds": -125,
+      "outcome": "New York Knicks",
+      "source_file": "json_feed.json",
+      "source_priority": 10,
+      "timestamp": "2026-01-05T12:00:00Z"
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "line": 2.5,
+      "market": "spread",
+      "odds": -110,
+      "outcome": "Boston Celtics",
+      "source_file": "json_feed.json",
+      "source_priority": 10,
+      "timestamp": "2026-01-05T12:00:00Z"
+    },
+    {
+      "away_team": "Boston Celtics",
+      "book": "NorthStar",
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "line": -2.5,
+      "market": "spread",
+      "odds": -110,
+      "outcome": "New York Knicks",
+      "source_file": "json_feed.json",
+      "source_priority": 10,
+      "timestamp": "2026-01-05T12:00:00Z"
+    },
+    {
+      "away_team": "Golden State Warriors",
+      "book": "BetCo",
+      "event_id": "ev-2002",
+      "home_team": "Los Angeles Lakers",
+      "line": 229.5,
+      "market": "total",
+      "odds": -111,
+      "outcome": "Over",
+      "source_file": "jsonl_feed.jsonl",
+      "source_priority": 12,
+      "timestamp": "2026-01-05T12:11:00Z"
+    },
+    {
+      "away_team": "Golden State Warriors",
+      "book": "BetCo",
+      "event_id": "ev-2002",
+      "home_team": "Los Angeles Lakers",
+      "line": 229.5,
+      "market": "total",
+      "odds": -110,
+      "outcome": "Under",
+      "source_file": "csv_feed.csv",
+      "source_priority": 12,
+      "timestamp": "2026-01-05T12:10:00Z"
+    },
+    {
+      "away_team": "Phoenix Suns",
+      "book": "Sunset",
+      "event_id": "ev-3003",
+      "home_team": "Dallas Mavericks",
+      "line": null,
+      "market": "moneyline",
+      "odds": -135,
+      "outcome": "Dallas Mavericks",
+      "source_file": "jsonl_feed.jsonl",
+      "source_priority": 7,
+      "timestamp": "2026-01-05T12:02:00Z"
+    },
+    {
+      "away_team": "Phoenix Suns",
+      "book": "Sunset",
+      "event_id": "ev-3003",
+      "home_team": "Dallas Mavericks",
+      "line": null,
+      "market": "moneyline",
+      "odds": 115,
+      "outcome": "Phoenix Suns",
+      "source_file": "jsonl_feed.jsonl",
+      "source_priority": 7,
+      "timestamp": "2026-01-05T12:02:00Z"
+    }
+  ]
+}

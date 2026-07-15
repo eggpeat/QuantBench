@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/distributional_boosting_boundary_stability"
+description = "Implement numerically stable negative-binomial natural gradients and diagonal Fisher preconditioning at clipping boundaries."
+requires_image = false
+keywords = ["negative-binomial", "distributional-boosting", "natural-gradient", "numerical-stability", "fisher-information"]
+
+[metadata]
+difficulty = "hard"
+category = "machine_learning"
+tags = ["probabilistic-modeling", "negative-binomial", "gradient", "hessian", "numpy"]
+risk_level = "medium"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = []
+source_concepts = ["negative-binomial log likelihood", "natural gradient", "diagonal Fisher information", "stable parameter clipping"]
+source_depth = "moderate"
+source_citations = [
+  "kmedved/xgboost-distribution, commit f05d36911282bbe56195704bac15b7d5561d7c8e, src/xgboost_distribution/distributions/negative_binomial.py (MIT), accessed 2026-07-12.",
+  "Jørgensen, The Theory of Dispersion Models, Chapman & Hall 1997, negative-binomial likelihood and information geometry.",
+  "Martens and Grosse, Optimizing Neural Networks with Kronecker-factored Approximate Curvature, ICML 2015, diagonal/Fisher natural-gradient motivation."
+]
+source_gaps = ["The upstream class API is adapted here to a dependency-light module function and adds explicit float32 boundary guarantees and domain validation."]
+promotion_blockers = []
+task_design_note = "Promoted quantitative benchmark task requiring corrected F_bb=n*p/(p+1), stable float64 raw gradients, and finite float32 natural gradients at both clipping limits."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+
+[environment.env]
+
+[verifier.env]
+
+[solution.env]

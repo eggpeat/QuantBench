@@ -1,0 +1,66 @@
+{
+  "bankroll": 1000.0,
+  "fractional_kelly": 0.25,
+  "high_hold_threshold": 0.12,
+  "markets": [
+    {
+      "market_id": "normal_spread_two_way",
+      "sport": "basketball",
+      "market_type": "spread",
+      "description": "Standard -110/-110 spread with no model edge.",
+      "outcomes": [
+        {
+          "name": "Harbor Hawks -3.5",
+          "american_odds": -110,
+          "model_probability": 0.51
+        },
+        {
+          "name": "Metro Foxes +3.5",
+          "american_odds": -110,
+          "model_probability": 0.49
+        }
+      ]
+    },
+    {
+      "market_id": "positive_edge_spread_two_way",
+      "sport": "basketball",
+      "market_type": "spread",
+      "description": "Standard -110/-110 spread where the model makes one side a fractional-Kelly bet.",
+      "outcomes": [
+        {
+          "name": "Desert Owls -1.5",
+          "american_odds": -110,
+          "model_probability": 0.56
+        },
+        {
+          "name": "Lakeside Bears +1.5",
+          "american_odds": -110,
+          "model_probability": 0.44
+        }
+      ]
+    },
+    {
+      "market_id": "high_hold_three_way_tie",
+      "sport": "soccer",
+      "market_type": "three_way_result",
+      "description": "Artificial high-hold 1X2 market; all outcomes are +140 and the market must be forced to no bet.",
+      "outcomes": [
+        {
+          "name": "North City win",
+          "american_odds": 140,
+          "model_probability": 0.45
+        },
+        {
+          "name": "Draw",
+          "american_odds": 140,
+          "model_probability": 0.30
+        },
+        {
+          "name": "South United win",
+          "american_odds": 140,
+          "model_probability": 0.25
+        }
+      ]
+    }
+  ]
+}

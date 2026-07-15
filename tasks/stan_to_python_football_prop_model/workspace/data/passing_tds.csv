@@ -1,0 +1,21 @@
+passer,opponent,is_home,passer_rating,opp_defense_rating,passing_tds
+Patrick Mahomes,Raiders,1,2.5,0.5,3
+Patrick Mahomes,Chargers,0,2.5,-0.2,1
+Josh Allen,Dolphins,1,1.8,0.8,2
+Josh Allen,Patriots,0,1.8,0.1,1
+Lamar Jackson,Steelers,1,2.2,0.4,2
+Lamar Jackson,Browns,0,2.2,0.0,2
+Joe Burrow,Ravens,1,1.5,0.6,1
+Joe Burrow,Steelers,0,1.5,-0.5,0
+Patrick Mahomes,Broncos,1,2.0,0.2,2
+Patrick Mahomes,Chiefs,0,2.0,0.1,1
+Josh Allen,Jets,1,2.8,0.9,4
+Josh Allen,Bills,0,2.8,0.3,2
+Lamar Jackson,Bengals,1,1.6,0.2,1
+Lamar Jackson,Ravens,0,1.6,-0.1,1
+Joe Burrow,Browns,1,2.1,0.5,2
+Joe Burrow,Dolphins,0,2.1,-0.3,1
+Patrick Mahomes,Raiders,1,1.9,0.7,2
+Patrick Mahomes,Chargers,0,1.9,0.0,1
+Josh Allen,Dolphins,1,2.4,0.6,3
+Josh Allen,Patriots,0,2.4,-0.2,1

@@ -1,0 +1,1 @@
+This benchmark task is an independent exercise based on the public numerical concepts and scipy.optimize API documented in scipy/scipy and the Markowitz portfolio-selection paper cited in task.toml. No upstream source files are redistributed in the public workspace.

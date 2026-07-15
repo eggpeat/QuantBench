@@ -1,0 +1,6 @@
+{
+  "x_col": "Asset_A",
+  "y_col": "Asset_B",
+  "adf_critical_value": -2.76,
+  "z_threshold": 2.0
+}

@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/bayesian_mcmc_rhat_diagnostic"
+description = "Implement rank-normalized split R-hat diagnostics with bulk and tail effective sample sizes for MCMC chains."
+requires_image = false
+keywords = ["bayesian", "mcmc", "rhat", "diagnostics", "statistics"]
+
+[metadata]
+difficulty = "medium"
+category = "data_science"
+tags = ["bayesian-statistics", "mcmc", "diagnostics", "json", "numeracy"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/663077209-Bayesian-Data-Analysis-Second-Edition-Chapman-Hall-CRC-Texts-in-Statistical-Science-by-Andrew-Gelman-John-B-Carlin-Hal-S-Stern-Donald-B-Rubin.pdf"]
+source_concepts = ["rank-normalized split R-hat", "bulk effective sample size", "tail effective sample size", "Geyer initial-positive-sequence estimator", "MCMC convergence diagnostics"]
+source_depth = "deep"
+source_citations = [
+  "Aki Vehtari, Andrew Gelman, Daniel Simpson, Bob Carpenter, and Paul-Christian Bürkner (2021), Rank-normalization, folding, and localization: An improved R-hat for assessing convergence of MCMC, Bayesian Analysis 16(2), 667-718.",
+  "Andrew Gelman, John B. Carlin, Hal S. Stern, Donald B. Rubin. Bayesian Data Analysis (Second Edition), Section 11.4, page 296, equations 11.1-11.4: foundational within-chain and between-chain variance decomposition."
+]
+source_gaps = []
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring a standard-library implementation of rank-normalized split R-hat plus bulk and tail ESS, with hidden shifted-chain, heavy-tail, autocorrelation, constant-chain, unequal-length, and too-few-draw cases."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

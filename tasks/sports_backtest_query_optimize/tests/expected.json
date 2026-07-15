@@ -1,0 +1,44 @@
+[
+  {
+    "sport": "basketball",
+    "bookmaker": "BookieA",
+    "total_bets": 122,
+    "avg_odds": 3.0686,
+    "avg_pred": 0.562
+  },
+  {
+    "sport": "basketball",
+    "bookmaker": "BookieC",
+    "total_bets": 118,
+    "avg_odds": 3.1283,
+    "avg_pred": 0.5539
+  },
+  {
+    "sport": "basketball",
+    "bookmaker": "BookieB",
+    "total_bets": 116,
+    "avg_odds": 3.126,
+    "avg_pred": 0.5589
+  },
+  {
+    "sport": "soccer",
+    "bookmaker": "BookieB",
+    "total_bets": 114,
+    "avg_odds": 3.0854,
+    "avg_pred": 0.5579
+  },
+  {
+    "sport": "soccer",
+    "bookmaker": "BookieC",
+    "total_bets": 114,
+    "avg_odds": 3.0886,
+    "avg_pred": 0.5588
+  },
+  {
+    "sport": "soccer",
+    "bookmaker": "BookieA",
+    "total_bets": 111,
+    "avg_odds": 3.1306,
+    "avg_pred": 0.5552
+  }
+]

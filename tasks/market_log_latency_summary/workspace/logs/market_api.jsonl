@@ -1,0 +1,26 @@
+{"timestamp": "2026-06-26T14:32:05Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 12, "dropped": false}
+{"timestamp": "2026-06-26T14:32:10Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 15, "dropped": false}
+{"timestamp": "2026-06-26T14:32:15Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 500, "latency_ms": 80, "dropped": false}
+{"timestamp": "2026-06-26T14:32:20Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 250, "dropped": true}
+{"timestamp": "2026-06-26T14:32:25Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 200, "latency_ms": 8, "dropped": false}
+{"timestamp": "2026-06-26T14:32:30Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 200, "latency_ms": 10, "dropped": false}
+{"timestamp": "2026-06-26T14:32:35Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 404, "latency_ms": 50, "dropped": false}
+{"timestamp": "2026-06-26T14:32:40Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 200, "latency_ms": 12, "dropped": false}
+{"type": "heartbeat", "timestamp": "2026-06-26T14:32:45Z"}
+invalid_json_here
+{"timestamp": "2026-06-26T14:32:50Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200}
+{"timestamp": "2026-06-26T14:33:01Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 10, "dropped": false}
+{"timestamp": "2026-06-26T14:33:05Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 20, "dropped": false}
+{"timestamp": "2026-06-26T14:33:10Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 30, "dropped": false}
+{"timestamp": "2026-06-26T14:33:15Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 40, "dropped": false}
+{"timestamp": "2026-06-26T14:33:20Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 50, "dropped": false}
+{"timestamp": "2026-06-26T14:33:25Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 60, "dropped": false}
+{"timestamp": "2026-06-26T14:33:30Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 70, "dropped": false}
+{"timestamp": "2026-06-26T14:33:35Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 80, "dropped": false}
+{"timestamp": "2026-06-26T14:33:40Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 90, "dropped": false}
+{"timestamp": "2026-06-26T14:33:45Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 100, "dropped": false}
+{"timestamp": "2026-06-26T14:33:50Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 200, "latency_ms": 500, "dropped": true}
+{"timestamp": "2026-06-26T14:33:05Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 200, "latency_ms": 15, "dropped": false}
+{"timestamp": "2026-06-26T14:33:15Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 200, "latency_ms": 25, "dropped": false}
+{"timestamp": "2026-06-26T14:33:25Z", "sportsbook": "FanDuel", "endpoint": "/v2/markets", "status": 503, "latency_ms": 300, "dropped": true}
+{"timestamp": "2026-06-26T14:34:10Z", "sportsbook": "DraftKings", "endpoint": "/v1/odds", "status": 504, "latency_ms": 1000, "dropped": true}

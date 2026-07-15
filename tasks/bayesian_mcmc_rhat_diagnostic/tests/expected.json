@@ -1,0 +1,16 @@
+{
+  "shifted": {
+    "draws_per_chain": 4,
+    "ess_bulk": 12.0,
+    "ess_tail": 12.0,
+    "n_chains": 3,
+    "rhat": 2.835293
+  },
+  "theta": {
+    "draws_per_chain": 4,
+    "ess_bulk": 12.0,
+    "ess_tail": 12.0,
+    "n_chains": 3,
+    "rhat": 1.548373
+  }
+}

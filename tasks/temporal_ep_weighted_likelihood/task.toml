@@ -1,0 +1,52 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/temporal_ep_weighted_likelihood"
+description = "Fit a scalar Gaussian random walk with weighted expectation-propagation likelihood sites and Rauch smoothing."
+requires_image = false
+keywords = ["numpy", "scipy", "expectation-propagation", "gauss-hermite", "state-space", "smoothing"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["numpy", "scipy", "expectation-propagation", "time-series", "numerical-integration"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_concepts"
+
+[provenance]
+source_books = []
+source_concepts = ["scalar Gaussian random-walk state-space models", "expectation propagation", "normalized Gauss-Hermite moment matching", "Rauch-Tung-Striebel smoothing", "weighted likelihood powers"]
+source_depth = "deep"
+source_citations = [
+  "Thomas P. Minka (2001), Expectation Propagation for Approximate Bayesian Inference, UAI 2001, https://tminka.github.io/papers/ep/",
+  "Andrew C. Harvey (1989), Forecasting, Structural Time Series Models and the Kalman Filter, Cambridge University Press, Chapter 3.",
+  "Rauch, H. E., Tung, F., and Striebel, C. T. (1965), Maximum likelihood estimates of linear dynamic systems, AIAA Journal 3(8), 1445-1450, https://doi.org/10.2514/3.3166",
+  "SciPy NumPy numerical APIs: numpy.polynomial.hermite.hermgauss and scipy.special.log_ndtr, gammaln, ive; SciPy 1.15 API documentation, https://docs.scipy.org/doc/scipy-1.15.0/"
+]
+source_gaps = ["The benchmark fixes scalar likelihood parameterizations, positive observation powers, stable duplicate-time ordering, and an executable verifier around the cited EP and smoothing concepts."]
+promotion_blockers = []
+task_design_note = "Seeded Terminal-Bench numerical task; public workspace uses seed 100 and omits precomputed expected answers."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,11 @@
+{
+  "seed": 100,
+  "times": [2.0, 0.0, 1.0, 1.0, 3.0, 2.0, 4.0, 5.0],
+  "outcomes": [1, -1, 1, -1, 1, -1, 1, 1],
+  "weights": [0.7, 1.2, 2.5, 0.4, 1.8, 3.0, 0.9, 1.6],
+  "likelihood": "logit",
+  "process_var": 0.35,
+  "initial_mean": -0.15,
+  "initial_var": 0.8,
+  "quadrature_order": 24
+}

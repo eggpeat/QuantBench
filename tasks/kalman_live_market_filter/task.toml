@@ -1,0 +1,52 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/kalman_live_market_filter"
+description = "Implement a scalar Kalman filter with outlier rejection to track a noisy market fair-value."
+requires_image = false
+keywords = ["kalman-filter", "state-estimation", "outlier-rejection", "market-microstructure", "statistics"]
+
+[metadata]
+difficulty = "medium"
+category = "data_science"
+tags = ["kalman-filtering", "outlier-gating", "time-series", "state-space", "numeracy"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/399552330-Kalman-and-Bayesian-Filters-in-Python.pdf"]
+source_concepts = ["predict/update", "measurement uncertainty", "outlier gating", "innovation variance", "Kalman gain"]
+source_depth = "deep"
+source_citations = [
+  "Roger R. Labbe. Kalman and Bayesian Filters in Python, Chapter 4: defines the 1D predict, update, and Kalman gain equations.",
+  "Roger R. Labbe. Kalman and Bayesian Filters in Python, Chapter 8, Section 8.6: discusses outlier detection and rejection using standard deviation / Mahalanobis distance."
+]
+source_gaps = [
+  "The task utilizes a 1D scalar Kalman filter where outlier gating rejects measurements if their absolute innovation exceeds a threshold based on the innovation covariance S = P + R. This innovation-covariance gating is the scalar Kalman predictive measurement variance, representing the deliberate verifier contract."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring a standard-library implementation of a 1D Kalman filter with outlier gating based on statistical deviation from predicted state."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,39 @@
+{
+  "hands": [
+    {
+      "hand_id": "hand_001",
+      "players": [
+        {"seat": 1, "name": "Alice", "bet": 100, "folded": false, "hand_strength": 5},
+        {"seat": 2, "name": "Bob", "bet": 100, "folded": false, "hand_strength": 3},
+        {"seat": 3, "name": "Charlie", "bet": 100, "folded": false, "hand_strength": 2}
+      ]
+    },
+    {
+      "hand_id": "hand_002",
+      "players": [
+        {"seat": 1, "name": "Player A", "bet": 100, "folded": false, "hand_strength": 20},
+        {"seat": 2, "name": "Player B", "bet": 200, "folded": false, "hand_strength": 30},
+        {"seat": 3, "name": "Player C", "bet": 300, "folded": false, "hand_strength": 40},
+        {"seat": 4, "name": "Player D", "bet": 400, "folded": false, "hand_strength": 10},
+        {"seat": 5, "name": "Player E", "bet": 250, "folded": true, "hand_strength": null}
+      ]
+    },
+    {
+      "hand_id": "hand_003",
+      "players": [
+        {"seat": 1, "name": "Player A", "bet": 150, "folded": false, "hand_strength": 50},
+        {"seat": 2, "name": "Player B", "bet": 150, "folded": false, "hand_strength": 50},
+        {"seat": 3, "name": "Player C", "bet": 150, "folded": false, "hand_strength": 40},
+        {"seat": 4, "name": "Player D", "bet": 51, "folded": false, "hand_strength": 50}
+      ]
+    },
+    {
+      "hand_id": "hand_004",
+      "players": [
+        {"seat": 1, "name": "Player A", "bet": 100, "folded": false, "hand_strength": 10},
+        {"seat": 2, "name": "Player B", "bet": 200, "folded": true, "hand_strength": null},
+        {"seat": 3, "name": "Player C", "bet": 50, "folded": true, "hand_strength": null}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "status": "recovered",
+  "initial_tx_id": 100,
+  "final_tx_id": 104,
+  "applied_transactions": [
+    101,
+    102,
+    103,
+    104
+  ],
+  "ticks_inserted": 6,
+  "corruption_encountered": true,
+  "database_state": {
+    "total_ticks": 21,
+    "live_odds": [
+      {
+        "market_id": "M_MLB_01",
+        "outcome": "AWAY",
+        "sportsbook": "BetMGM",
+        "price": 1.75,
+        "timestamp": "2026-06-27T12:10:00.000Z",
+        "tx_id": 103
+      },
+      {
+        "market_id": "M_MLB_01",
+        "outcome": "AWAY",
+        "sportsbook": "DraftKings",
+        "price": 1.76,
+        "timestamp": "2026-06-27T10:05:00.000Z",
+        "tx_id": 95
+      },
+      {
+        "market_id": "M_MLB_01",
+        "outcome": "HOME",
+        "sportsbook": "BetMGM",
+        "price": 2.15,
+        "timestamp": "2026-06-27T12:10:00.000Z",
+        "tx_id": 103
+      },
+      {
+        "market_id": "M_MLB_01",
+        "outcome": "HOME",
+        "sportsbook": "DraftKings",
+        "price": 2.1,
+        "timestamp": "2026-06-27T10:05:00.000Z",
+        "tx_id": 95
+      },
+      {
+        "market_id": "M_MLB_01",
+        "outcome": "HOME",
+        "sportsbook": "FanDuel",
+        "price": 2.05,
+        "timestamp": "2026-06-27T10:06:00.000Z",
+        "tx_id": 96
+      },
+      {
+        "market_id": "M_NBA_01",
+        "outcome": "AWAY",
+        "sportsbook": "BetMGM",
+        "price": 2.55,
+        "timestamp": "2026-06-27T10:10:00.000Z",
+        "tx_id": 100
+      },
+      {
+        "market_id": "M_NBA_01",
+        "outcome": "AWAY",
+        "sportsbook": "DraftKings",
+        "price": 2.6,
+        "timestamp": "2026-06-27T10:02:00.000Z",
+        "tx_id": 92
+      },
+      {
+        "market_id": "M_NBA_01",
+        "outcome": "AWAY",
+        "sportsbook": "FanDuel",
+        "price": 2.7,
+        "timestamp": "2026-06-27T12:05:00.000Z",
+        "tx_id": 102
+      },
+      {
+        "market_id": "M_NBA_01",
+        "outcome": "HOME",
+        "sportsbook": "DraftKings",
+        "price": 1.48,
+        "timestamp": "2026-06-27T12:15:00.000Z",
+        "tx_id": 104
+      },
+      {
+        "market_id": "M_NBA_01",
+        "outcome": "HOME",
+        "sportsbook": "FanDuel",
+        "price": 1.55,
+        "timestamp": "2026-06-27T10:04:00.000Z",
+        "tx_id": 94
+      },
+      {
+        "market_id": "M_NFL_01",
+        "outcome": "AWAY",
+        "sportsbook": "DraftKings",
+        "price": 1.82,
+        "timestamp": "2026-06-27T12:00:00.000Z",
+        "tx_id": 101
+      },
+      {
+        "market_id": "M_NFL_01",
+        "outcome": "AWAY",
+        "sportsbook": "FanDuel",
+        "price": 1.91,
+        "timestamp": "2026-06-27T10:09:00.000Z",
+        "tx_id": 99
+      },
+      {
+        "market_id": "M_NFL_01",
+        "outcome": "HOME",
+        "sportsbook": "BetMGM",
+        "price": 1.87,
+        "timestamp": "2026-06-27T10:03:00.000Z",
+        "tx_id": 93
+      },
+      {
+        "market_id": "M_NFL_01",
+        "outcome": "HOME",
+        "sportsbook": "DraftKings",
+        "price": 1.98,
+        "timestamp": "2026-06-27T12:00:00.000Z",
+        "tx_id": 101
+      },
+      {
+        "market_id": "M_NFL_01",
+        "outcome": "HOME",
+        "sportsbook": "FanDuel",
+        "price": 1.92,
+        "timestamp": "2026-06-27T10:01:00.000Z",
+        "tx_id": 91
+      }
+    ]
+  }
+}

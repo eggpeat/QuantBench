@@ -1,0 +1,153 @@
+PokerStars Hand #100000001: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:00:00 ET
+Table 'Redwood' 9-max Seat #3 is the button
+Seat 1: PlayerA ($200.00 in chips)
+Seat 2: PlayerB ($150.00 in chips)
+Seat 3: PlayerC ($100.00 in chips)
+PlayerA: posts small blind $1.00
+PlayerB: posts big blind $2.00
+*** HOLE CARDS ***
+PlayerC: raises $4.00 to $6.00
+PlayerA: calls $5.00
+PlayerB: folds
+*** FLOP *** [2d 5h As]
+PlayerA: checks
+PlayerC: bets $10.00
+PlayerA: calls $10.00
+*** TURN *** [2d 5h As] [Js]
+PlayerA: checks
+PlayerC: bets $20.00
+PlayerA: folds
+Uncalled bet ($20.00) returned to PlayerC
+PlayerC collected $34.00 from pot
+*** SUMMARY ***
+Total pot $34.00 | Rake $0.00
+Board [2d 5h As Js]
+Seat 1: PlayerA (small blind) folded on the Turn
+Seat 2: PlayerB (big blind) folded before Flop
+Seat 3: PlayerC (button) collected ($34.00)
+
+PokerStars Hand #100000002: Hold'em No Limit ($0.50/$1.00 USD) - 2026/06/27 12:05:00 ET
+Table 'Pine' 6-max Seat #1 is the button
+Seat 1: Alice ($100.00 in chips)
+Seat 2: Bob ($120.00 in chips)
+Seat 3: Charlie ($80.00 in chips)
+Bob: posts small blind $0.50
+Charlie: posts big blind $1.00
+*** HOLE CARDS ***
+Alice: calls $1.00
+Bob: calls $0.50
+Charlie: checks
+*** FLOP *** [Kh Qh Jh]
+Bob: checks
+Charlie: checks
+Alice: bets $2.00
+Bob: calls $2.00
+Charlie: raises $6.00 to $8.00
+Alice: calls $6.00
+Bob: folds
+*** TURN *** [Kh Qh Jh] [Th]
+Charlie: bets $16.00
+Alice: calls $16.00
+*** RIVER *** [Kh Qh Jh Th] [2c]
+Charlie: checks
+Alice: bets $20.00
+Charlie: calls $20.00
+*** SHOW DOWN ***
+Alice: shows [Ah 9h] (a Royal Flush)
+Charlie: mucks hand
+Alice collected $90.00 from pot
+*** SUMMARY ***
+Total pot $93.00 | Rake $3.00
+Board [Kh Qh Jh Th 2c]
+Seat 1: Alice (button) showed [Ah 9h] and won ($90.00) with a Royal Flush
+Seat 2: Bob (small blind) folded on the Flop
+Seat 3: Charlie (big blind) mucked [Ks Kd]
+
+PokerStars Hand #100000003: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:10:00 ET
+Table 'Maple' 9-max Seat #2 is the button
+Seat 1: folds ($100.00 in chips)
+Seat 2: calls ($150.00 in chips)
+Seat 3: raises ($200.00 in chips)
+folds: posts small blind $1.00
+calls: posts big blind $2.00
+*** HOLE CARDS ***
+raises: raises $4.00 to $6.00
+folds: calls $5.00
+calls: folds
+*** FLOP *** [2d 5h As]
+folds: checks
+raises: bets $8.00
+folds: folds
+Uncalled bet ($8.00) returned to raises
+raises collected $14.00 from pot
+*** SUMMARY ***
+Total pot $14.00 | Rake $0.00
+Board [2d 5h As]
+Seat 1: folds (small blind) folded on the Flop
+Seat 2: calls (button) (big blind) folded before Flop
+Seat 3: raises collected ($14.00)
+
+PokerStars Hand #100000004: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:15:00 ET
+Table 'Oak' 9-max Seat #1 is the button
+Seat 1: Player1 ($100.00 in chips)
+Seat 2: Player2 ($100.00 in chips)
+Player2: posts small blind $1.00
+Player1: posts big blind $2.00
+*** HOLE CARDS ***
+Player2: "I think he folds"
+Player2: calls $1.00
+Player1: "checks is the way"
+Player1: checks
+*** FLOP *** [Kh Qh Jh]
+Player2: checks
+Player1: "bets $10.00"
+Player1: bets $5.00
+Player2: folds
+Uncalled bet ($5.00) returned to Player1
+Player1 collected $4.00 from pot
+*** SUMMARY ***
+Total pot $4.00 | Rake $0.00
+Board [Kh Qh Jh]
+Seat 1: Player1 (button) (big blind) collected ($4.00)
+Seat 2: Player2 (small blind) folded on the Flop
+
+PokerStars Hand #100000005: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:20:00 ET
+Table 'Elm' 9-max Seat #1 is the button
+Seat 1: PlayerA ($100.00 in chips)
+Seat 2: PlayerB ($100.00 in chips)
+PlayerB: posts small blind $1.00
+PlayerA: posts big blind $2.00
+*** HOLE CARDS ***
+PlayerB: raises $4.00 to $5.00
+PlayerA: checks
+*** SUMMARY ***
+Total pot $7.00 | Rake $0.00
+
+PokerStars Hand #100000006: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:25:00 ET
+Table 'Birch' 9-max Seat #1 is the button
+Seat 1: PlayerA ($100.00 in chips)
+Seat 2: PlayerB ($100.00 in chips)
+Seat 3: PlayerC ($100.00 in chips)
+PlayerB: posts small blind $1.00
+PlayerC: posts big blind $2.00
+*** HOLE CARDS ***
+PlayerA: folds
+PlayerB: calls $1.00
+PlayerC: checks
+*** FLOP *** [As Ks Qd]
+PlayerA: checks
+PlayerB: bets $2.00
+*** SUMMARY ***
+Total pot $6.00 | Rake $0.00
+
+PokerStars Hand #100000007: Hold'em No Limit ($1.00/$2.00 USD) - 2026/06/27 12:30:00 ET
+Table 'Cedar' 9-max Seat #1 is the button
+Seat 1: PlayerA ($10.00 in chips)
+Seat 2: PlayerB ($100.00 in chips)
+PlayerB: posts small blind $1.00
+PlayerA: posts big blind $2.00
+*** HOLE CARDS ***
+PlayerB: raises $28.00 to $29.00
+PlayerA: calls $27.00
+*** SUMMARY ***
+Total pot $39.00 | Rake $0.00

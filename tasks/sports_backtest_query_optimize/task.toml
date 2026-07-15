@@ -1,0 +1,54 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/sports_backtest_query_optimize"
+description = "Optimize a complex historical backtest query in SQLite using index design and query planning analysis."
+requires_image = false
+keywords = ["sqlite", "query-optimization", "database", "backtesting", "indexing", "explain-query-plan"]
+
+[metadata]
+difficulty = "medium"
+category = "data_systems"
+tags = ["sqlite", "query-optimization", "database", "backtesting", "indexing", "explain-query-plan"]
+risk_level = "money_impacting"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = [
+  "source_books/SQLite-Query-Optimization.pdf"
+]
+source_concepts = ["SQLite query planner", "Multi-column indexes", "Correlated subquery indexing", "EXPLAIN QUERY PLAN parsing"]
+source_depth = "moderate"
+source_citations = [
+  "SQLite Query Planner Documentation (sqlite.org/queryplanner.html): defines the use of indexes for joins, covering indexes, and how the query optimizer handles search vs scan.",
+  "Using SQLite (Jay A. Kreibich), Chapter 5: discusses index design, query optimization, and interpreting EXPLAIN QUERY PLAN output to eliminate automatic temp indexes."
+]
+source_gaps = []
+
+promotion_blockers = []
+
+task_design_note = "Promoted Quant Bench task for SQLite backtest database query optimization. The query joins three tables with a date range filter and correlated subqueries. Without indexes, SQLite performs full table scans and creates automatic temporary indexes, which is highly inefficient. The task tests the agent's ability to analyze the query, design covering/composite indexes, and verify that the SQLite optimizer transitions from SCAN to SEARCH without any automatic indexes."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

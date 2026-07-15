@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/incremental_feature_materialization"
+description = "Implement crash-safe incremental feature materialization over append-only JSONL events."
+requires_image = false
+keywords = ["incremental", "materialization", "atomic", "jsonl", "features"]
+
+[metadata]
+difficulty = "hard"
+category = "data_engineering"
+tags = ["incremental-view", "atomic-commit", "hard-link", "idempotence"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_concept"
+
+[provenance]
+source_books = []
+source_concepts = ["incremental view maintenance", "atomic generation pointers", "append-only prefix verification"]
+source_depth = "moderate"
+source_citations = [
+  "Gupta, A. and Mumick, I. S. (1995), Maintenance of Materialized Views: Problems, Techniques, and Applications, IEEE Data Engineering Bulletin 18(2).",
+  "Gray, J. and Reuter, A. (1992), Transaction Processing: Concepts and Techniques, Morgan Kaufmann (atomic commit and recovery invariants)."
+]
+source_gaps = ["The benchmark specifies a filesystem generation protocol, deterministic JSONL serialization, hard-linked unchanged partitions, and prefix checksums."]
+promotion_blockers = []
+task_design_note = "Seeded Terminal-Bench data-engineering task; visible events use seed 100 and hidden cases exercise late data, crashes, and prefix mutation."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 1024
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

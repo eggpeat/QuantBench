@@ -1,0 +1,52 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/empirical_bayes_true_skill"
+description = "Implement empirical Bayes shrinkage on player skill success rates using a beta-binomial model and method-of-moments prior fitting."
+requires_image = false
+keywords = ["statistics", "empirical-bayes", "beta-binomial", "shrinkage", "true-skill"]
+
+[metadata]
+difficulty = "medium"
+category = "data_science"
+tags = ["statistics", "empirical-bayes", "beta-binomial", "shrinkage", "json"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/367144371-IntroductionToEmpiricalBayes-DavidRobinson.pdf"]
+source_concepts = ["beta-binomial empirical Bayes", "method of moments prior estimation", "posterior mean shrinkage", "credible intervals"]
+source_depth = "moderate"
+source_citations = [
+  "David Robinson. Introduction to Empirical Bayes: Examples and Methods in R, Chapter 3, pages 21-25. Lines 543-579 describe EB estimation and successes/total data. Lines 717-720 mention the method of moments for fitting a beta prior.",
+  "David Robinson. Introduction to Empirical Bayes: Examples and Methods in R, Chapter 4, pages 28-34: details the standard Beta posterior update and discusses how to compute credible intervals using beta distributions."
+]
+source_gaps = [
+  "The book implements prior estimation primarily using Maximum Likelihood Estimation (MLE) in R via dbetabinom.ab. This task explicitly requires using the Method of Moments (MoM) to estimate the Beta prior's alpha and beta parameters from the sample mean and variance of raw rates, with a robust fallback for cases where sample variance is 0 or exceeds the theoretical maximum."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring an implementation of empirical Bayes shrinkage for player success/attempt rates (skills) using Method of Moments to estimate the Beta prior, calculating posterior parameters, means, and Normal approximation credible intervals."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

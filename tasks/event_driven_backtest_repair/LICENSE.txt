@@ -1,0 +1,1 @@
+This benchmark task is an independent exercise based on the historical-backtest concepts and deterministic fixture style of the upstream sports_backtest_query_optimize task in this repository. See task.toml for provenance citations; no upstream source files are redistributed in the public workspace.

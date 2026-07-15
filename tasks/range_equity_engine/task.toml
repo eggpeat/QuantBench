@@ -1,0 +1,49 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/range_equity_engine"
+description = "Implement a probabilistic card/range equity engine that parses cards, evaluates 5-7 card hands, and calculates exact or simulated equity for ranges."
+requires_image = false
+keywords = ["poker", "equity-engine", "probabilistic", "monte-carlo", "hand-evaluator"]
+
+[metadata]
+difficulty = "medium"
+category = "deep_quant"
+tags = ["poker", "equity", "hand-evaluation", "monte-carlo", "probability"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed_scanned"
+
+[provenance]
+source_books = ["source_books/392022285-No-Limit-Hold-em-Theory-and-Practice-David-Sklansky-Ed-Miller-pdf.pdf"]
+source_concepts = ["expectation and pot/implied odds", "showdown equity and range versus range comparison"]
+source_depth = "medium"
+source_citations = [
+  "p18 image / book page 2: introduction assumes familiarity with poker terms including pot odds, implied odds, and expectation."
+]
+source_gaps = []
+promotion_blockers = []
+task_design_note = "Probabilistic card/range equity engine task. Verifier scores correctness of the poker card parsing, 5-7 card hand evaluation, and exact or simulated range equity calculations."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

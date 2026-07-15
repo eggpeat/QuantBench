@@ -1,0 +1,129 @@
+{
+  "prior": {
+    "alpha": 3.099177,
+    "beta": 5.578519,
+    "mean": 0.357143
+  },
+  "rankings": [
+    {
+      "player_id": "player_10",
+      "successes": 700,
+      "attempts": 1000,
+      "raw_rate": 0.7,
+      "posterior_alpha": 703.099177,
+      "posterior_beta": 305.578519,
+      "posterior_mean": 0.69705,
+      "credible_interval_low": 0.668705,
+      "credible_interval_high": 0.725396,
+      "rank": 1
+    },
+    {
+      "player_id": "player_7",
+      "successes": 2,
+      "attempts": 2,
+      "raw_rate": 1.0,
+      "posterior_alpha": 5.099177,
+      "posterior_beta": 5.578519,
+      "posterior_mean": 0.477554,
+      "credible_interval_low": 0.191064,
+      "credible_interval_high": 0.764044,
+      "rank": 2
+    },
+    {
+      "player_id": "player_9",
+      "successes": 2,
+      "attempts": 2,
+      "raw_rate": 1.0,
+      "posterior_alpha": 5.099177,
+      "posterior_beta": 5.578519,
+      "posterior_mean": 0.477554,
+      "credible_interval_low": 0.191064,
+      "credible_interval_high": 0.764044,
+      "rank": 3
+    },
+    {
+      "player_id": "player_2",
+      "successes": 35,
+      "attempts": 100,
+      "raw_rate": 0.35,
+      "posterior_alpha": 38.099177,
+      "posterior_beta": 70.578519,
+      "posterior_mean": 0.35057,
+      "credible_interval_low": 0.261271,
+      "credible_interval_high": 0.43987,
+      "rank": 4
+    },
+    {
+      "player_id": "player_5",
+      "successes": 310,
+      "attempts": 1000,
+      "raw_rate": 0.31,
+      "posterior_alpha": 313.099177,
+      "posterior_beta": 695.578519,
+      "posterior_mean": 0.310406,
+      "credible_interval_low": 0.281867,
+      "credible_interval_high": 0.338944,
+      "rank": 5
+    },
+    {
+      "player_id": "player_1",
+      "successes": 30,
+      "attempts": 100,
+      "raw_rate": 0.3,
+      "posterior_alpha": 33.099177,
+      "posterior_beta": 75.578519,
+      "posterior_mean": 0.304563,
+      "credible_interval_low": 0.218431,
+      "credible_interval_high": 0.390695,
+      "rank": 6
+    },
+    {
+      "player_id": "player_4",
+      "successes": 300,
+      "attempts": 1000,
+      "raw_rate": 0.3,
+      "posterior_alpha": 303.099177,
+      "posterior_beta": 705.578519,
+      "posterior_mean": 0.300492,
+      "credible_interval_low": 0.272212,
+      "credible_interval_high": 0.328771,
+      "rank": 7
+    },
+    {
+      "player_id": "player_6",
+      "successes": 290,
+      "attempts": 1000,
+      "raw_rate": 0.29,
+      "posterior_alpha": 293.099177,
+      "posterior_beta": 715.578519,
+      "posterior_mean": 0.290578,
+      "credible_interval_low": 0.262572,
+      "credible_interval_high": 0.318583,
+      "rank": 8
+    },
+    {
+      "player_id": "player_8",
+      "successes": 0,
+      "attempts": 2,
+      "raw_rate": 0.0,
+      "posterior_alpha": 3.099177,
+      "posterior_beta": 7.578519,
+      "posterior_mean": 0.290248,
+      "credible_interval_low": 0.029923,
+      "credible_interval_high": 0.550572,
+      "rank": 9
+    },
+    {
+      "player_id": "player_3",
+      "successes": 25,
+      "attempts": 100,
+      "raw_rate": 0.25,
+      "posterior_alpha": 28.099177,
+      "posterior_beta": 80.578519,
+      "posterior_mean": 0.258555,
+      "credible_interval_low": 0.176612,
+      "credible_interval_high": 0.340498,
+      "rank": 10
+    }
+  ]
+}

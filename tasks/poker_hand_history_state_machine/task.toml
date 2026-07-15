@@ -1,0 +1,51 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/poker_hand_history_state_machine"
+description = "Implement a state-machine parser for raw poker hand history text that handles blinds, seats, actions, pot contributions, and edge cases like chat and malformed lines."
+requires_image = false
+keywords = ["poker", "state-machine", "parser", "hand-history", "systems"]
+
+[metadata]
+difficulty = "hard"
+category = "systems"
+tags = ["poker", "state-machine", "parsing", "validation", "data-engineering"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/392022285-No-Limit-Hold-em-Theory-and-Practice-David-Sklansky-Ed-Miller-pdf.pdf"]
+source_concepts = ["poker hand histories", "no-limit hold'em rules", "pot tracking", "betting sequences", "blinds and button positions"]
+source_depth = "deep"
+source_citations = [
+  "David Sklansky, Ed Miller. No-Limit Hold'em: Theory and Practice: assumes standard rules of no-limit hold'em including blind postings, betting rounds (preflop, flop, turn, river), and showdown payouts."
+]
+source_gaps = [
+  "The task uses PokerStars-style text formatting as the canonical representation for hand parsing. The verifier checks state transitions, pot tracking, and malformed history validation, which represents a systems engineering wrapper over standard hold'em rules."
+]
+promotion_blockers = []
+task_design_note = "State machine parser for poker hand histories. Designed to test robust parsing of raw text into structured JSON, handling tricky cases like players with action-word names, chat messages, and stateful validation."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

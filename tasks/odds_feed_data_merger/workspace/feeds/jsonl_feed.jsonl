@@ -1,0 +1,5 @@
+{"event": "ev-2002", "home": "Los Angeles Lakers", "away": "GSW", "market_name": "totals", "sportsbook": "BetCo", "selection": "Over", "price": -111, "points": 229.5, "observed_at": "2026-01-05T12:11:00Z", "source_priority": 12}
+{"event": "ev-3003", "home": "Dallas Mavs", "away": "PHX Suns", "market_name": "h2h", "sportsbook": "Sunset", "selection": "Mavs", "price": -135, "points": null, "observed_at": "2026-01-05T12:02:00Z", "source_priority": 7}
+{"event": "ev-3003", "home": "Dallas Mavs", "away": "PHX Suns", "market_name": "h2h", "sportsbook": "Sunset", "selection": "Mavs", "price": -135, "points": null, "observed_at": "2026-01-05T12:02:00Z", "source_priority": 7}
+{"event": "ev-3003", "home": "Dallas Mavs", "away": "PHX Suns", "market_name": "h2h", "sportsbook": "Sunset", "selection": "Phoenix Suns", "price": 115, "points": null, "observed_at": "2026-01-05T12:02:00Z", "source_priority": 7}
+{"event": "ev-1001", "home": "New York Knicks", "away": "Boston C's", "market_name": "h2h", "sportsbook": "NorthStar", "selection": "Boston C's", "price": 107, "points": null, "observed_at": "2026-01-05T12:10:00Z", "source_priority": 10}

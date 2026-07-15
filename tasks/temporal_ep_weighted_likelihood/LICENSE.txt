@@ -1,0 +1,1 @@
+This benchmark task is an independent implementation of the public numerical concepts in Minka (2001), Harvey (1989), and Rauch, Tung, and Striebel (1965), as cited in task.toml. No upstream source files are redistributed in the public workspace. The SciPy and NumPy APIs used by the task remain under their respective upstream licenses.

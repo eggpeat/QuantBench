@@ -1,0 +1,52 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/kalman_2d_market_tracker"
+description = "Implement a 2D state-space Kalman filter with structural break detection using Mahalanobis distance gating to track market price and trend."
+requires_image = false
+keywords = ["kalman-filter", "multivariate-state-space", "anomaly-detection", "structural-break", "statistics", "time-series"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["kalman-filtering", "multivariate-kalman", "mahalanobis-gating", "time-series", "state-space", "numeracy"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/399552330-Kalman-and-Bayesian-Filters-in-Python.pdf"]
+source_concepts = ["predict/update", "multivariate Kalman filter", "Mahalanobis distance", "structural break detection", "covariance inflation"]
+source_depth = "deep"
+source_citations = [
+  "Roger R. Labbe. Kalman and Bayesian Filters in Python, Chapter 6: defines the multivariate Kalman filter predict and update equations.",
+  "Roger R. Labbe. Kalman and Bayesian Filters in Python, Chapter 8, Section 8.6: discusses anomaly / outlier detection using Mahalanobis distance."
+]
+source_gaps = [
+  "The task extends the 1D Kalman filter to a 2D state-space representation tracking both price and velocity. When a structural break or anomaly is detected (Mahalanobis distance exceeds a threshold), the covariance is inflated by a factor to allow faster adaptation rather than rejecting the measurement, representing the deliberate verifier contract."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring a standard-library implementation of a 2D Kalman filter with covariance inflation upon Mahalanobis-based anomaly detection."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

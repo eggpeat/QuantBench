@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "time": 1,
+      "mean": 101.428571,
+      "variance": 1.428571,
+      "accepted": true
+    },
+    {
+      "time": 2,
+      "mean": 101.428571,
+      "variance": 2.428571,
+      "accepted": false
+    },
+    {
+      "time": 3,
+      "mean": 100.526316,
+      "variance": 1.263158,
+      "accepted": true
+    }
+  ],
+  "final_state": {
+    "mean": 100.526316,
+    "variance": 1.263158
+  }
+}

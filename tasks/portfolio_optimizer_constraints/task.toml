@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/portfolio_optimizer_constraints"
+description = "Implement a constrained minimum-variance portfolio optimizer with target-return, sector, and turnover constraints."
+requires_image = false
+keywords = ["numpy", "scipy", "portfolio", "optimization", "constraints", "markowitz"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["scipy", "quadratic-optimization", "portfolio", "constraints", "validation"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_commit"
+
+[provenance]
+source_books = []
+source_concepts = ["Markowitz minimum-variance portfolio", "SLSQP constrained optimization", "turnover and sector exposure constraints"]
+source_depth = "moderate"
+source_citations = [
+  "scipy/scipy, scipy.optimize.minimize documentation (SLSQP constrained nonlinear minimization), https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html",
+  "Harry Markowitz (1952), Portfolio Selection, The Journal of Finance 7(1), 77-91, https://doi.org/10.2307/2975974"
+]
+source_gaps = ["The benchmark exposes a small deterministic NumPy API and adds explicit infeasible-result and un-ridged-objective semantics around the standard Markowitz formulation."]
+promotion_blockers = []
+task_design_note = "Seeded Terminal-Bench numerical task: solve a symmetrized/ridge-regularized quadratic program while reporting un-ridged variance; visible fixture uses seed 100."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

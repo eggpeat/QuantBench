@@ -1,0 +1,7 @@
+event_id,home,away,market_name,sportsbook,selection,american_odds,points,as_of,source_priority
+ev-1001,NY Knicks,Boston C's,ML,NorthStar,Knicks,-120,,2026-01-05T12:05:00Z,5
+ev-1001,NY Knicks,Boston C's,ML,NorthStar,Celtics,100,,2026-01-05T12:05:00Z,5
+ev-1001,Knickerbockers,BOS Celtics,spread,NorthStar,NY Knicks,-112,-2.5,2026-01-05T12:05:00Z,5
+ev-2002,LA Lakers,GS Warriors,over_under,BetCo,Over,-110,229.5,2026-01-05T12:10:00Z,12
+ev-2002,LA Lakers,GS Warriors,over_under,BetCo,Under,-110,229.5,2026-01-05T12:10:00Z,12
+ev-3003,Dallas Mavericks,Phoenix Suns,Moneyline,Sunset,Dallas Mavericks,-130,,2026-01-05T12:00:00Z,7

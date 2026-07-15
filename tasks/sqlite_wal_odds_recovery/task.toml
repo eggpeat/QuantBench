@@ -1,0 +1,52 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/sqlite_wal_odds_recovery"
+description = "Implement a database write-ahead log (WAL) recovery engine in SQLite to parse, validate, and replay transaction-logged odds updates."
+requires_image = false
+keywords = ["sqlite", "wal", "recovery", "integrity", "data-engineering", "systems"]
+
+[metadata]
+difficulty = "medium"
+category = "systems"
+tags = ["sqlite", "database-recovery", "checksum-validation", "write-ahead-log", "transaction-integrity"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "terminal_bench_adaptation"
+
+[provenance]
+source_books = []
+source_concepts = [
+  "transaction logs and write-ahead log recovery",
+  "checksum verification for data integrity",
+  "SQLite database updates and transaction boundaries"
+]
+source_depth = "concept-level"
+source_citations = ["Adapted from systems database recovery and log validation concepts."]
+source_gaps = []
+
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task adapting database write-ahead log recovery and transaction checksum patterns to a sports betting odds database scenario. Verified with sequential transaction and checksum tests in pytest."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

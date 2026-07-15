@@ -1,0 +1,56 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/git_secret_alpha_purge"
+description = "Remove a leaked binary file (alpha_weights.bin) and a production API secret token from the entire Git Repository history while preserving the exact merge topology, commit messages, and the current non-leaked files in the latest HEAD."
+requires_image = false
+keywords = ["git", "git-history", "fast-export", "fast-import", "provenance", "systems"]
+
+[metadata]
+difficulty = "hard"
+category = "systems"
+tags = ["git", "git-history", "fast-export", "fast-import", "provenance"]
+risk_level = "low"
+promotion_status = "promoted"
+synthetic_secret_canaries = ["alpha-prod-tok-991283"]
+source_status = "terminal_bench_adaptation"
+
+[provenance]
+source_books = []
+source_concepts = [
+  "Git object model (commits, trees, blobs)",
+  "Git history rewriting, fast-export, and fast-import",
+  "Merge preservation and DAG manipulation in Git"
+]
+source_depth = "concept-level"
+source_citations = ["Adapted from Terminal-Bench adaptation concept for Git repository surgery."]
+source_gaps = [
+  "Parent behavior preserved: Surgical removal of sensitive files and secret patterns from the complete commit history, including history before and after branches and merges.",
+  "Domain translation added: The task sets up an active git repository fixture in the candidate workspace. The candidate must write a Python script `purge_alpha.py` that parses the git database (e.g. via fast-export/fast-import or git filter-branch) and outputs a detailed JSON report of modified commits.",
+  "Verifier anti-cheat: Checks both the final static outputs, ensures the topology is preserved, checks that hashes changed but merge relationships are intact, imports the candidate's implementation and runs it on a newly randomized git history structure with distinct secrets and binary files, and checks that no copy of the secret or binary remains anywhere in the reflog or Git objects."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench systems task for Git history scrubbing."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

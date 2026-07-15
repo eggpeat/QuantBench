@@ -1,0 +1,40 @@
+{
+  "scenarios": [
+    {
+      "scenario_id": "river_simple_pair_vs_trips",
+      "p1_range": ["AcJs"],
+      "p2_range": ["7s7d"],
+      "board": ["As", "Kh", "Qd", "7c", "2s"]
+    },
+    {
+      "scenario_id": "turn_set_vs_flush_draw",
+      "p1_range": ["2s2d"],
+      "p2_range": ["QhJh"],
+      "board": ["Ah", "Kh", "2c", "7h"]
+    },
+    {
+      "scenario_id": "flop_pair_vs_straight_draw",
+      "p1_range": ["AdAs"],
+      "p2_range": ["JcTs"],
+      "board": ["8s", "9d", "2c"]
+    },
+    {
+      "scenario_id": "flop_range_vs_range",
+      "p1_range": ["AdAs", "KdKs"],
+      "p2_range": ["QdQs", "JdJs"],
+      "board": ["8s", "9d", "2c"]
+    },
+    {
+      "scenario_id": "flop_asymmetric_straight_draw",
+      "p1_range": ["JhTh"],
+      "p2_range": ["Js9c"],
+      "board": ["As", "Ks", "Qd"]
+    },
+    {
+      "scenario_id": "flop_dead_card_removal",
+      "p1_range": ["AhKh", "AsKs"],
+      "p2_range": ["QhQd", "QsQc"],
+      "board": ["Kh", "Qc", "2s"]
+    }
+  ]
+}

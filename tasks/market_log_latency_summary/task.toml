@@ -1,0 +1,55 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/market_log_latency_summary"
+description = "Parse market API JSONL logs, ignore malformed/heartbeat entries, and group metrics by minute and sportsbook to calculate request counts, error counts, dropped counts, drop rate, and nearest-rank percentiles (p50, p95, p99) of request latency."
+requires_image = false
+keywords = ["logs", "latency", "percentile", "jsonl", "data-parsing", "systems"]
+
+[metadata]
+difficulty = "medium"
+category = "systems"
+tags = ["logs", "latency", "percentile", "jsonl", "data-parsing"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "terminal_bench_adaptation"
+
+[provenance]
+source_books = []
+source_concepts = [
+  "Terminal-Bench log summary/date-range and data parsing patterns",
+  "nearest-rank percentile formula",
+  "market API latency monitoring and rate analysis"
+]
+source_depth = "concept-level"
+source_citations = ["Adapted from Terminal-Bench 2.1 `log-summary-date-ranges` and `regex-log` tasks."]
+source_gaps = [
+  "Parent behavior preserved: Parsing files containing structured and semi-structured log lines, sanitizing and ignoring malformed or internal/heartbeat lines, and grouping/aggregating stats by timestamp-based intervals (truncating to minutes) and category key (sportsbook).",
+  "Domain translation added: Applies log aggregation to sports betting market API latencies, adding specific calculations for nearest-rank percentiles (p50, p95, p99) of request latency (excluding dropped requests) and dropped request rate metrics.",
+  "Verifier anti-cheat: The verifier resists static-output copying because in addition to checking the static latency_summary.json snapshot, it dynamically imports log_summary and runs unit tests verifying the nearest_rank_percentile formula on various unsorted and boundary list inputs, verifies the parser on custom malformed test logs, and checks the summarizer behavior."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task adapting Terminal-Bench log-summary-date-ranges and regex-log parsing patterns to market API monitoring."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

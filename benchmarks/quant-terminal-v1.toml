@@ -1,0 +1,322 @@
+schema_version = "1.0"
+
+[benchmark]
+id = "quant-terminal-v1"
+attempts = 5
+max_retries = 3
+timeout_scale = 1.0
+results_source_manifest_sha256 = "09fcd2fd2ac0e1370981d3efafc7d89e6280012735b65a5501422db6349d730a"
+
+[task_sets]
+official = [
+  "sports_hold_vig_removal",
+  "odds_feed_data_merger",
+  "bayesian_mcmc_rhat_diagnostic",
+  "async_odds_scraper_shutdown",
+  "poker_shove_fold_equity",
+  "quant_var_expected_shortfall",
+  "kalman_live_market_filter",
+  "empirical_bayes_ctr_shrinkage",
+  "sports_injury_steam_audit",
+  "market_log_latency_summary",
+  "sports_settlement_ledger_reconciliation",
+  "sqlite_wal_odds_recovery",
+  "poker_side_pot_resolution_engine",
+  "stan_to_python_football_prop_model",
+  "sportsbook_parlay_synthetic_risk",
+  "quant_cointegration_pairs_trade",
+  "empirical_bayes_true_skill",
+  "sports_backtest_query_optimize",
+  "llm_news_batch_scheduler",
+  "data_quality_leakage_client_model",
+  "kalman_2d_market_tracker",
+  "range_equity_engine",
+  "poker_hand_history_state_machine",
+  "git_secret_alpha_purge",
+  "heteroscedastic_oof_calibration",
+  "distributional_boosting_boundary_stability",
+  "vectorized_fisher_preconditioner",
+  "crps_vectorization_and_scoring",
+  "adaptive_conformal_intervals",
+  "feature_selection_knockoff_fdr",
+  "incremental_schur_feature_selector",
+  "stability_selection_resampling",
+  "temporal_ep_weighted_likelihood",
+  "linear_residual_boosting_pipeline",
+  "portfolio_optimizer_constraints",
+  "event_driven_backtest_repair",
+  "adaptive_ode_event_integration",
+  "sparse_linear_solver",
+  "bitemporal_asof_join",
+  "incremental_feature_materialization",
+]
+pilot = [
+  "heteroscedastic_oof_calibration",
+  "distributional_boosting_boundary_stability",
+  "vectorized_fisher_preconditioner",
+  "feature_selection_knockoff_fdr",
+  "temporal_ep_weighted_likelihood",
+  "event_driven_backtest_repair",
+  "adaptive_ode_event_integration",
+  "bitemporal_asof_join",
+]
+
+[agent_sets]
+completed_sol = ["gpt-5-6-sol"]
+completed_luna = ["gpt-5-6-luna"]
+completed_terra = ["gpt-5-6-terra"]
+completed_devin = ["swe-1-7-devin"]
+official = ["gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin"]
+
+[[tasks]]
+id = "sports_hold_vig_removal"
+path = "tasks/sports_hold_vig_removal"
+[[tasks]]
+id = "odds_feed_data_merger"
+path = "tasks/odds_feed_data_merger"
+[[tasks]]
+id = "bayesian_mcmc_rhat_diagnostic"
+path = "tasks/bayesian_mcmc_rhat_diagnostic"
+[[tasks]]
+id = "async_odds_scraper_shutdown"
+path = "tasks/async_odds_scraper_shutdown"
+[[tasks]]
+id = "poker_shove_fold_equity"
+path = "tasks/poker_shove_fold_equity"
+[[tasks]]
+id = "quant_var_expected_shortfall"
+path = "tasks/quant_var_expected_shortfall"
+[[tasks]]
+id = "kalman_live_market_filter"
+path = "tasks/kalman_live_market_filter"
+[[tasks]]
+id = "empirical_bayes_ctr_shrinkage"
+path = "tasks/empirical_bayes_ctr_shrinkage"
+[[tasks]]
+id = "sports_injury_steam_audit"
+path = "tasks/sports_injury_steam_audit"
+[[tasks]]
+id = "market_log_latency_summary"
+path = "tasks/market_log_latency_summary"
+[[tasks]]
+id = "sports_settlement_ledger_reconciliation"
+path = "tasks/sports_settlement_ledger_reconciliation"
+[[tasks]]
+id = "sqlite_wal_odds_recovery"
+path = "tasks/sqlite_wal_odds_recovery"
+[[tasks]]
+id = "poker_side_pot_resolution_engine"
+path = "tasks/poker_side_pot_resolution_engine"
+[[tasks]]
+id = "stan_to_python_football_prop_model"
+path = "tasks/stan_to_python_football_prop_model"
+[[tasks]]
+id = "sportsbook_parlay_synthetic_risk"
+path = "tasks/sportsbook_parlay_synthetic_risk"
+[[tasks]]
+id = "quant_cointegration_pairs_trade"
+path = "tasks/quant_cointegration_pairs_trade"
+[[tasks]]
+id = "empirical_bayes_true_skill"
+path = "tasks/empirical_bayes_true_skill"
+[[tasks]]
+id = "sports_backtest_query_optimize"
+path = "tasks/sports_backtest_query_optimize"
+[[tasks]]
+id = "llm_news_batch_scheduler"
+path = "tasks/llm_news_batch_scheduler"
+[[tasks]]
+id = "data_quality_leakage_client_model"
+path = "tasks/data_quality_leakage_client_model"
+[[tasks]]
+id = "kalman_2d_market_tracker"
+path = "tasks/kalman_2d_market_tracker"
+[[tasks]]
+id = "range_equity_engine"
+path = "tasks/range_equity_engine"
+[[tasks]]
+id = "poker_hand_history_state_machine"
+path = "tasks/poker_hand_history_state_machine"
+[[tasks]]
+id = "git_secret_alpha_purge"
+path = "tasks/git_secret_alpha_purge"
+[[tasks]]
+id = "heteroscedastic_oof_calibration"
+path = "tasks/heteroscedastic_oof_calibration"
+[[tasks]]
+id = "distributional_boosting_boundary_stability"
+path = "tasks/distributional_boosting_boundary_stability"
+[[tasks]]
+id = "vectorized_fisher_preconditioner"
+path = "tasks/vectorized_fisher_preconditioner"
+[[tasks]]
+id = "crps_vectorization_and_scoring"
+path = "tasks/crps_vectorization_and_scoring"
+[[tasks]]
+id = "adaptive_conformal_intervals"
+path = "tasks/adaptive_conformal_intervals"
+[[tasks]]
+id = "feature_selection_knockoff_fdr"
+path = "tasks/feature_selection_knockoff_fdr"
+[[tasks]]
+id = "incremental_schur_feature_selector"
+path = "tasks/incremental_schur_feature_selector"
+[[tasks]]
+id = "stability_selection_resampling"
+path = "tasks/stability_selection_resampling"
+[[tasks]]
+id = "temporal_ep_weighted_likelihood"
+path = "tasks/temporal_ep_weighted_likelihood"
+[[tasks]]
+id = "linear_residual_boosting_pipeline"
+path = "tasks/linear_residual_boosting_pipeline"
+[[tasks]]
+id = "portfolio_optimizer_constraints"
+path = "tasks/portfolio_optimizer_constraints"
+[[tasks]]
+id = "event_driven_backtest_repair"
+path = "tasks/event_driven_backtest_repair"
+[[tasks]]
+id = "adaptive_ode_event_integration"
+path = "tasks/adaptive_ode_event_integration"
+[[tasks]]
+id = "sparse_linear_solver"
+path = "tasks/sparse_linear_solver"
+[[tasks]]
+id = "bitemporal_asof_join"
+path = "tasks/bitemporal_asof_join"
+[[tasks]]
+id = "incremental_feature_materialization"
+path = "tasks/incremental_feature_materialization"
+
+[[agents]]
+name = "gpt-5-6-sol"
+model = "openai-codex/gpt-5.6-sol"
+backend_provider = "openai-codex"
+thinking = "max"
+harness = "OMP"
+metadata_confirmed = true
+[[agents]]
+name = "gpt-5-6-luna"
+model = "openai-codex/gpt-5.6-luna"
+backend_provider = "openai-codex"
+thinking = "xhigh"
+harness = "OMP"
+metadata_confirmed = true
+[[agents]]
+name = "gpt-5-6-terra"
+model = "openai-codex/gpt-5.6-terra"
+backend_provider = "openai-codex"
+thinking = "xhigh"
+harness = "OMP"
+metadata_confirmed = true
+[[agents]]
+name = "swe-1-7-devin"
+model = "devin/swe-1-7"
+backend_provider = "devin"
+thinking = "none"
+harness = "OMP"
+metadata_confirmed = true
+
+[[integrity_gates]]
+task = "bayesian_mcmc_rhat_diagnostic"
+mutant_id = "unsplit_rhat"
+mutant_path = "tasks/bayesian_mcmc_rhat_diagnostic/tests/mutants/unsplit_rhat/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "heteroscedastic_oof_calibration"
+mutant_id = "in_sample_residuals"
+mutant_path = "tasks/heteroscedastic_oof_calibration/tests/mutants/in_sample_residuals/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "distributional_boosting_boundary_stability"
+mutant_id = "unsafe_nb_gradient"
+mutant_path = "tasks/distributional_boosting_boundary_stability/tests/mutants/unsafe_nb_gradient/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "vectorized_fisher_preconditioner"
+mutant_id = "matrix_solve"
+mutant_path = "tasks/vectorized_fisher_preconditioner/tests/mutants/matrix_solve/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "crps_vectorization_and_scoring"
+mutant_id = "pairwise_tensor"
+mutant_path = "tasks/crps_vectorization_and_scoring/tests/mutants/pairwise_tensor/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "adaptive_conformal_intervals"
+mutant_id = "naive_quantile"
+mutant_path = "tasks/adaptive_conformal_intervals/tests/mutants/naive_quantile/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "feature_selection_knockoff_fdr"
+mutant_id = "marginal_topk"
+mutant_path = "tasks/feature_selection_knockoff_fdr/tests/mutants/marginal_topk/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "incremental_schur_feature_selector"
+mutant_id = "full_inverse"
+mutant_path = "tasks/incremental_schur_feature_selector/tests/mutants/full_inverse/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "stability_selection_resampling"
+mutant_id = "global_preprocessing"
+mutant_path = "tasks/stability_selection_resampling/tests/mutants/global_preprocessing/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "temporal_ep_weighted_likelihood"
+mutant_id = "unweighted_updates"
+mutant_path = "tasks/temporal_ep_weighted_likelihood/tests/mutants/unweighted_updates/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "linear_residual_boosting_pipeline"
+mutant_id = "validation_leak"
+mutant_path = "tasks/linear_residual_boosting_pipeline/tests/mutants/validation_leak/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "portfolio_optimizer_constraints"
+mutant_id = "ignore_turnover"
+mutant_path = "tasks/portfolio_optimizer_constraints/tests/mutants/ignore_turnover/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "event_driven_backtest_repair"
+mutant_id = "lookahead_join"
+mutant_path = "tasks/event_driven_backtest_repair/tests/mutants/lookahead_join/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "adaptive_ode_event_integration"
+mutant_id = "fixed_step"
+mutant_path = "tasks/adaptive_ode_event_integration/tests/mutants/fixed_step/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "sparse_linear_solver"
+mutant_id = "densify"
+mutant_path = "tasks/sparse_linear_solver/tests/mutants/densify/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "bitemporal_asof_join"
+mutant_id = "latest_revision"
+mutant_path = "tasks/bitemporal_asof_join/tests/mutants/latest_revision/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3
+[[integrity_gates]]
+task = "incremental_feature_materialization"
+mutant_id = "append_without_recompute"
+mutant_path = "tasks/incremental_feature_materialization/tests/mutants/append_without_recompute/solve.py"
+repeat_mode = "verifier"
+repeat_runs = 3

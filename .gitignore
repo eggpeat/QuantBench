@@ -1,0 +1,35 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.venv/
+
+# Local review and benchmark run artifacts
+.autoreview/
+artifacts/
+handoffs/
+*.log
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+/.omp/
+/models.yml
+/models.db*
+/agent.db*
+/credentials.json
+
+# Optional local source or provenance inputs
+source_books/
+models.txt
+get_poisson.py
+get_toc.py
+search_pdf.py
+test.py
+
+# Task-solver copies produced by local smoke runs
+/hetero.py
+/selector.py
+/stability.py

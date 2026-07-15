@@ -1,0 +1,9 @@
+{
+  "hedge_ratio": 1.200409,
+  "residual_mean": -2.8e-05,
+  "residual_std": 0.24254,
+  "z_score": -1.146087,
+  "adf_t_stat": -9.47769,
+  "cointegrated": true,
+  "signal": "HOLD"
+}

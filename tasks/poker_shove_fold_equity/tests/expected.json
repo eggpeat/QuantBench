@@ -1,0 +1,28 @@
+{
+  "spots": [
+    {
+      "spot_id": "turn_semi_bluff",
+      "shove_ev": 38.52,
+      "breakeven_fold_equity": 0.056604,
+      "decision": "shove"
+    },
+    {
+      "spot_id": "small_fold_equity",
+      "shove_ev": -22.0,
+      "breakeven_fold_equity": 0.333333,
+      "decision": "fold"
+    },
+    {
+      "spot_id": "value_jam",
+      "shove_ev": 50.8,
+      "breakeven_fold_equity": 0.0,
+      "decision": "shove"
+    },
+    {
+      "spot_id": "river_pressure",
+      "shove_ev": 47.76,
+      "breakeven_fold_equity": 0.438202,
+      "decision": "shove"
+    }
+  ]
+}

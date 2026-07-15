@@ -1,0 +1,54 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "ticket_one_leg",
+      "true_rollover_decimal": 1.666667,
+      "offered_decimal": 1.666667,
+      "short_pay_margin": 0.0,
+      "expected_synthetic_handle": 100.0,
+      "expected_return": 100.0,
+      "hold_on_stake": 0.0,
+      "hold_on_synthetic_handle": 0.0
+    },
+    {
+      "ticket_id": "ticket_favorites_underdogs_mix",
+      "true_rollover_decimal": 7.159091,
+      "offered_decimal": 7.159091,
+      "short_pay_margin": 0.0,
+      "expected_synthetic_handle": 299.875,
+      "expected_return": 103.584886,
+      "hold_on_stake": -0.035849,
+      "hold_on_synthetic_handle": -0.011955
+    },
+    {
+      "ticket_id": "ticket_fair_off_board",
+      "true_rollover_decimal": 4.444444,
+      "offered_decimal": 4.444444,
+      "short_pay_margin": 0.0,
+      "expected_synthetic_handle": 300.0,
+      "expected_return": 100.0,
+      "hold_on_stake": 0.0,
+      "hold_on_synthetic_handle": 0.0
+    },
+    {
+      "ticket_id": "ticket_short_pay",
+      "true_rollover_decimal": 6.957926,
+      "offered_decimal": 6.0,
+      "short_pay_margin": 0.137674,
+      "expected_synthetic_handle": 286.570248,
+      "expected_return": 75.0,
+      "hold_on_stake": 0.25,
+      "hold_on_synthetic_handle": 0.087239
+    },
+    {
+      "ticket_id": "ticket_edge_compounding",
+      "true_rollover_decimal": 8.0,
+      "offered_decimal": 8.0,
+      "short_pay_margin": 0.0,
+      "expected_synthetic_handle": 331.0,
+      "expected_return": 133.1,
+      "hold_on_stake": -0.331,
+      "hold_on_synthetic_handle": -0.1
+    }
+  ]
+}
