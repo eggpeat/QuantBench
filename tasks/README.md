@@ -5,6 +5,12 @@ This index covers the 40 task directories registered in
 Links are grouped by each task's `metadata.category`; a task README, when
 present, describes its observable contract and runtime constraints.
 
+The summaries below are intentionally capability-level. They explain the
+problem each task represents without exposing formulas, implementation steps,
+verifier cases, or hidden evaluation details. During a benchmark run, the
+solver receives only the task's `instruction.md` and `workspace/`; these
+repository-facing summaries are not staged into the solve environment.
+
 ## Use the corpus
 
 List the frozen official task IDs without launching a model request:
@@ -80,76 +86,100 @@ host-side OMP configuration, never in a task directory.
 
 ## Data engineering
 
-- [odds_feed_data_merger](odds_feed_data_merger/)
-- [llm_news_batch_scheduler](llm_news_batch_scheduler/)
-- [bitemporal_asof_join](bitemporal_asof_join/)
-- [incremental_feature_materialization](incremental_feature_materialization/)
+| Task | What it tests |
+| --- | --- |
+| [Odds feed data merger](odds_feed_data_merger/) | Combining differently formatted sportsbook feeds into consistent records while detecting duplicates and conflicting data. |
+| [News batch scheduler](llm_news_batch_scheduler/) | Scheduling simulated AI news-scoring jobs reliably while respecting batching, request-rate, and retry limits. |
+| [Bitemporal as-of join](bitemporal_asof_join/) | Finding the record version that was both valid and known at a requested point in time. |
+| [Incremental feature materialization](incremental_feature_materialization/) | Updating derived features from new events without reprocessing all history or corrupting saved progress after an interruption. |
 
 ## Data science
 
-- [bayesian_mcmc_rhat_diagnostic](bayesian_mcmc_rhat_diagnostic/)
-- [kalman_live_market_filter](kalman_live_market_filter/)
-- [empirical_bayes_ctr_shrinkage](empirical_bayes_ctr_shrinkage/)
-- [empirical_bayes_true_skill](empirical_bayes_true_skill/)
-- [data_quality_leakage_client_model](data_quality_leakage_client_model/)
-- [kalman_2d_market_tracker](kalman_2d_market_tracker/)
-- [heteroscedastic_oof_calibration](heteroscedastic_oof_calibration/)
-- [vectorized_fisher_preconditioner](vectorized_fisher_preconditioner/)
-- [crps_vectorization_and_scoring](crps_vectorization_and_scoring/)
-- [temporal_ep_weighted_likelihood](temporal_ep_weighted_likelihood/)
-- [linear_residual_boosting_pipeline](linear_residual_boosting_pipeline/)
-- [portfolio_optimizer_constraints](portfolio_optimizer_constraints/)
+| Task | What it tests |
+| --- | --- |
+| [Bayesian simulation diagnostics](bayesian_mcmc_rhat_diagnostic/) | Assessing whether repeated statistical simulation chains agree and estimating how much independent information they contain. |
+| [Live market Kalman filter](kalman_live_market_filter/) | Tracking an underlying market value from noisy updates while handling observations that appear abnormal. |
+| [Advertising rate shrinkage](empirical_bayes_ctr_shrinkage/) | Stabilizing click-rate estimates for low-volume advertisements by combining individual results with evidence from the full population. |
+| [Player skill shrinkage](empirical_bayes_true_skill/) | Estimating player ability from uneven amounts of performance data without overreacting to small samples. |
+| [Client-model data quality audit](data_quality_leakage_client_model/) | Finding unusable records and future-information leakage before building a time-ordered training and validation dataset. |
+| [Two-dimensional market tracker](kalman_2d_market_tracker/) | Tracking both market level and trend from noisy observations while recognizing sudden changes in behavior. |
+| [Out-of-fold uncertainty calibration](heteroscedastic_oof_calibration/) | Producing leakage-safe cross-validated predictions and calibrating uncertainty that changes from one observation to another. |
+| [Vectorized Fisher preconditioner](vectorized_fisher_preconditioner/) | Rescaling batches of machine-learning gradients with a memory-efficient estimate of each parameter's curvature. |
+| [Probabilistic forecast scoring](crps_vectorization_and_scoring/) | Measuring the accuracy of distribution-based and sample-based forecasts while keeping large calculations memory-efficient. |
+| [Weighted temporal inference](temporal_ep_weighted_likelihood/) | Estimating a changing hidden signal from differently weighted observations using approximate Bayesian inference. |
+| [Linear residual boosting](linear_residual_boosting_pipeline/) | Combining a linear baseline with a tree model without data leakage, then saving and restoring the fitted model. |
+| [Constrained portfolio optimizer](portfolio_optimizer_constraints/) | Allocating investments to reduce risk while honoring return goals and practical limits on assets, sectors, and trading. |
 
 ## Data systems
 
-- [sports_backtest_query_optimize](sports_backtest_query_optimize/)
+| Task | What it tests |
+| --- | --- |
+| [Sports backtest query optimization](sports_backtest_query_optimize/) | Speeding up a complex historical betting query through database indexing and query-plan analysis without changing its results. |
 
 ## Deep quant
 
-- [poker_shove_fold_equity](poker_shove_fold_equity/)
-- [quant_var_expected_shortfall](quant_var_expected_shortfall/)
-- [poker_side_pot_resolution_engine](poker_side_pot_resolution_engine/)
-- [quant_cointegration_pairs_trade](quant_cointegration_pairs_trade/)
-- [range_equity_engine](range_equity_engine/)
+| Task | What it tests |
+| --- | --- |
+| [Poker shove-or-fold equity](poker_shove_fold_equity/) | Evaluating whether an all-in poker decision is profitable and how often opponents must fold for it to break even. |
+| [Portfolio loss risk](quant_var_expected_shortfall/) | Estimating likely and severe portfolio losses from historical asset returns at a chosen confidence level. |
+| [Poker side-pot resolution](poker_side_pot_resolution_engine/) | Distributing chips correctly when poker hands include folds, all-in limits, tied winners, and multiple side pots. |
+| [Cointegration pairs analysis](quant_cointegration_pairs_trade/) | Distinguishing price series with a stable long-run relationship from series that are merely correlated. |
+| [Poker range equity engine](range_equity_engine/) | Comparing poker hands and ranges by exact enumeration or reproducible simulation across valid card combinations. |
 
 ## Feature selection
 
-- [feature_selection_knockoff_fdr](feature_selection_knockoff_fdr/)
-- [incremental_schur_feature_selector](incremental_schur_feature_selector/)
-- [stability_selection_resampling](stability_selection_resampling/)
+| Task | What it tests |
+| --- | --- |
+| [Knockoff false-discovery control](feature_selection_knockoff_fdr/) | Selecting useful variables while statistically limiting the expected share of false discoveries. |
+| [Incremental Schur feature selector](incremental_schur_feature_selector/) | Choosing complementary variables one at a time while updating the required linear-algebra state efficiently. |
+| [Stability selection](stability_selection_resampling/) | Finding variables that remain useful across repeated group-aware or time-aware samples with missing and weighted data. |
 
 ## Machine learning
 
-- [distributional_boosting_boundary_stability](distributional_boosting_boundary_stability/)
+| Task | What it tests |
+| --- | --- |
+| [Distributional boosting stability](distributional_boosting_boundary_stability/) | Keeping probability-model gradient calculations finite and accurate near extreme parameter limits. |
 
 ## Operations
 
-- [async_odds_scraper_shutdown](async_odds_scraper_shutdown/)
+| Task | What it tests |
+| --- | --- |
+| [Async odds scraper shutdown](async_odds_scraper_shutdown/) | Running asynchronous scraping jobs with limited concurrency while preserving result order and cleaning up safely after cancellation. |
 
 ## Probabilistic ML
 
-- [adaptive_conformal_intervals](adaptive_conformal_intervals/)
+| Task | What it tests |
+| --- | --- |
+| [Adaptive conformal intervals](adaptive_conformal_intervals/) | Building prediction intervals that account for groups, time ordering, and observation weights while maintaining reliable coverage. |
 
 ## Quantitative finance
 
-- [event_driven_backtest_repair](event_driven_backtest_repair/)
+| Task | What it tests |
+| --- | --- |
+| [Event-driven backtest repair](event_driven_backtest_repair/) | Repairing a trading backtest so events, orders, corporate actions, costs, and portfolio accounting follow real-world timing. |
 
 ## Scientific computing
 
-- [adaptive_ode_event_integration](adaptive_ode_event_integration/)
-- [sparse_linear_solver](sparse_linear_solver/)
+| Task | What it tests |
+| --- | --- |
+| [Adaptive differential-equation solver](adaptive_ode_event_integration/) | Solving a changing system efficiently while locating important events that occur between numerical integration steps. |
+| [Sparse linear solver](sparse_linear_solver/) | Solving large systems of linear equations stored sparsely without consuming memory as if every entry were present. |
 
 ## Sports modeling
 
-- [sports_hold_vig_removal](sports_hold_vig_removal/)
-- [sports_injury_steam_audit](sports_injury_steam_audit/)
-- [sports_settlement_ledger_reconciliation](sports_settlement_ledger_reconciliation/)
-- [stan_to_python_football_prop_model](stan_to_python_football_prop_model/)
-- [sportsbook_parlay_synthetic_risk](sportsbook_parlay_synthetic_risk/)
+| Task | What it tests |
+| --- | --- |
+| [Sportsbook margin removal](sports_hold_vig_removal/) | Converting quoted odds into fair probabilities, identifying favorable bets, and sizing exposure with controlled risk. |
+| [Injury and line-movement audit](sports_injury_steam_audit/) | Comparing injury news with betting-line movement to judge whether the market has already reacted. |
+| [Settlement ledger reconciliation](sports_settlement_ledger_reconciliation/) | Matching internal betting transactions to payment-processor records while handling fees, duplicates, and time differences. |
+| [Football prop model translation](stan_to_python_football_prop_model/) | Rebuilding a football player forecasting model in deterministic Python and using it to evaluate proposition bets. |
+| [Parlay synthetic-risk accounting](sportsbook_parlay_synthetic_risk/) | Measuring sportsbook exposure when multi-leg tickets are represented through their component bets. |
 
 ## Systems
 
-- [market_log_latency_summary](market_log_latency_summary/)
-- [sqlite_wal_odds_recovery](sqlite_wal_odds_recovery/)
-- [poker_hand_history_state_machine](poker_hand_history_state_machine/)
-- [git_secret_alpha_purge](git_secret_alpha_purge/)
+| Task | What it tests |
+| --- | --- |
+| [Market log latency summary](market_log_latency_summary/) | Turning imperfect API logs into grouped request, error, drop, and response-time summaries. |
+| [SQLite write-ahead-log recovery](sqlite_wal_odds_recovery/) | Restoring database updates after a crash by validating and replaying intact transaction-log records. |
+| [Poker hand-history parser](poker_hand_history_state_machine/) | Converting messy poker hand logs into structured game state while tolerating chat and malformed lines. |
+| [Git secret and file purge](git_secret_alpha_purge/) | Removing sensitive data from an entire Git history while preserving legitimate content and repository structure. |
