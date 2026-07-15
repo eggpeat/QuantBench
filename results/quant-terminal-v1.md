@@ -1,15 +1,15 @@
 # Quant Bench Report
 
-Generated: `2026-07-15T03:41:40+00:00`
+Generated: `2026-07-15T12:07:43+00:00`
 
 ## Leaderboard
 
-| Model | Configuration | Coverage | Comparable | Semantic pass | Attempt pass range | Budgeted pass | Median duration (s) | Provider output tok/s (median) |
-|---|---|---:|:---:|---:|---:|---:|---:|---:|
-| openai-codex/gpt-5.6-luna | `openai-codex/gpt-5.6-luna · xhigh · OMP` | 200/200 | yes | 90% | 82.5%–92.5% | 90% | 242.156 | 47.5385 |
-| openai-codex/gpt-5.6-sol | `openai-codex/gpt-5.6-sol · max · OMP` | 200/200 | yes | 89% | 87.5%–92.5% | 89% | 332.12 | 37.385 |
-| openai-codex/gpt-5.6-terra | `openai-codex/gpt-5.6-terra · xhigh · OMP` | 200/200 | yes | 87% | 85%–90% | 87% | 243.2305 | 47.807 |
-| devin/swe-1-7 | `devin/swe-1-7 · none · OMP` | 200/200 | yes | 79.4% | — | 79% | 549.67 | 98.059 |
+| Model | Configuration | Coverage | Comparable | Median attempt pass | Attempt range | Median duration (s) | Provider output tok/s (median) |
+|---|---|---:|:---:|---:|---:|---:|---:|
+| openai-codex/gpt-5.6-luna | `openai-codex/gpt-5.6-luna · xhigh · OMP` | 200/200 | yes | 92.5% | 82.5%–92.5% | 242.156 | 47.5385 |
+| openai-codex/gpt-5.6-sol | `openai-codex/gpt-5.6-sol · max · OMP` | 200/200 | yes | 87.5% | 87.5%–92.5% | 332.12 | 37.385 |
+| openai-codex/gpt-5.6-terra | `openai-codex/gpt-5.6-terra · xhigh · OMP` | 200/200 | yes | 85% | 85%–90% | 243.2305 | 47.807 |
+| devin/swe-1-7 | `devin/swe-1-7 · none · OMP` | 200/200 | yes | 80% | 77.5%–80% | 549.67 | 98.059 |
 
 ## openai-codex/gpt-5.6-luna
 
@@ -18,8 +18,8 @@ Configuration: `{"agents":["gpt-5-6-luna-xhigh"],"backend_provider":"openai-code
 - Comparable: **yes**
 - Statuses: `{"INFRA_BLOCKED": 0, "PASS": 180, "REJECT": 20, "TIME_LIMIT": 0}`
 - Semantic cells: **200/200**
-- Per-attempt semantic pass rates: **1=92.5% (37/40), 2=82.5% (33/40), 3=92.5% (37/40), 4=90% (36/40), 5=92.5% (37/40)**
-- Across-attempt pass-rate range: **82.5%–92.5% (spread 10 pp)** (descriptive stochastic min–max; not a confidence interval)
+- Per-attempt budgeted pass rates: **1=92.5% (37/40), 2=82.5% (33/40), 3=92.5% (37/40), 4=90% (36/40), 5=92.5% (37/40)**
+- Attempt distribution: **median 92.5%; range 82.5%–92.5%; spread 10 pp** (5 equally weighted attempts; TIME_LIMIT counts as a non-pass)
 - Verified duration: median **242.156 s**, p90 **595.665 s**, complete total **66063.09 s**, observed sum **66063.09 s** (coverage 200/200)
 - Total tokens: complete total **117074111** (coverage 200/200); observed sum **117074111**
 - Cached-input tokens: complete total **103497216** (coverage 200/200); observed sum **103497216**
@@ -80,8 +80,8 @@ Configuration: `{"agents":["gpt-5-6-sol"],"backend_provider":"openai-codex","har
 - Comparable: **yes**
 - Statuses: `{"INFRA_BLOCKED": 0, "PASS": 178, "REJECT": 22, "TIME_LIMIT": 0}`
 - Semantic cells: **200/200**
-- Per-attempt semantic pass rates: **1=90% (36/40), 2=87.5% (35/40), 3=92.5% (37/40), 4=87.5% (35/40), 5=87.5% (35/40)**
-- Across-attempt pass-rate range: **87.5%–92.5% (spread 5 pp)** (descriptive stochastic min–max; not a confidence interval)
+- Per-attempt budgeted pass rates: **1=90% (36/40), 2=87.5% (35/40), 3=92.5% (37/40), 4=87.5% (35/40), 5=87.5% (35/40)**
+- Attempt distribution: **median 87.5%; range 87.5%–92.5%; spread 5 pp** (5 equally weighted attempts; TIME_LIMIT counts as a non-pass)
 - Verified duration: median **332.12 s**, p90 **654.819 s**, complete total **72345.626 s**, observed sum **72345.626 s** (coverage 200/200)
 - Total tokens: complete total **70472186** (coverage 200/200); observed sum **70472186**
 - Cached-input tokens: complete total **60617728** (coverage 200/200); observed sum **60617728**
@@ -142,8 +142,8 @@ Configuration: `{"agents":["gpt-5-6-terra-xhigh"],"backend_provider":"openai-cod
 - Comparable: **yes**
 - Statuses: `{"INFRA_BLOCKED": 0, "PASS": 174, "REJECT": 26, "TIME_LIMIT": 0}`
 - Semantic cells: **200/200**
-- Per-attempt semantic pass rates: **1=90% (36/40), 2=90% (36/40), 3=85% (34/40), 4=85% (34/40), 5=85% (34/40)**
-- Across-attempt pass-rate range: **85%–90% (spread 5 pp)** (descriptive stochastic min–max; not a confidence interval)
+- Per-attempt budgeted pass rates: **1=90% (36/40), 2=90% (36/40), 3=85% (34/40), 4=85% (34/40), 5=85% (34/40)**
+- Attempt distribution: **median 85%; range 85%–90%; spread 5 pp** (5 equally weighted attempts; TIME_LIMIT counts as a non-pass)
 - Verified duration: median **243.2305 s**, p90 **486.679 s**, complete total **56465.753 s**, observed sum **56465.753 s** (coverage 200/200)
 - Total tokens: complete total **68120529** (coverage 200/200); observed sum **68120529**
 - Cached-input tokens: complete total **55716096** (coverage 200/200); observed sum **55716096**
@@ -204,8 +204,8 @@ Configuration: `{"agents":["swe-1-7-devin"],"backend_provider":"devin","harness"
 - Comparable: **yes**
 - Statuses: `{"INFRA_BLOCKED": 0, "PASS": 158, "REJECT": 41, "TIME_LIMIT": 1}`
 - Semantic cells: **199/200**
-- Per-attempt semantic pass rates: **1=80% (32/40), 2=77.5% (31/40), 3=79.49% (31/39), 4=80% (32/40), 5=80% (32/40)**
-- Across-attempt pass-rate range: **— (incomplete matrix; observed per-attempt rates are not a comparable range)** (descriptive stochastic min–max; not a confidence interval)
+- Per-attempt budgeted pass rates: **1=80% (32/40), 2=77.5% (31/40), 3=77.5% (31/40), 4=80% (32/40), 5=80% (32/40)**
+- Attempt distribution: **median 80%; range 77.5%–80%; spread 2.5 pp** (5 equally weighted attempts; TIME_LIMIT counts as a non-pass)
 - Verified duration: median **549.67 s**, p90 **1779.664 s**, complete total **159067.417 s**, observed sum **159067.417 s** (coverage 199/199)
 - Total tokens: complete total **779440018** (coverage 199/199); observed sum **779440018**
 - Cached-input tokens: complete total **745277848** (coverage 199/199); observed sum **745277848**

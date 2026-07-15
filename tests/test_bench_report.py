@@ -248,9 +248,48 @@ class BenchReportTest(unittest.TestCase):
                     "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
                 },
             )
-            markdown = bench_report.render_markdown(bench_report.build_report(["r"], td, expected_tasks=2, expected_attempts=2))
+            distribution = model["attempt_budgeted_pass_rate_distribution"]
+            self.assertTrue(distribution["complete"])
+            self.assertEqual(distribution["median"], 0.75)
+            self.assertEqual(distribution["minimum"], 0.5)
+            self.assertEqual(distribution["maximum"], 1.0)
+            self.assertEqual(model["median_attempt_budgeted_pass_rate"], 0.75)
+            markdown = bench_report.render_markdown(
+                bench_report.build_report(
+                    ["r"], td, expected_tasks=2, expected_attempts=2
+                )
+            )
+            self.assertIn("Median attempt pass", markdown)
             self.assertIn("50%–100%", markdown)
-            self.assertIn("spread 50 pp", markdown)
+            self.assertIn("median 75%", markdown)
+
+    def test_attempt_budgeted_median_counts_time_limit_as_non_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            rows = [
+                self.row(result_id="a1", task="t1", attempt=1, status="PASS"),
+                self.row(
+                    result_id="a2", task="t2", attempt=1, status="TIME_LIMIT"
+                ),
+                self.row(result_id="b1", task="t1", attempt=2, status="PASS"),
+                self.row(result_id="b2", task="t2", attempt=2, status="PASS"),
+            ]
+            self.make_run(td, "r", rows)
+            model = bench_report.build_report(
+                ["r"], td, expected_tasks=2, expected_attempts=2
+            )["models"][0]
+            self.assertEqual(
+                [attempt["semantic_pass_rate"] for attempt in model["attempts"]],
+                [1.0, 1.0],
+            )
+            self.assertEqual(
+                [attempt["budgeted_pass_rate"] for attempt in model["attempts"]],
+                [0.5, 1.0],
+            )
+            self.assertFalse(model["attempt_pass_rate_range"]["complete"])
+            distribution = model["attempt_budgeted_pass_rate_distribution"]
+            self.assertTrue(distribution["complete"])
+            self.assertEqual(distribution["median"], 0.75)
+            self.assertEqual(distribution["spread"], 0.5)
 
     def test_attempt_pass_rate_range_is_null_for_partial_matrix(self):
         with tempfile.TemporaryDirectory() as td:
@@ -264,6 +303,10 @@ class BenchReportTest(unittest.TestCase):
             self.assertFalse(model["attempt_pass_rate_range"]["complete"])
             self.assertIsNone(model["attempt_pass_rate_range"]["minimum"])
             self.assertEqual(model["attempt_pass_rate_range"]["observed_minimum"], 0.5)
+            distribution = model["attempt_budgeted_pass_rate_distribution"]
+            self.assertFalse(distribution["complete"])
+            self.assertIsNone(distribution["median"])
+            self.assertEqual(distribution["observed_median"], 0.75)
 
     def test_exact_even_odd_medians_and_nearest_rank_p90(self):
         self.assertEqual(bench_report.exact_median([1, 3, 2]), 2.0)
@@ -454,6 +497,32 @@ class BenchReportTest(unittest.TestCase):
             ["r"], root, expected_tasks=1, expected_attempts=1, manifest_path=manifest
         )
 
+    def test_attempt_distribution_svg_renders_raw_points_and_median(self):
+        with tempfile.TemporaryDirectory() as td:
+            report = self.strict_report(td)
+            dark_svg = bench_report.render_attempt_distribution_svg(
+                report, theme="dark"
+            )
+            light_svg = bench_report.render_attempt_distribution_svg(
+                report, theme="light"
+            )
+            self.assertIn('role="img"', dark_svg)
+            self.assertIn("across 1 attempts", dark_svg)
+            self.assertIn("Attempt 1: 100%", dark_svg)
+            self.assertIn("No mean or aggregate count", dark_svg)
+            self.assertIn("#E6EDF3", dark_svg)
+            self.assertIn("#1F2328", light_svg)
+            self.assertNotEqual(dark_svg, light_svg)
+            self.assertNotIn("<script", dark_svg)
+
+            report["models"][0]["attempt_budgeted_pass_rate_distribution"][
+                "median"
+            ] = 0.5
+            with self.assertRaisesRegex(
+                bench_report.ReportError, "median does not match"
+            ):
+                bench_report.render_attempt_distribution_svg(report)
+
     def test_manifest_hash_mismatch_is_not_comparable(self):
         with tempfile.TemporaryDirectory() as td:
             manifest, manifest_sha256 = self.tiny_manifest(td)
@@ -588,6 +657,96 @@ class BenchReportTest(unittest.TestCase):
             self.assertNotIn("artifact_root", payload["input"])
             self.assertEqual(payload["manifest"]["path"], "benchmarks/quant-terminal-v1.toml")
             self.assertIn("# Quant Bench Report", md_out.read_text())
+
+    def test_cli_writes_attempt_distribution_svg(self):
+        with tempfile.TemporaryDirectory() as td:
+            manifest, manifest_sha256 = self.tiny_manifest(td)
+            self.make_run(
+                td,
+                "r",
+                [self.strict_row()],
+                status_fields=self.strict_status(manifest_sha256),
+            )
+            json_out = Path(td) / "report.json"
+            md_out = Path(td) / "report.md"
+            light_svg_out = Path(td) / "distribution-light.svg"
+            dark_svg_out = Path(td) / "distribution-dark.svg"
+            rc = bench_report.main([
+                "r",
+                "--artifact-root",
+                td,
+                "--manifest",
+                str(manifest),
+                "--expected-tasks",
+                "1",
+                "--expected-attempts",
+                "1",
+                "--json-output",
+                str(json_out),
+                "--markdown-output",
+                str(md_out),
+                "--svg-light-output",
+                str(light_svg_out),
+                "--svg-dark-output",
+                str(dark_svg_out),
+            ])
+            self.assertEqual(rc, 0)
+            self.assertIn("#1F2328", light_svg_out.read_text())
+            self.assertIn("#E6EDF3", dark_svg_out.read_text())
+
+    def test_cli_rejects_image_lock_and_parent_child_output_collisions(self):
+        with tempfile.TemporaryDirectory() as td:
+            manifest, manifest_sha256 = self.tiny_manifest(td)
+            self.make_run(
+                td,
+                "r",
+                [self.strict_row()],
+                status_fields=self.strict_status(manifest_sha256),
+            )
+            base_args = [
+                "r",
+                "--artifact-root",
+                td,
+                "--manifest",
+                str(manifest),
+                "--expected-tasks",
+                "1",
+                "--expected-attempts",
+                "1",
+            ]
+            image_lock = Path(td) / "image-lock.json"
+            original_lock = image_lock.read_bytes()
+            self.assertEqual(
+                bench_report.main(
+                    base_args + ["--svg-light-output", str(image_lock)]
+                ),
+                2,
+            )
+            self.assertEqual(image_lock.read_bytes(), original_lock)
+            run_output = Path(td) / "r" / "report.svg"
+            self.assertEqual(
+                bench_report.main(
+                    base_args + ["--svg-light-output", str(run_output)]
+                ),
+                2,
+            )
+            self.assertFalse(run_output.exists())
+
+            parent_output = Path(td) / "report-output"
+            child_output = parent_output / "distribution.svg"
+            self.assertEqual(
+                bench_report.main(
+                    base_args
+                    + [
+                        "--json-output",
+                        str(parent_output),
+                        "--svg-light-output",
+                        str(child_output),
+                    ]
+                ),
+                2,
+            )
+            self.assertFalse(parent_output.exists())
 
     def test_cli_rejects_output_aliases_without_overwriting_inputs(self):
         with tempfile.TemporaryDirectory() as td:

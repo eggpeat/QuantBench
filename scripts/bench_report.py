@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 import tomllib
+from xml.sax.saxutils import escape
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST_PATH = PROJECT_ROOT / "benchmarks" / "quant-terminal-v1.toml"
@@ -835,26 +836,110 @@ def _model_summary(
     }
     attempts: list[dict[str, Any]] = []
     for attempt_number in expected_attempt_numbers:
-        attempt_rows = [row for row in semantic_rows if int(row["attempt_number"]) == attempt_number]
-        attempt_tasks = {str(row["task_id"]) for row in attempt_rows}
-        attempt_passes = sum(1 for row in attempt_rows if row.get("status") == "PASS")
+        attempt_semantic_rows = [
+            row for row in semantic_rows if int(row["attempt_number"]) == attempt_number
+        ]
+        attempt_budgeted_rows = [
+            row for row in budgeted_rows if int(row["attempt_number"]) == attempt_number
+        ]
+        attempt_tasks = {str(row["task_id"]) for row in attempt_budgeted_rows}
+        attempt_passes = sum(
+            1 for row in attempt_budgeted_rows if row.get("status") == "PASS"
+        )
         attempts.append({
             "attempt_number": attempt_number,
             "semantic_passes": attempt_passes,
-            "semantic_trials": len(attempt_rows),
-            "pass_rate": (attempt_passes / len(attempt_rows) if attempt_rows else None),
-            "complete": len(attempt_rows) == expected_tasks and len(attempt_tasks) == expected_tasks,
+            "semantic_trials": len(attempt_semantic_rows),
+            "semantic_pass_rate": (
+                attempt_passes / len(attempt_semantic_rows)
+                if attempt_semantic_rows
+                else None
+            ),
+            "pass_rate": (
+                attempt_passes / len(attempt_semantic_rows)
+                if attempt_semantic_rows
+                else None
+            ),
+            "budgeted_passes": attempt_passes,
+            "budgeted_trials": len(attempt_budgeted_rows),
+            "budgeted_pass_rate": (
+                attempt_passes / len(attempt_budgeted_rows)
+                if attempt_budgeted_rows
+                else None
+            ),
+            "complete": (
+                len(attempt_budgeted_rows) == expected_tasks
+                and len(attempt_tasks) == expected_tasks
+            ),
         })
-    observed_attempt_rates = [attempt["pass_rate"] for attempt in attempts if attempt["pass_rate"] is not None]
-    attempt_range_complete = complete and infra_clear and all(attempt["complete"] for attempt in attempts)
+    observed_attempt_rates = [
+        attempt["semantic_pass_rate"]
+        for attempt in attempts
+        if attempt["semantic_pass_rate"] is not None
+    ]
+    attempt_range_complete = (
+        complete
+        and infra_clear
+        and all(attempt["semantic_trials"] == expected_tasks for attempt in attempts)
+    )
     attempt_pass_rate_range = {
         "complete": attempt_range_complete,
         "minimum": min(observed_attempt_rates) if attempt_range_complete else None,
         "maximum": max(observed_attempt_rates) if attempt_range_complete else None,
-        "spread": (max(observed_attempt_rates) - min(observed_attempt_rates) if attempt_range_complete else None),
+        "spread": (
+            max(observed_attempt_rates) - min(observed_attempt_rates)
+            if attempt_range_complete
+            else None
+        ),
         "observed_minimum": min(observed_attempt_rates) if observed_attempt_rates else None,
         "observed_maximum": max(observed_attempt_rates) if observed_attempt_rates else None,
         "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
+    }
+    observed_budgeted_attempt_rates = [
+        attempt["budgeted_pass_rate"]
+        for attempt in attempts
+        if attempt["budgeted_pass_rate"] is not None
+    ]
+    budgeted_distribution_complete = (
+        complete
+        and infra_clear
+        and len(observed_budgeted_attempt_rates) == expected_attempts
+        and all(attempt["complete"] for attempt in attempts)
+    )
+    attempt_budgeted_pass_rate_distribution = {
+        "complete": budgeted_distribution_complete,
+        "median": (
+            exact_median(observed_budgeted_attempt_rates)
+            if budgeted_distribution_complete
+            else None
+        ),
+        "minimum": (
+            min(observed_budgeted_attempt_rates)
+            if budgeted_distribution_complete
+            else None
+        ),
+        "maximum": (
+            max(observed_budgeted_attempt_rates)
+            if budgeted_distribution_complete
+            else None
+        ),
+        "spread": (
+            max(observed_budgeted_attempt_rates) - min(observed_budgeted_attempt_rates)
+            if budgeted_distribution_complete
+            else None
+        ),
+        "observed_median": exact_median(observed_budgeted_attempt_rates),
+        "observed_minimum": (
+            min(observed_budgeted_attempt_rates)
+            if observed_budgeted_attempt_rates
+            else None
+        ),
+        "observed_maximum": (
+            max(observed_budgeted_attempt_rates)
+            if observed_budgeted_attempt_rates
+            else None
+        ),
+        "definition": "Median and raw distribution of complete per-attempt budgeted pass rates; TIME_LIMIT counts as a non-pass and INFRA_BLOCKED invalidates comparison.",
     }
     execution_evidence = execution_evidence or {}
     contributing_run_ids = sorted({str(row.get("_run_id")) for row in rows if row.get("_run_id")})
@@ -929,6 +1014,8 @@ def _model_summary(
         "budgeted_pass_rate": (semantic_passes / budgeted_denominator if budgeted_denominator else None),
         "attempts": attempts,
         "attempt_pass_rate_range": attempt_pass_rate_range,
+        "attempt_budgeted_pass_rate_distribution": attempt_budgeted_pass_rate_distribution,
+        "median_attempt_budgeted_pass_rate": attempt_budgeted_pass_rate_distribution["median"],
         "task_reliability_distribution": _task_distribution(tasks),
         "tasks": tasks,
         "duration": duration,
@@ -1050,6 +1137,7 @@ def build_report(
         "metric_definitions": {
             "semantic_pass_rate": "PASS / (PASS + REJECT); INFRA_BLOCKED and TIME_LIMIT are excluded.",
             "budgeted_pass_rate": "PASS / (PASS + REJECT + TIME_LIMIT); INFRA_BLOCKED is excluded.",
+            "median_attempt_budgeted_pass_rate": "Median of the complete per-attempt budgeted pass rates; each attempt is weighted equally, TIME_LIMIT counts as a non-pass, and INFRA_BLOCKED invalidates comparison.",
             "duration": "For semantic PASS/REJECT rows: agent_elapsed_sec + verifier_elapsed_sec when both are available, otherwise duration_sec; infrastructure and time-limit rows are excluded.",
             "attempt_pass_rate_range": "Descriptive min-max of complete per-attempt semantic pass rates across tasks; this stochastic range is not a confidence interval.",
             "provider_output_tok_s": "Median of finite runtime_metrics.throughput.output_tok_s values; provider-reported/generated-duration throughput, not end-to-end speed.",
@@ -1071,13 +1159,13 @@ def render_markdown(report: Mapping[str, Any]) -> str:
     lines.extend([
         "## Leaderboard",
         "",
-        "| Model | Configuration | Coverage | Comparable | Semantic pass | Attempt pass range | Budgeted pass | Median duration (s) | Provider output tok/s (median) |",
-        "|---|---|---:|:---:|---:|---:|---:|---:|---:|",
+        "| Model | Configuration | Coverage | Comparable | Median attempt pass | Attempt range | Median duration (s) | Provider output tok/s (median) |",
+        "|---|---|---:|:---:|---:|---:|---:|---:|",
     ])
     models = list(report.get("models", []))
 
     def sort_key(model: Mapping[str, Any]) -> tuple[Any, ...]:
-        rate = model.get("semantic_pass_rate")
+        rate = model.get("median_attempt_budgeted_pass_rate")
         config = model.get("configuration", {})
         return (
             not bool(model.get("comparable")),
@@ -1116,14 +1204,14 @@ def render_markdown(report: Mapping[str, Any]) -> str:
         coverage = model.get("coverage", {})
         expected = coverage.get("expected_cells", 0)
         observed = coverage.get("observed_cells", 0)
-        rate = model.get("semantic_pass_rate")
-        budgeted = model.get("budgeted_pass_rate")
+        median_attempt_pass = model.get("median_attempt_budgeted_pass_rate")
         duration = model.get("duration", {}).get("median_sec")
         throughput = model.get("throughput", {}).get("provider_output_tok_s_median")
-        attempt_range = model.get("attempt_pass_rate_range", {})
+        attempt_distribution = model.get("attempt_budgeted_pass_rate_distribution", {})
         range_text = (
-            f"{fmt_percent(attempt_range.get('minimum'))}–{fmt_percent(attempt_range.get('maximum'))}"
-            if attempt_range.get("complete")
+            f"{fmt_percent(attempt_distribution.get('minimum'))}–"
+            f"{fmt_percent(attempt_distribution.get('maximum'))}"
+            if attempt_distribution.get("complete")
             else "—"
         )
         model_selector = str(config.get("model") or "")
@@ -1134,8 +1222,9 @@ def render_markdown(report: Mapping[str, Any]) -> str:
         config_label = " · ".join(part for part in config_parts if part)
         lines.append(
             f"| {config.get('model') or 'unknown'} | `{config_label}` | {observed}/{expected} | "
-            f"{'yes' if model.get('comparable') else 'no'} | {fmt_percent(rate)} | {range_text} | "
-            f"{fmt_percent(budgeted)} | {fmt(duration)} | {fmt(throughput)} |"
+            f"{'yes' if model.get('comparable') else 'no'} | "
+            f"{fmt_percent(median_attempt_pass)} | {range_text} | "
+            f"{fmt(duration)} | {fmt(throughput)} |"
         )
     for model in models:
         config = model.get("configuration", {})
@@ -1154,17 +1243,21 @@ def render_markdown(report: Mapping[str, Any]) -> str:
         cache_coverage = model.get("cache_coverage", cache.get("coverage", {}))
         throughput = model.get("throughput", {})
         attempts = model.get("attempts", [])
-        attempt_range = model.get("attempt_pass_rate_range", {})
+        attempt_distribution = model.get("attempt_budgeted_pass_rate_distribution", {})
         attempt_text = ", ".join(
-            f"{attempt.get('attempt_number')}={fmt_percent(attempt.get('pass_rate'))} "
-            f"({attempt.get('semantic_passes', 0)}/{attempt.get('semantic_trials', 0)})"
+            f"{attempt.get('attempt_number')}="
+            f"{fmt_percent(attempt.get('budgeted_pass_rate'))} "
+            f"({attempt.get('budgeted_passes', 0)}/"
+            f"{attempt.get('budgeted_trials', 0)})"
             for attempt in attempts
         )
-        attempt_range_text = (
-            f"{fmt_percent(attempt_range.get('minimum'))}–{fmt_percent(attempt_range.get('maximum'))} "
-            f"(spread {fmt_percentage_points(attempt_range.get('spread'))})"
-            if attempt_range.get("complete")
-            else "— (incomplete matrix; observed per-attempt rates are not a comparable range)"
+        attempt_distribution_text = (
+            f"median {fmt_percent(attempt_distribution.get('median'))}; "
+            f"range {fmt_percent(attempt_distribution.get('minimum'))}–"
+            f"{fmt_percent(attempt_distribution.get('maximum'))}; "
+            f"spread {fmt_percentage_points(attempt_distribution.get('spread'))}"
+            if attempt_distribution.get("complete")
+            else "— (incomplete or infrastructure-blocked attempt distribution)"
         )
         token_total = token_totals.get("total")
         token_observed_total = token_observed.get("total")
@@ -1193,8 +1286,8 @@ def render_markdown(report: Mapping[str, Any]) -> str:
             f"- Comparable: **{'yes' if model.get('comparable') else 'no'}**",
             f"- Statuses: `{json.dumps(model.get('status_counts', {}), sort_keys=True)}`",
             f"- Semantic cells: **{semantic_coverage.get('observed_cells', 0)}/{semantic_coverage.get('expected_cells', 0)}**",
-            f"- Per-attempt semantic pass rates: **{attempt_text}**",
-            f"- Across-attempt pass-rate range: **{attempt_range_text}** (descriptive stochastic min–max; not a confidence interval)",
+            f"- Per-attempt budgeted pass rates: **{attempt_text}**",
+            f"- Attempt distribution: **{attempt_distribution_text}** ({len(attempts)} equally weighted attempts; TIME_LIMIT counts as a non-pass)",
             f"- Verified duration: median **{fmt(duration.get('median_sec'))} s**, p90 **{fmt(duration.get('p90_sec'))} s**, complete total **{fmt(duration.get('total_sec'))} s**, observed sum **{fmt(duration.get('observed_sum_sec'))} s** (coverage {duration.get('coverage', 0)}/{duration.get('expected', 0)})",
             f"- Total tokens: {token_total_text}",
             f"- Cached-input tokens: {cached_text}",
@@ -1218,6 +1311,300 @@ def render_markdown(report: Mapping[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+_CHART_MODEL_NAMES = {
+    "openai-codex/gpt-5.6-luna": "LUNA",
+    "openai-codex/gpt-5.6-sol": "SOL",
+    "openai-codex/gpt-5.6-terra": "TERRA",
+    "devin/swe-1-7": "DEVIN SWE",
+}
+_CHART_PALETTES = {
+    "dark": {
+        "text_primary": "#E6EDF3",
+        "text_secondary": "#8B949E",
+        "grid": "#30363D",
+        "accent": "#35CAFF",
+        "point_stroke": "#0D1117",
+        "median": "#F4AC41",
+    },
+    "light": {
+        "text_primary": "#1F2328",
+        "text_secondary": "#656D76",
+        "grid": "#D0D7DE",
+        "accent": "#0E9BE0",
+        "point_stroke": "#FFFFFF",
+        "median": "#B45309",
+    },
+}
+
+
+def _chart_percent(value: float) -> str:
+    text = f"{value * 100:.2f}".rstrip("0").rstrip(".")
+    return f"{text}%"
+
+
+def render_attempt_distribution_svg(
+    report: Mapping[str, Any], *, theme: str = "dark"
+) -> str:
+    """Render complete per-attempt budgeted pass rates without density smoothing."""
+    if theme not in _CHART_PALETTES:
+        raise ReportError(f"unsupported distribution SVG theme: {theme}")
+    palette = _CHART_PALETTES[theme]
+    source_models = list(report.get("models", []))
+    if not source_models:
+        raise ReportError("distribution SVG requires at least one model")
+    expected_attempts = int(report.get("manifest", {}).get("attempts") or 0)
+    expected_tasks = int(report.get("input", {}).get("expected_tasks") or 0)
+    if expected_attempts < 1 or expected_tasks < 1:
+        raise ReportError("distribution SVG requires positive task and attempt counts")
+
+    chart_models: list[dict[str, Any]] = []
+    for model in source_models:
+        config = model.get("configuration", {})
+        selector = str(config.get("model") or "unknown")
+        distribution = model.get("attempt_budgeted_pass_rate_distribution", {})
+        if not model.get("comparable") or not distribution.get("complete"):
+            raise ReportError(
+                f"distribution SVG requires a comparable complete matrix: {selector}"
+            )
+        rates: list[tuple[int, float]] = []
+        for attempt in model.get("attempts", []):
+            rate = _finite_number(attempt.get("budgeted_pass_rate"))
+            attempt_number = attempt.get("attempt_number")
+            if (
+                rate is None
+                or rate < 0
+                or rate > 1
+                or isinstance(attempt_number, bool)
+                or not isinstance(attempt_number, int)
+            ):
+                raise ReportError(
+                    f"distribution SVG has invalid attempt data: {selector}"
+                )
+            rates.append((attempt_number, rate))
+        if len(rates) != expected_attempts or {
+            attempt_number for attempt_number, _ in rates
+        } != set(range(1, expected_attempts + 1)):
+            raise ReportError(
+                f"distribution SVG requires attempts 1..{expected_attempts}: {selector}"
+            )
+        median = exact_median(rate for _, rate in rates)
+        declared_median = _finite_number(distribution.get("median"))
+        if (
+            median is None
+            or declared_median is None
+            or not math.isclose(median, declared_median, rel_tol=0, abs_tol=1e-12)
+        ):
+            raise ReportError(
+                f"distribution SVG median does not match attempt data: {selector}"
+            )
+        chart_models.append({
+            "selector": selector,
+            "display_name": _CHART_MODEL_NAMES.get(
+                selector, selector.rsplit("/", 1)[-1].upper()
+            ),
+            "rates": sorted(rates),
+            "median": median,
+            "minimum": min(rate for _, rate in rates),
+            "maximum": max(rate for _, rate in rates),
+        })
+    chart_models.sort(
+        key=lambda model: (-float(model["median"]), str(model["selector"]))
+    )
+
+    all_rates = [
+        rate for model in chart_models for _, rate in model["rates"]
+    ]
+    domain_min = math.floor(min(all_rates) * 100 / 5) * 5
+    domain_max = math.ceil(max(all_rates) * 100 / 5) * 5
+    while domain_max - domain_min < 20:
+        if domain_min > 0:
+            domain_min -= 5
+        elif domain_max < 100:
+            domain_max += 5
+        else:
+            break
+    domain_min = max(0, domain_min)
+    domain_max = min(100, domain_max)
+    domain_span = domain_max - domain_min
+    if domain_span <= 0:
+        raise ReportError("distribution SVG cannot determine a non-zero axis")
+
+    width = 720
+    plot_left = 170
+    plot_right = 700
+    plot_width = plot_right - plot_left
+    row_top = 128
+    row_gap = 75
+    axis_y = row_top + row_gap * (len(chart_models) - 1) + 57
+    footnote_y = axis_y + 36
+    height = footnote_y + 15
+
+    def x_position(rate: float) -> float:
+        percent = rate * 100
+        return plot_left + (percent - domain_min) / domain_span * plot_width
+
+    description = " ".join(
+        (
+            f"{model['display_name']}: attempts "
+            f"{', '.join(_chart_percent(rate) for _, rate in model['rates'])}; "
+            f"median {_chart_percent(float(model['median']))}."
+        )
+        for model in chart_models
+    )
+    axis_disclosure = (
+        f"Pass-rate axis zoomed to {domain_min}–{domain_max}%."
+        if (domain_min, domain_max) != (0, 100)
+        else "Full 0–100% pass-rate axis."
+    )
+    svg = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        (
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" '
+            f'height="{height}" viewBox="0 0 {width} {height}" role="img" '
+            'aria-labelledby="qbd-title qbd-desc" '
+            'font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">'
+        ),
+        (
+            "<title id=\"qbd-title\">Budgeted pass-rate distribution across "
+            f"{expected_attempts} attempts, by agent configuration</title>"
+        ),
+        (
+            f'<desc id="qbd-desc">{escape(description)} Dots are individual '
+            "attempts and stack where tied; the gold marker is the median; "
+            f"the cyan line is the min–max range. {axis_disclosure}</desc>"
+        ),
+        (
+            f'<line x1="16" y1="1" x2="704" y2="1" stroke="{palette["grid"]}" '
+            'stroke-width="1"/>'
+        ),
+        (
+            f'<text x="16" y="30" fill="{palette["text_primary"]}" '
+            'font-size="16" font-weight="650">'
+            f"Budgeted pass rate across {expected_attempts} attempts</text>"
+        ),
+        (
+            f'<circle cx="174" cy="56" r="3.5" fill="{palette["accent"]}" '
+            f'stroke="{palette["point_stroke"]}" stroke-width=".75"/>'
+        ),
+        (
+            f'<text x="185" y="60" fill="{palette["text_secondary"]}" '
+            'font-size="10.5">single attempt</text>'
+        ),
+        (
+            f'<line x1="290" y1="56" x2="310" y2="56" '
+            f'stroke="{palette["accent"]}" stroke-width="2.5" '
+            'stroke-linecap="round" opacity=".65"/>'
+        ),
+        (
+            f'<text x="320" y="60" fill="{palette["text_secondary"]}" '
+            'font-size="10.5">min–max range</text>'
+        ),
+        (
+            f'<line x1="441" y1="45" x2="441" y2="64" '
+            f'stroke="{palette["median"]}" stroke-width="2"/>'
+        ),
+        (
+            f'<polygon points="441,40 446,45 441,50 436,45" '
+            f'fill="{palette["median"]}"/>'
+        ),
+        (
+            f'<text x="452" y="60" fill="{palette["text_secondary"]}" '
+            'font-size="10.5">median</text>'
+        ),
+    ]
+
+    grid_top = 82
+    grid_bottom = axis_y - 18
+    for tick in range(domain_min, domain_max + 1, 5):
+        x = plot_left + (tick - domain_min) / domain_span * plot_width
+        svg.extend([
+            (
+                f'<line x1="{x:.2f}" y1="{grid_top}" x2="{x:.2f}" '
+                f'y2="{grid_bottom}" stroke="{palette["grid"]}" '
+                'stroke-width="1"/>'
+            ),
+            (
+                f'<text x="{x:.2f}" y="{axis_y + 15}" text-anchor="middle" '
+                f'fill="{palette["text_secondary"]}" font-size="10">'
+                f"{tick}%</text>"
+            ),
+        ])
+    svg.append(
+        f'<line x1="{plot_left}" y1="{axis_y - 18}" x2="{plot_right}" '
+        f'y2="{axis_y - 18}" stroke="{palette["grid"]}" stroke-width="1"/>'
+    )
+
+    for index, model in enumerate(chart_models):
+        y = row_top + index * row_gap
+        minimum_x = x_position(float(model["minimum"]))
+        maximum_x = x_position(float(model["maximum"]))
+        median_x = x_position(float(model["median"]))
+        svg.extend([
+            (
+                f'<text x="152" y="{y - 4}" text-anchor="end" '
+                f'fill="{palette["text_primary"]}" font-size="13.5" '
+                'font-weight="600">'
+                f'{escape(str(model["display_name"]))}</text>'
+            ),
+            (
+                f'<text x="152" y="{y + 15}" text-anchor="end" '
+                f'fill="{palette["median"]}" font-size="15" font-weight="700">'
+                f'{_chart_percent(float(model["median"]))}</text>'
+            ),
+            (
+                f'<line x1="{minimum_x:.2f}" y1="{y}" x2="{maximum_x:.2f}" '
+                f'y2="{y}" stroke="{palette["accent"]}" stroke-width="2.5" '
+                'stroke-linecap="round" opacity=".55"/>'
+            ),
+            (
+                f'<line x1="{median_x:.2f}" y1="{y - 27}" '
+                f'x2="{median_x:.2f}" y2="{y + 27}" '
+                f'stroke="{palette["median"]}" stroke-width="2" '
+                'stroke-linecap="round" opacity=".9"/>'
+            ),
+        ])
+        grouped_rates: dict[float, list[int]] = defaultdict(list)
+        for attempt_number, rate in model["rates"]:
+            grouped_rates[float(rate)].append(int(attempt_number))
+        for rate, attempt_numbers in sorted(grouped_rates.items()):
+            for point_index, attempt_number in enumerate(attempt_numbers):
+                offset = (point_index - (len(attempt_numbers) - 1) / 2) * 7
+                svg.append(
+                    f'<circle cx="{x_position(rate):.2f}" '
+                    f'cy="{y + offset:.2f}" r="4.5" '
+                    f'fill="{palette["accent"]}" '
+                    f'stroke="{palette["point_stroke"]}" stroke-width=".75">'
+                    f"<title>Attempt {attempt_number}: {_chart_percent(rate)}</title>"
+                    "</circle>"
+                )
+        svg.append(
+            f'<polygon points="{median_x:.2f},{y - 32} '
+            f'{median_x + 5:.2f},{y - 27} {median_x:.2f},{y - 22} '
+            f'{median_x - 5:.2f},{y - 27}" fill="{palette["median"]}"/>'
+        )
+        if index < len(chart_models) - 1:
+            svg.append(
+                f'<line x1="16" y1="{y + 37.5:.2f}" x2="704" '
+                f'y2="{y + 37.5:.2f}" stroke="{palette["grid"]}" '
+                'stroke-width=".75" opacity=".45"/>'
+            )
+    svg.extend([
+        (
+            f'<text x="16" y="{footnote_y}" fill="{palette["text_secondary"]}" '
+            'font-size="9">'
+            f"Each dot is one of {expected_attempts} attempts; tied attempts "
+            f"stack vertically. {axis_disclosure} No mean or aggregate count."
+            "</text>"
+        ),
+        (
+            f'<line x1="16" y1="{height - 1}" x2="704" y2="{height - 1}" '
+            f'stroke="{palette["grid"]}" stroke-width="1"/>'
+        ),
+        "</svg>",
+    ])
+    return "\n".join(svg) + "\n"
+
+
 def _write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
@@ -1229,31 +1616,51 @@ def _same_existing_file(left: Path, right: Path) -> bool:
         return False
 
 
+def _paths_overlap(left: Path, right: Path) -> bool:
+    return (
+        left == right
+        or _same_existing_file(left, right)
+        or left in right.parents
+        or right in left.parents
+    )
+
+
 def _validate_output_paths(
     artifact_root: Path | str,
     run_ids: Iterable[str],
     json_output: Path | None,
     markdown_output: Path | None,
+    svg_light_output: Path | None = None,
+    svg_dark_output: Path | None = None,
     *,
     manifest_path: Path | str | None = None,
 ) -> None:
-    destinations = [path.resolve() for path in (json_output, markdown_output) if path is not None]
-    if len(destinations) == 2 and (
-        destinations[0] == destinations[1] or _same_existing_file(destinations[0], destinations[1])
-    ):
-        raise ReportError("JSON and Markdown output paths must be different")
+    destinations = [
+        path.resolve()
+        for path in (json_output, markdown_output, svg_light_output, svg_dark_output)
+        if path is not None
+    ]
+    for index, destination in enumerate(destinations):
+        if any(
+            _paths_overlap(destination, other)
+            for other in destinations[index + 1:]
+        ):
+            raise ReportError("report output paths must be different")
     root = Path(artifact_root).resolve()
-    protected = {
-        (root / str(run_id) / filename).resolve()
-        for run_id in run_ids
+    run_roots = {(root / str(run_id)).resolve() for run_id in run_ids}
+    protected = set(run_roots)
+    protected.update(
+        run_root / filename
+        for run_root in run_roots
         for filename in ("results.jsonl", "status.json")
-    }
+    )
     if manifest_path is not None:
-        protected.add(Path(manifest_path).expanduser().resolve())
+        manifest = Path(manifest_path).expanduser().resolve()
+        protected.update((manifest, (manifest.parent / "image-lock.json").resolve()))
     conflicts = sorted(
         str(destination)
         for destination in destinations
-        if destination in protected or any(_same_existing_file(destination, source) for source in protected)
+        if any(_paths_overlap(destination, source) for source in protected)
     )
     if conflicts:
         raise ReportError(f"output path would overwrite benchmark input: {', '.join(conflicts)}")
@@ -1270,6 +1677,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--expected-attempts", type=int, default=DEFAULT_EXPECTED_ATTEMPTS)
     parser.add_argument("--json-output", type=Path, help="write JSON report to this path (default: stdout)")
     parser.add_argument("--markdown-output", type=Path, help="write Markdown report to this path (default: stdout when JSON output is selected)")
+    parser.add_argument("--svg-light-output", type=Path, help="write light-theme attempt-distribution SVG to this path")
+    parser.add_argument("--svg-dark-output", type=Path, help="write dark-theme attempt-distribution SVG to this path")
     return parser
 
 
@@ -1286,17 +1695,33 @@ def main(argv: list[str] | None = None) -> int:
         )
         markdown = render_markdown(report)
         encoded = json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+        svg_light = (
+            render_attempt_distribution_svg(report, theme="light")
+            if args.svg_light_output
+            else None
+        )
+        svg_dark = (
+            render_attempt_distribution_svg(report, theme="dark")
+            if args.svg_dark_output
+            else None
+        )
         _validate_output_paths(
             args.artifact_root,
             report["input"]["run_ids"],
             args.json_output,
             args.markdown_output,
+            args.svg_light_output,
+            args.svg_dark_output,
             manifest_path=args.manifest,
         )
         if args.json_output:
             _write_text(args.json_output, encoded)
         if args.markdown_output:
             _write_text(args.markdown_output, markdown)
+        if args.svg_light_output and svg_light is not None:
+            _write_text(args.svg_light_output, svg_light)
+        if args.svg_dark_output and svg_dark is not None:
+            _write_text(args.svg_dark_output, svg_dark)
         if not args.json_output and not args.markdown_output:
             print(encoded, end="")
             print(markdown, file=sys.stderr, end="")

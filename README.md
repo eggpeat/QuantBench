@@ -16,16 +16,30 @@ a task benchmark, not a claim about isolated model capability.
 ## Published results
 
 The repository preserves four complete `quant-terminal-v1` result matrices.
-Each matrix covers all 40 tasks and five attempts (200 terminal outcomes), and
-their preserved source runs share the historical digest declared by the
-publication manifest.
+Each matrix covers the same 40 tasks across five independent attempts, and its
+preserved source runs share the historical digest declared by the publication
+manifest. The public headline is the median of the five per-attempt budgeted
+pass rates, rather than a pooled average.
 
-| Agent configuration | Outcomes | Budgeted pass | Attempt pass range |
-|---|---:|---:|---:|
-| Luna — `openai-codex/gpt-5.6-luna` (`xhigh`) | 180 PASS / 20 REJECT | **90%** | 82.5%–92.5% |
-| Sol — `openai-codex/gpt-5.6-sol` (`max`) | 178 PASS / 22 REJECT | **89%** | 87.5%–92.5% |
-| Terra — `openai-codex/gpt-5.6-terra` (`xhigh`) | 174 PASS / 26 REJECT | **87%** | 85%–90% |
-| Devin SWE — `devin/swe-1-7` (`none`) | 158 PASS / 41 REJECT / 1 TIME_LIMIT | **79%** | — |
+| Agent configuration | Attempt pass rates (1→5) | Median attempt pass |
+|---|---:|---:|
+| Luna — `openai-codex/gpt-5.6-luna` (`xhigh`) | 92.5%, 82.5%, 92.5%, 90%, 92.5% | **92.5%** |
+| Sol — `openai-codex/gpt-5.6-sol` (`max`) | 90%, 87.5%, 92.5%, 87.5%, 87.5% | **87.5%** |
+| Terra — `openai-codex/gpt-5.6-terra` (`xhigh`) | 90%, 90%, 85%, 85%, 85% | **85%** |
+| Devin SWE — `devin/swe-1-7` (`none`) | 80%, 77.5%, 77.5%, 80%, 80% | **80%** |
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/results-distribution-dark.svg">
+  <img src="assets/results-distribution-light.svg"
+       alt="Budgeted pass-rate distribution: five attempts per configuration with min–max range and median (Luna 92.5%, Sol 87.5%, Terra 85%, Devin SWE 80%). Full values are in the adjacent table."
+       width="720">
+</picture>
+
+Each dot is one 40-task attempt; tied values stack vertically. The cyan line is
+the observed range and the gold marker is the median. The axis is explicitly
+zoomed to the observed region. Raw points are shown instead of a smoothed
+density because five attempts do not support a meaningful KDE. `TIME_LIMIT`
+counts as a non-pass in this summary.
 
 - [Markdown report](results/quant-terminal-v1.md)
 - [Machine-readable JSON](results/quant-terminal-v1.json)
@@ -176,7 +190,9 @@ For a completed run, aggregate only explicit run IDs:
 python3 scripts/bench_report.py RUN_ID [RUN_ID ...] \
   --artifact-root artifacts/quant-bench-runs \
   --json-output /tmp/quant-bench-report.json \
-  --markdown-output /tmp/quant-bench-report.md
+  --markdown-output /tmp/quant-bench-report.md \
+  --svg-light-output /tmp/quant-bench-results-light.svg \
+  --svg-dark-output /tmp/quant-bench-results-dark.svg
 ```
 
 A report is comparable only when every included configuration covers all 200
