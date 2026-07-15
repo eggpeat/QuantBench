@@ -5,7 +5,7 @@
   },
   "comparability_reasons": [],
   "comparable": true,
-  "generated_at": "2026-07-15T03:41:40+00:00",
+  "generated_at": "2026-07-15T12:07:43+00:00",
   "input": {
     "expected_attempts": 5,
     "expected_tasks": 40,
@@ -1076,6 +1076,7 @@
     "attempt_pass_rate_range": "Descriptive min-max of complete per-attempt semantic pass rates across tasks; this stochastic range is not a confidence interval.",
     "budgeted_pass_rate": "PASS / (PASS + REJECT + TIME_LIMIT); INFRA_BLOCKED is excluded.",
     "duration": "For semantic PASS/REJECT rows: agent_elapsed_sec + verifier_elapsed_sec when both are available, otherwise duration_sec; infrastructure and time-limit rows are excluded.",
+    "median_attempt_budgeted_pass_rate": "Median of the complete per-attempt budgeted pass rates; each attempt is weighted equally, TIME_LIMIT counts as a non-pass, and INFRA_BLOCKED invalidates comparison.",
     "provider_output_tok_s": "Median of finite runtime_metrics.throughput.output_tok_s values; provider-reported/generated-duration throughput, not end-to-end speed.",
     "semantic_pass_rate": "PASS / (PASS + REJECT); INFRA_BLOCKED and TIME_LIMIT are excluded.",
     "token_cache_totals": "Complete totals are null unless every semantic row has a finite value; observed sums and coverage are always retained.",
@@ -1083,6 +1084,17 @@
   },
   "models": [
     {
+      "attempt_budgeted_pass_rate_distribution": {
+        "complete": true,
+        "definition": "Median and raw distribution of complete per-attempt budgeted pass rates; TIME_LIMIT counts as a non-pass and INFRA_BLOCKED invalidates comparison.",
+        "maximum": 0.8,
+        "median": 0.8,
+        "minimum": 0.775,
+        "observed_maximum": 0.8,
+        "observed_median": 0.8,
+        "observed_minimum": 0.775,
+        "spread": 0.025000000000000022
+      },
       "attempt_pass_rate_range": {
         "complete": false,
         "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
@@ -1095,36 +1107,56 @@
       "attempts": [
         {
           "attempt_number": 1,
+          "budgeted_pass_rate": 0.8,
+          "budgeted_passes": 32,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.8,
+          "semantic_pass_rate": 0.8,
           "semantic_passes": 32,
           "semantic_trials": 40
         },
         {
           "attempt_number": 2,
+          "budgeted_pass_rate": 0.775,
+          "budgeted_passes": 31,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.775,
+          "semantic_pass_rate": 0.775,
           "semantic_passes": 31,
           "semantic_trials": 40
         },
         {
           "attempt_number": 3,
-          "complete": false,
+          "budgeted_pass_rate": 0.775,
+          "budgeted_passes": 31,
+          "budgeted_trials": 40,
+          "complete": true,
           "pass_rate": 0.7948717948717948,
+          "semantic_pass_rate": 0.7948717948717948,
           "semantic_passes": 31,
           "semantic_trials": 39
         },
         {
           "attempt_number": 4,
+          "budgeted_pass_rate": 0.8,
+          "budgeted_passes": 32,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.8,
+          "semantic_pass_rate": 0.8,
           "semantic_passes": 32,
           "semantic_trials": 40
         },
         {
           "attempt_number": 5,
+          "budgeted_pass_rate": 0.8,
+          "budgeted_passes": 32,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.8,
+          "semantic_pass_rate": 0.8,
           "semantic_passes": 32,
           "semantic_trials": 40
         }
@@ -1448,6 +1480,7 @@
         "task_set_match": true,
         "unexpected_task_ids": []
       },
+      "median_attempt_budgeted_pass_rate": 0.8,
       "semantic_pass_rate": 0.7939698492462312,
       "semantic_passes": 158,
       "semantic_trials": 199,
@@ -2463,6 +2496,17 @@
       }
     },
     {
+      "attempt_budgeted_pass_rate_distribution": {
+        "complete": true,
+        "definition": "Median and raw distribution of complete per-attempt budgeted pass rates; TIME_LIMIT counts as a non-pass and INFRA_BLOCKED invalidates comparison.",
+        "maximum": 0.925,
+        "median": 0.925,
+        "minimum": 0.825,
+        "observed_maximum": 0.925,
+        "observed_median": 0.925,
+        "observed_minimum": 0.825,
+        "spread": 0.10000000000000009
+      },
       "attempt_pass_rate_range": {
         "complete": true,
         "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
@@ -2475,36 +2519,56 @@
       "attempts": [
         {
           "attempt_number": 1,
+          "budgeted_pass_rate": 0.925,
+          "budgeted_passes": 37,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.925,
+          "semantic_pass_rate": 0.925,
           "semantic_passes": 37,
           "semantic_trials": 40
         },
         {
           "attempt_number": 2,
+          "budgeted_pass_rate": 0.825,
+          "budgeted_passes": 33,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.825,
+          "semantic_pass_rate": 0.825,
           "semantic_passes": 33,
           "semantic_trials": 40
         },
         {
           "attempt_number": 3,
+          "budgeted_pass_rate": 0.925,
+          "budgeted_passes": 37,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.925,
+          "semantic_pass_rate": 0.925,
           "semantic_passes": 37,
           "semantic_trials": 40
         },
         {
           "attempt_number": 4,
+          "budgeted_pass_rate": 0.9,
+          "budgeted_passes": 36,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.9,
+          "semantic_pass_rate": 0.9,
           "semantic_passes": 36,
           "semantic_trials": 40
         },
         {
           "attempt_number": 5,
+          "budgeted_pass_rate": 0.925,
+          "budgeted_passes": 37,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.925,
+          "semantic_pass_rate": 0.925,
           "semantic_passes": 37,
           "semantic_trials": 40
         }
@@ -2898,6 +2962,7 @@
         "task_set_match": true,
         "unexpected_task_ids": []
       },
+      "median_attempt_budgeted_pass_rate": 0.925,
       "semantic_pass_rate": 0.9,
       "semantic_passes": 180,
       "semantic_trials": 200,
@@ -3907,6 +3972,17 @@
       }
     },
     {
+      "attempt_budgeted_pass_rate_distribution": {
+        "complete": true,
+        "definition": "Median and raw distribution of complete per-attempt budgeted pass rates; TIME_LIMIT counts as a non-pass and INFRA_BLOCKED invalidates comparison.",
+        "maximum": 0.925,
+        "median": 0.875,
+        "minimum": 0.875,
+        "observed_maximum": 0.925,
+        "observed_median": 0.875,
+        "observed_minimum": 0.875,
+        "spread": 0.050000000000000044
+      },
       "attempt_pass_rate_range": {
         "complete": true,
         "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
@@ -3919,36 +3995,56 @@
       "attempts": [
         {
           "attempt_number": 1,
+          "budgeted_pass_rate": 0.9,
+          "budgeted_passes": 36,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.9,
+          "semantic_pass_rate": 0.9,
           "semantic_passes": 36,
           "semantic_trials": 40
         },
         {
           "attempt_number": 2,
+          "budgeted_pass_rate": 0.875,
+          "budgeted_passes": 35,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.875,
+          "semantic_pass_rate": 0.875,
           "semantic_passes": 35,
           "semantic_trials": 40
         },
         {
           "attempt_number": 3,
+          "budgeted_pass_rate": 0.925,
+          "budgeted_passes": 37,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.925,
+          "semantic_pass_rate": 0.925,
           "semantic_passes": 37,
           "semantic_trials": 40
         },
         {
           "attempt_number": 4,
+          "budgeted_pass_rate": 0.875,
+          "budgeted_passes": 35,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.875,
+          "semantic_pass_rate": 0.875,
           "semantic_passes": 35,
           "semantic_trials": 40
         },
         {
           "attempt_number": 5,
+          "budgeted_pass_rate": 0.875,
+          "budgeted_passes": 35,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.875,
+          "semantic_pass_rate": 0.875,
           "semantic_passes": 35,
           "semantic_trials": 40
         }
@@ -4438,6 +4534,7 @@
         "task_set_match": true,
         "unexpected_task_ids": []
       },
+      "median_attempt_budgeted_pass_rate": 0.875,
       "semantic_pass_rate": 0.89,
       "semantic_passes": 178,
       "semantic_trials": 200,
@@ -5447,6 +5544,17 @@
       }
     },
     {
+      "attempt_budgeted_pass_rate_distribution": {
+        "complete": true,
+        "definition": "Median and raw distribution of complete per-attempt budgeted pass rates; TIME_LIMIT counts as a non-pass and INFRA_BLOCKED invalidates comparison.",
+        "maximum": 0.9,
+        "median": 0.85,
+        "minimum": 0.85,
+        "observed_maximum": 0.9,
+        "observed_median": 0.85,
+        "observed_minimum": 0.85,
+        "spread": 0.050000000000000044
+      },
       "attempt_pass_rate_range": {
         "complete": true,
         "definition": "Descriptive minimum and maximum semantic pass rates across repeated attempt numbers; not a confidence interval.",
@@ -5459,36 +5567,56 @@
       "attempts": [
         {
           "attempt_number": 1,
+          "budgeted_pass_rate": 0.9,
+          "budgeted_passes": 36,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.9,
+          "semantic_pass_rate": 0.9,
           "semantic_passes": 36,
           "semantic_trials": 40
         },
         {
           "attempt_number": 2,
+          "budgeted_pass_rate": 0.9,
+          "budgeted_passes": 36,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.9,
+          "semantic_pass_rate": 0.9,
           "semantic_passes": 36,
           "semantic_trials": 40
         },
         {
           "attempt_number": 3,
+          "budgeted_pass_rate": 0.85,
+          "budgeted_passes": 34,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.85,
+          "semantic_pass_rate": 0.85,
           "semantic_passes": 34,
           "semantic_trials": 40
         },
         {
           "attempt_number": 4,
+          "budgeted_pass_rate": 0.85,
+          "budgeted_passes": 34,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.85,
+          "semantic_pass_rate": 0.85,
           "semantic_passes": 34,
           "semantic_trials": 40
         },
         {
           "attempt_number": 5,
+          "budgeted_pass_rate": 0.85,
+          "budgeted_passes": 34,
+          "budgeted_trials": 40,
           "complete": true,
           "pass_rate": 0.85,
+          "semantic_pass_rate": 0.85,
           "semantic_passes": 34,
           "semantic_trials": 40
         }
@@ -5882,6 +6010,7 @@
         "task_set_match": true,
         "unexpected_task_ids": []
       },
+      "median_attempt_budgeted_pass_rate": 0.85,
       "semantic_pass_rate": 0.87,
       "semantic_passes": 174,
       "semantic_trials": 200,

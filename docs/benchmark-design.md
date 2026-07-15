@@ -124,15 +124,28 @@ configuration, task, and attempt cell.
 
 ## Scoring and comparability
 
-The primary public score is budgeted pass rate:
+The primary public score is the median attempt-level budgeted pass rate. For
+each attempt \(a\), first compute:
 
 $$
-\text{budgeted pass rate} =
-\frac{\text{PASS}}
-{\text{PASS} + \text{REJECT} + \text{TIME\_LIMIT}}.
+p_a =
+\frac{\text{PASS}_a}
+{\text{PASS}_a + \text{REJECT}_a + \text{TIME\_LIMIT}_a},
 $$
 
-The semantic pass rate excludes right-censored time limits:
+then report:
+
+$$
+\operatorname{median}(p_1, p_2, p_3, p_4, p_5).
+$$
+
+Each of the five attempts therefore receives equal weight, and a time limit
+counts as a non-pass. The median is the public headline because it describes
+the center of the observed repeated-attempt distribution without letting one
+unusually high or low attempt pull a pooled average.
+
+The semantic pass rate remains available for diagnosis and excludes
+right-censored time limits:
 
 $$
 \text{semantic pass rate} =
@@ -140,19 +153,24 @@ $$
 {\text{PASS} + \text{REJECT}}.
 $$
 
-`INFRA_BLOCKED` is excluded from both rates because it is not a semantic or
-budgeted result. A configuration is comparable only when all 200 expected cells
-are terminal, no cell is infrastructure-blocked, every row records Docker solve
-and verification, every task image matches the checked-in lock, and each source
-run matches one of the manifest's exact accepted digests: the current
-publication digest or its declared preserved-results digest.
+`INFRA_BLOCKED` is excluded from rate denominators and invalidates the public
+attempt distribution because it is not a model outcome. A configuration is
+comparable only when all 200 expected cells are terminal, no cell is
+infrastructure-blocked, every row records Docker solve and verification, every
+task image matches the checked-in lock, and each source run matches one of the
+manifest's exact accepted digests: the current publication digest or its
+declared preserved-results digest.
 
-For complete attempts, the report includes the minimum and maximum semantic
-pass rates across the five attempt numbers. This is a descriptive stochastic
-range, not a confidence interval. Reports also retain verified duration,
-covered token totals, weighted cache-read ratio, provider-reported throughput,
-and end-to-end wall throughput when those fields are complete. Missing runtime
-fields remain missing rather than being imputed.
+The report and README show all five raw budgeted attempt rates, their median,
+and their observed minimum–maximum span. The visualization uses discrete
+stacked points rather than a KDE, violin, or box plot: five observations do not
+support a defensible smoothed density or stable quartile estimate. The axis
+zoom is labeled explicitly and no bar encoding is used. Pooled status counts
+and aggregate semantic/budgeted rates remain in the machine-readable report
+for audit, but they are not the public headline. Reports also retain verified
+duration, covered token totals, weighted cache-read ratio, provider-reported
+throughput, and end-to-end wall throughput when those fields are complete.
+Missing runtime fields remain missing rather than being imputed.
 
 ## Reproduction and publication
 
@@ -168,7 +186,9 @@ Use explicit run IDs and aggregate only complete runs:
 python3 scripts/bench_report.py RUN_ID [RUN_ID ...] \
   --artifact-root artifacts/quant-bench-runs \
   --json-output /tmp/quant-bench-report.json \
-  --markdown-output /tmp/quant-bench-report.md
+  --markdown-output /tmp/quant-bench-report.md \
+  --svg-light-output /tmp/quant-bench-results-light.svg \
+  --svg-dark-output /tmp/quant-bench-results-dark.svg
 ```
 
 A public comparison must:
@@ -179,7 +199,7 @@ A public comparison must:
    preserved-results digest declared by that publication manifest;
 4. match row and status execution modes and image IDs to the checked-in lock;
 5. retain exact configuration and metric definitions;
-6. publish both Markdown and machine-readable JSON aggregates;
+6. publish Markdown, machine-readable JSON, and theme-aware distribution SVGs;
 7. omit partial runs instead of ranking them on observed subsets; and
 8. keep credentials, raw prompts, agent outputs, and local run directories out
    of version control.
