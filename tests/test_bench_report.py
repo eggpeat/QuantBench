@@ -260,8 +260,8 @@ class BenchReportTest(unittest.TestCase):
                 )
             )
             self.assertIn("Median attempt pass", markdown)
-            self.assertIn("50%–100%", markdown)
-            self.assertIn("median 75%", markdown)
+            self.assertIn("50.0%–100.0%", markdown)
+            self.assertIn("median 75.0%", markdown)
 
     def test_attempt_budgeted_median_counts_time_limit_as_non_pass(self):
         with tempfile.TemporaryDirectory() as td:
@@ -500,6 +500,9 @@ class BenchReportTest(unittest.TestCase):
     def test_attempt_distribution_svg_renders_raw_points_and_median(self):
         with tempfile.TemporaryDirectory() as td:
             report = self.strict_report(td)
+            report["models"][0]["configuration"]["model"] = (
+                "openai-codex/gpt-5.6-sol"
+            )
             dark_svg = bench_report.render_attempt_distribution_svg(
                 report, theme="dark"
             )
@@ -508,7 +511,8 @@ class BenchReportTest(unittest.TestCase):
             )
             self.assertIn('role="img"', dark_svg)
             self.assertIn("across 1 attempts", dark_svg)
-            self.assertIn("Attempt 1: 100%", dark_svg)
+            self.assertIn("OpenAI GPT 5.6 Sol", dark_svg)
+            self.assertIn("Attempt 1: 100.0%", dark_svg)
             self.assertIn("No mean or aggregate count", dark_svg)
             self.assertIn("#E6EDF3", dark_svg)
             self.assertIn("#1F2328", light_svg)

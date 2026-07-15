@@ -1185,14 +1185,12 @@ def render_markdown(report: Mapping[str, Any]) -> str:
     def fmt_percent(value: Any) -> str:
         if value is None or isinstance(value, bool) or not isinstance(value, (int, float)):
             return "—"
-        text = f"{float(value) * 100:.2f}".rstrip("0").rstrip(".")
-        return f"{text}%"
+        return f"{float(value) * 100:.1f}%"
 
     def fmt_percentage_points(value: Any) -> str:
         if value is None or isinstance(value, bool) or not isinstance(value, (int, float)):
             return "—"
-        text = f"{float(value) * 100:.2f}".rstrip("0").rstrip(".")
-        return f"{text} pp"
+        return f"{float(value) * 100:.1f} pp"
 
 
 
@@ -1215,20 +1213,26 @@ def render_markdown(report: Mapping[str, Any]) -> str:
             else "—"
         )
         model_selector = str(config.get("model") or "")
+        public_name = _PUBLIC_MODEL_NAMES.get(
+            model_selector, model_selector or "unknown"
+        )
         backend = str(config.get("backend_provider") or "")
         config_parts = [model_selector, str(config.get("thinking") or ""), str(config.get("harness") or "")]
         if backend and not model_selector.startswith(f"{backend}/"):
             config_parts.insert(0, backend)
         config_label = " · ".join(part for part in config_parts if part)
         lines.append(
-            f"| {config.get('model') or 'unknown'} | `{config_label}` | {observed}/{expected} | "
+            f"| {public_name} | `{config_label}` | {observed}/{expected} | "
             f"{'yes' if model.get('comparable') else 'no'} | "
             f"{fmt_percent(median_attempt_pass)} | {range_text} | "
             f"{fmt(duration)} | {fmt(throughput)} |"
         )
     for model in models:
         config = model.get("configuration", {})
-        title = config.get("model") or "unknown model"
+        model_selector = str(config.get("model") or "")
+        title = _PUBLIC_MODEL_NAMES.get(
+            model_selector, model_selector or "unknown model"
+        )
         coverage = model.get("coverage", {})
         semantic_coverage = coverage.get("semantic", {})
         duration = model.get("duration", {})
@@ -1311,11 +1315,11 @@ def render_markdown(report: Mapping[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-_CHART_MODEL_NAMES = {
-    "openai-codex/gpt-5.6-luna": "LUNA",
-    "openai-codex/gpt-5.6-sol": "SOL",
-    "openai-codex/gpt-5.6-terra": "TERRA",
-    "devin/swe-1-7": "DEVIN SWE",
+_PUBLIC_MODEL_NAMES = {
+    "openai-codex/gpt-5.6-luna": "OpenAI GPT 5.6 Luna",
+    "openai-codex/gpt-5.6-sol": "OpenAI GPT 5.6 Sol",
+    "openai-codex/gpt-5.6-terra": "OpenAI GPT 5.6 Terra",
+    "devin/swe-1-7": "Devin SWE 1.7",
 }
 _CHART_PALETTES = {
     "dark": {
@@ -1338,8 +1342,7 @@ _CHART_PALETTES = {
 
 
 def _chart_percent(value: float) -> str:
-    text = f"{value * 100:.2f}".rstrip("0").rstrip(".")
-    return f"{text}%"
+    return f"{value * 100:.1f}%"
 
 
 def render_attempt_distribution_svg(
@@ -1399,8 +1402,8 @@ def render_attempt_distribution_svg(
             )
         chart_models.append({
             "selector": selector,
-            "display_name": _CHART_MODEL_NAMES.get(
-                selector, selector.rsplit("/", 1)[-1].upper()
+            "display_name": _PUBLIC_MODEL_NAMES.get(
+                selector, selector.rsplit("/", 1)[-1]
             ),
             "rates": sorted(rates),
             "median": median,
@@ -1430,7 +1433,7 @@ def render_attempt_distribution_svg(
         raise ReportError("distribution SVG cannot determine a non-zero axis")
 
     width = 720
-    plot_left = 170
+    plot_left = 230
     plot_right = 700
     plot_width = plot_right - plot_left
     row_top = 128
@@ -1452,9 +1455,9 @@ def render_attempt_distribution_svg(
         for model in chart_models
     )
     axis_disclosure = (
-        f"Pass-rate axis zoomed to {domain_min}–{domain_max}%."
+        f"Pass-rate axis zoomed to {domain_min:.1f}–{domain_max:.1f}%."
         if (domain_min, domain_max) != (0, 100)
-        else "Full 0–100% pass-rate axis."
+        else "Full 0.0–100.0% pass-rate axis."
     )
     svg = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -1526,7 +1529,7 @@ def render_attempt_distribution_svg(
             (
                 f'<text x="{x:.2f}" y="{axis_y + 15}" text-anchor="middle" '
                 f'fill="{palette["text_secondary"]}" font-size="10">'
-                f"{tick}%</text>"
+                f"{tick:.1f}%</text>"
             ),
         ])
     svg.append(
@@ -1541,13 +1544,13 @@ def render_attempt_distribution_svg(
         median_x = x_position(float(model["median"]))
         svg.extend([
             (
-                f'<text x="152" y="{y - 4}" text-anchor="end" '
-                f'fill="{palette["text_primary"]}" font-size="13.5" '
+                f'<text x="212" y="{y - 4}" text-anchor="end" '
+                f'fill="{palette["text_primary"]}" font-size="12.5" '
                 'font-weight="600">'
                 f'{escape(str(model["display_name"]))}</text>'
             ),
             (
-                f'<text x="152" y="{y + 15}" text-anchor="end" '
+                f'<text x="212" y="{y + 15}" text-anchor="end" '
                 f'fill="{palette["median"]}" font-size="15" font-weight="700">'
                 f'{_chart_percent(float(model["median"]))}</text>'
             ),
