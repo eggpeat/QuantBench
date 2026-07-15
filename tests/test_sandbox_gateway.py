@@ -11,6 +11,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import time
 from pathlib import Path
 from typing import Any
 
@@ -1203,6 +1204,7 @@ providers:
         sys.modules[spec.name] = auth
         spec.loader.exec_module(auth)
         tmp_root = Path(tempfile.mkdtemp())
+        proc: subprocess.Popen[str] | None = None
         try:
             auth.AUTH_ARTIFACT_ROOT = tmp_root
             proc = subprocess.Popen(["sleep", "30"])
@@ -1218,10 +1220,16 @@ providers:
                 "run_state": "running",
             }
             (out_dir / "status.json").write_text(json.dumps(status), encoding="utf-8")
+            deadline = time.monotonic() + 2
+            while not auth._live_generation_pids(status) and time.monotonic() < deadline:
+                time.sleep(0.01)
             self.assertTrue(bool(auth._live_generation_pids(status)))
             self.assertEqual(auth._restart_error(status), "verified live generation refuses restart")
             proc.terminate()
             proc.wait(timeout=3)
             self.assertEqual(auth._restart_error(status), "prior generation must be explicitly stopped before restart")
         finally:
+            if proc is not None and proc.poll() is None:
+                proc.terminate()
+                proc.wait(timeout=3)
             shutil.rmtree(tmp_root, ignore_errors=True)
