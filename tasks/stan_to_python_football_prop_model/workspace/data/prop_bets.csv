@@ -1,0 +1,4 @@
+prop_id,passer,opponent,is_home,passer_rating,opp_defense_rating,line,over_odds,under_odds
+prop_1,Patrick Mahomes,Raiders,1,2.5,0.5,1.5,-130,110
+prop_2,Josh Allen,Patriots,0,2.2,-0.2,1.5,120,-140
+prop_3,Lamar Jackson,Steelers,1,1.8,0.2,1.5,-110,-110

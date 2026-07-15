@@ -1,0 +1,55 @@
+{
+  "prior": {
+    "global_ctr": 0.026727,
+    "prior_strength": 100.0,
+    "alpha0": 2.67271,
+    "beta0": 97.32729
+  },
+  "ranking": [
+    {
+      "ad_id": "ad_1",
+      "impressions": 10000,
+      "clicks": 500,
+      "raw_ctr": 0.05,
+      "posterior_alpha": 502.67271,
+      "posterior_beta": 9597.32729,
+      "posterior_mean": 0.04977
+    },
+    {
+      "ad_id": "ad_2",
+      "impressions": 2,
+      "clicks": 2,
+      "raw_ctr": 1.0,
+      "posterior_alpha": 4.67271,
+      "posterior_beta": 97.32729,
+      "posterior_mean": 0.045811
+    },
+    {
+      "ad_id": "ad_4",
+      "impressions": 5,
+      "clicks": 0,
+      "raw_ctr": 0.0,
+      "posterior_alpha": 2.67271,
+      "posterior_beta": 102.32729,
+      "posterior_mean": 0.025454
+    },
+    {
+      "ad_id": "ad_5",
+      "impressions": 10000,
+      "clicks": 200,
+      "raw_ctr": 0.02,
+      "posterior_alpha": 202.67271,
+      "posterior_beta": 9897.32729,
+      "posterior_mean": 0.020067
+    },
+    {
+      "ad_id": "ad_3",
+      "impressions": 10000,
+      "clicks": 100,
+      "raw_ctr": 0.01,
+      "posterior_alpha": 102.67271,
+      "posterior_beta": 9997.32729,
+      "posterior_mean": 0.010166
+    }
+  ]
+}

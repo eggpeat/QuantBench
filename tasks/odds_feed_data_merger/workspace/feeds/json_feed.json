@@ -1,0 +1,65 @@
+{
+  "feed_name": "arena-json",
+  "records": [
+    {
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "away_team": "Boston Celtics",
+      "market": "Moneyline",
+      "book": "NorthStar",
+      "outcome": "New York Knicks",
+      "odds": -125,
+      "line": null,
+      "timestamp": "2026-01-05T12:00:00Z",
+      "source_priority": 10
+    },
+    {
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "away_team": "Boston Celtics",
+      "market": "Moneyline",
+      "book": "NorthStar",
+      "outcome": "Boston Celtics",
+      "odds": 105,
+      "line": null,
+      "timestamp": "2026-01-05T12:00:00Z",
+      "source_priority": 10
+    },
+    {
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "away_team": "Boston Celtics",
+      "market": "Point Spread",
+      "book": "NorthStar",
+      "outcome": "New York Knicks",
+      "odds": -110,
+      "line": -2.5,
+      "timestamp": "2026-01-05T12:00:00Z",
+      "source_priority": 10
+    },
+    {
+      "event_id": "ev-1001",
+      "home_team": "New York Knicks",
+      "away_team": "Boston Celtics",
+      "market": "Point Spread",
+      "book": "NorthStar",
+      "outcome": "Boston Celtics",
+      "odds": -110,
+      "line": 2.5,
+      "timestamp": "2026-01-05T12:00:00Z",
+      "source_priority": 10
+    },
+    {
+      "event_id": "ev-2002",
+      "home_team": "Los Angeles Lakers",
+      "away_team": "Golden State Warriors",
+      "market": "Total",
+      "book": "BetCo",
+      "outcome": "Over",
+      "odds": -108,
+      "line": 229.5,
+      "timestamp": "2026-01-05T12:05:00Z",
+      "source_priority": 10
+    }
+  ]
+}

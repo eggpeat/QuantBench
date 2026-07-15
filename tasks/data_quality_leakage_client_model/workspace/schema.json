@@ -1,0 +1,10 @@
+{
+  "primary_key": "row_id",
+  "entity_id": "client_id",
+  "timestamp": "timestamp",
+  "target": "target_churn",
+  "cutoff_time": "2026-06-27T00:00:00Z",
+  "train_validation_cutoff": "2026-05-01T00:00:00Z",
+  "stable_attributes": ["signup_date"],
+  "contamination_candidates": ["total_spend_full_history"]
+}

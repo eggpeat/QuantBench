@@ -1,0 +1,9 @@
+{
+  "seed": 100,
+  "entity_key": "entity_id",
+  "fact_time": "fact_time",
+  "valid_from": "valid_from",
+  "valid_to": "valid_to",
+  "system_from": "system_from",
+  "as_of_system_time": "2023-06-15T12:00:00Z"
+}

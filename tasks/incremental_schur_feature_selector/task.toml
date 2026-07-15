@@ -1,0 +1,56 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/incremental_schur_feature_selector"
+description = "Implement greedy conditional-correlation feature selection with incremental Schur-complement inverse updates."
+requires_image = false
+keywords = ["feature-selection", "schur-complement", "linear-algebra", "ridge", "performance"]
+
+[metadata]
+difficulty = "hard"
+category = "feature_selection"
+tags = ["feature-selection", "schur-complement", "correlation", "numerical-stability", "performance"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+provenance_citations = [
+  "kmedved/sift oracle commit c873c808da8299174d1d2147bb6bee7434423587 (CEFS+ feature-selection implementation), https://github.com/kmedved/sift/commit/c873c808da8299174d1d2147bb6bee7434423587"
+]
+
+[provenance]
+source_books = []
+source_concepts = ["CEFS+ copula feature selection", "Schur-complement determinant/inverse updates", "greedy conditional correlation"]
+source_depth = "moderate"
+source_citations = [
+  "kmedved/sift, commit c873c808da8299174d1d2147bb6bee7434423587 (2025-12-27), mrmr/cefsplus.py: introduces greedy multivariate feature selection with Schur-complement log-determinant updates; https://github.com/kmedved/sift/commit/c873c808da8299174d1d2147bb6bee7434423587",
+  "Harville, D. A. (1997), Matrix Algebra From a Statistician's Perspective, Springer, Section 18.2: block inverse and Schur-complement identities used for stable rank-one updates."
+]
+source_gaps = [
+  "The cited package selects by CEFS+ rank counts rather than exposing the benchmark's compact conditional-correlation API; this task fixes the public API and ridge/tie semantics while retaining the cited incremental update technique.",
+  "The source package does not define the benchmark's bounded-memory performance gate; tests add a full-inverse reference only as a correctness/performance oracle."
+]
+promotion_blockers = []
+task_design_note = "Seeded-100 public correlation fixture and independent hidden fixtures require parity with a naive inverse reference, lower-index tie handling, near-collinear ridge stability, and a measurable runtime advantage over recomputing every inverse."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

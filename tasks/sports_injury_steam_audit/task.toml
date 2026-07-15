@@ -1,0 +1,51 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/sports_injury_steam_audit"
+description = "Audit sports betting games to detect whether injury-related line movement (steam) has been priced in by the market or if a stale line represents a betting opportunity."
+requires_image = false
+keywords = ["sports-betting", "injury-news", "steam-moves", "market-efficiency", "priced-in-information"]
+
+[metadata]
+difficulty = "medium"
+category = "sports_modeling"
+tags = ["sports-betting", "injury-news", "steam-moves", "market-efficiency", "audit"]
+risk_level = "money_impacting"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/891833573-Winning-Sports-Betting-Masaru-Kanemoto.pdf"]
+source_concepts = ["injury news", "steam moves", "already-priced information", "fake/setup moves"]
+source_depth = "deep"
+source_citations = [
+  "Winning Sports Betting (Masaru Kanemoto), Chapter 3: lines 259-281 discuss fake/setup steam and betting funnel timing; lines 283-297 discuss injury/lineup steam, priced-in injuries, front-running, and overreaction; lines 301-351 discuss line feeds, speed, and slow books."
+]
+source_gaps = [
+  "Synthetic Operationalization: The qualitative market dynamics described in Chapter 3 are operationalized into synthetic, simplified timestamp rules for deterministic verification."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task auditing if injury news and market steam moves are correctly classified. Qualitative concepts from Kanemoto Chapter 3 (such as fake/setup steam, priced-in/injury lineup steam, and line feeds/slow books) are mapped to deterministic chronological timestamp rules for robust verification."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

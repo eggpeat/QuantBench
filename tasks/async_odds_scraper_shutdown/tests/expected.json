@@ -1,0 +1,11 @@
+{
+  "function": "run_book_tasks",
+  "expected_behavior": {
+    "preserves_input_order": true,
+    "max_concurrent_respected": true,
+    "does_not_eager_start_queued_tasks": true,
+    "cancelled_started_tasks_are_awaited_for_cleanup": true,
+    "no_pending_tasks_leaked": true
+  },
+  "public_fixture_note": "Tests use inline asyncio Event fixtures; this file documents the oracle behavior and is not an output to copy."
+}

@@ -1,0 +1,51 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/async_odds_scraper_shutdown"
+description = "Implement bounded asyncio book scraping with ordered results and cancellation-safe child cleanup."
+requires_image = false
+keywords = ["asyncio", "cancellation", "concurrency", "cleanup", "systems"]
+
+[metadata]
+difficulty = "medium"
+category = "ops"
+tags = ["asyncio", "cancellation", "concurrency", "systems", "python"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "terminal_bench_adaptation"
+
+[provenance]
+source_books = []
+source_concepts = ["Terminal-Bench cancel-async-tasks pattern", "bounded concurrency with asyncio.Semaphore", "structured cancellation and awaiting cancelled children", "preserving result order from concurrent tasks"]
+source_depth = "direct"
+source_citations = ["Direct adaptation of the Terminal-Bench 2.1 `cancel-async-tasks` task."]
+source_gaps = [
+  "Parent behavior preserved: Restricting async concurrency limits with asyncio.Semaphore, preserving original task order in the return list, and implementing robust task cancellation where started child tasks are explicitly cancelled and awaited to prevent leakage of pending tasks.",
+  "Domain translation added: Adapts the abstract async task executor to a sports betting data pipeline, framing the callables as sportsbook scraper tasks rather than generic functions.",
+  "Verifier anti-cheat: The verifier resists static-output copying by dynamically constructing asynchronous task scenarios, tracking concurrency states with asyncio.Events, and auditing active tasks/leaks in the asyncio event loop at runtime. The candidate's solution must implement correct asyncio coordination to pass."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task adapting Terminal-Bench async cancellation gotchas to odds-scraper infrastructure."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,53 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/empirical_bayes_ctr_shrinkage"
+description = "Implement empirical Bayes shrinkage on ad click-through rates using a beta-binomial model."
+requires_image = false
+keywords = ["statistics", "empirical-bayes", "beta-binomial", "shrinkage", "ctr"]
+
+[metadata]
+difficulty = "medium"
+category = "data_science"
+tags = ["statistics", "empirical-bayes", "beta-binomial", "shrinkage", "ctr", "json"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = ["source_books/367144371-IntroductionToEmpiricalBayes-DavidRobinson.pdf"]
+source_concepts = ["beta-binomial empirical Bayes", "prior strength", "shrinkage of noisy low-sample rates"]
+source_depth = "moderate"
+source_citations = [
+  "David Robinson. Introduction to Empirical Bayes: Examples and Methods in R, Chapter 3, pages 21-25. Lines 543-579 describe EB estimation and successes/total data (including ad click-through rates).",
+  "David Robinson. Introduction to Empirical Bayes: Examples and Methods in R, Chapter 3, lines 669-671: mentions estimating a beta prior from data.",
+  "David Robinson. Introduction to Empirical Bayes: Examples and Methods in R, Chapter 3, lines 537-538: mentions updating parameters by adding successes to alpha0 and failures to beta0."
+]
+source_gaps = [
+  "This task is intentionally scoped as a posterior update and shrinkage task rather than hyperparameter estimation. It tests conjugate beta-binomial shrinkage using an empirical global mean and a configured prior strength K (to calculate alpha0 and beta0), instead of performing full Maximum Likelihood Estimation (MLE) or Method of Moments beta-binomial parameter fitting on the raw click/impression dataset."
+]
+promotion_blockers = []
+task_design_note = "Promoted Quant Bench task requiring an implementation of empirical Bayes shrinkage for ad CTR data using standard python tools, verifying shrinkage of noisy low-sample-size estimators."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

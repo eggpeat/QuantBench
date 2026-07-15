@@ -1,0 +1,8 @@
+{
+  "weights": {
+    "asset_a": 0.4,
+    "asset_b": 0.3,
+    "asset_c": 0.3
+  },
+  "confidence_levels": [0.95, 0.99]
+}

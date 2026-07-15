@@ -1,0 +1,58 @@
+{
+  "coefficients": {
+    "intercept": -1.494668,
+    "passer_rating": 0.754303,
+    "opp_defense_rating": 0.617869,
+    "is_home": 0.311304
+  },
+  "prop_opinions": [
+    {
+      "prop_id": "prop_1",
+      "passer": "Patrick Mahomes",
+      "opponent": "Raiders",
+      "line": 1.5,
+      "lambda": 2.749247,
+      "model_prob_over": 0.760138,
+      "model_prob_under": 0.239862,
+      "market_be_over": 0.565217,
+      "market_be_under": 0.47619,
+      "fair_odds_over": -317,
+      "fair_odds_under": 317,
+      "edge_over": 0.194921,
+      "edge_under": -0.236329,
+      "opinion": "OVER"
+    },
+    {
+      "prop_id": "prop_2",
+      "passer": "Josh Allen",
+      "opponent": "Patriots",
+      "line": 1.5,
+      "lambda": 1.042086,
+      "model_prob_over": 0.279719,
+      "model_prob_under": 0.720281,
+      "market_be_over": 0.454545,
+      "market_be_under": 0.583333,
+      "fair_odds_over": 258,
+      "fair_odds_under": -258,
+      "edge_over": -0.174826,
+      "edge_under": 0.136948,
+      "opinion": "UNDER"
+    },
+    {
+      "prop_id": "prop_3",
+      "passer": "Lamar Jackson",
+      "opponent": "Steelers",
+      "line": 1.5,
+      "lambda": 1.347101,
+      "model_prob_over": 0.38977,
+      "model_prob_under": 0.61023,
+      "market_be_over": 0.52381,
+      "market_be_under": 0.52381,
+      "fair_odds_over": 157,
+      "fair_odds_under": -157,
+      "edge_over": -0.134039,
+      "edge_under": 0.08642,
+      "opinion": "UNDER"
+    }
+  ]
+}

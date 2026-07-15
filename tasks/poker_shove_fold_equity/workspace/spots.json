@@ -1,0 +1,36 @@
+{
+  "spots": [
+    {
+      "spot_id": "turn_semi_bluff",
+      "pot": 100.0,
+      "risk": 150.0,
+      "call": 150.0,
+      "equity": 0.36,
+      "fold_probability": 0.42
+    },
+    {
+      "spot_id": "small_fold_equity",
+      "pot": 80.0,
+      "risk": 120.0,
+      "call": 120.0,
+      "equity": 0.25,
+      "fold_probability": 0.15
+    },
+    {
+      "spot_id": "value_jam",
+      "pot": 60.0,
+      "risk": 100.0,
+      "call": 100.0,
+      "equity": 0.58,
+      "fold_probability": 0.0
+    },
+    {
+      "spot_id": "river_pressure",
+      "pot": 240.0,
+      "risk": 360.0,
+      "call": 360.0,
+      "equity": 0.18,
+      "fold_probability": 0.55
+    }
+  ]
+}

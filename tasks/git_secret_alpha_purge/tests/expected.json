@@ -1,0 +1,14 @@
+{
+  "pre_purge_check": {
+    "leaked_file_found_in_history": true,
+    "secret_token_found_in_history": true
+  },
+  "post_purge_check": {
+    "leaked_file_removed": true,
+    "secret_token_removed": true,
+    "merge_topology_preserved": true,
+    "current_working_directory_clean": true,
+    "commit_count": 8
+  },
+  "success": true
+}

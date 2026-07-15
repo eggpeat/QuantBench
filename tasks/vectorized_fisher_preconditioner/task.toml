@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/vectorized_fisher_preconditioner"
+description = "Implement a memory-bounded diagonal Fisher preconditioner for batched gradients."
+requires_image = false
+keywords = ["numpy", "fisher-information", "preconditioning", "vectorization", "memory"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["numpy", "fisher-information", "optimization", "performance"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_commit"
+
+[provenance]
+source_books = []
+source_concepts = ["diagonal Fisher information", "natural-gradient diagonal solve", "array vectorization"]
+source_depth = "moderate"
+source_citations = [
+  "kmedved/xgboost-distribution, commit 4512dc95f9894f937e21bded597c4fe623fd7e94 (public numerical-distribution implementation basis), https://github.com/kmedved/xgboost-distribution/commit/4512dc95f9894f937e21bded597c4fe623fd7e94",
+  "Amari, Information Geometry and Its Applications (Springer, 2016), Chapter 2: Fisher information as a local metric and diagonal preconditioning."
+]
+source_gaps = ["The benchmark isolates the diagonal batched solve from the upstream model implementation so the API can be tested independently."]
+promotion_blockers = []
+task_design_note = "Seeded Terminal-Bench numerical task: implement raw_grad / max(fisher_diag, floor) without constructing an N x P x P tensor; visible fixture uses seed 100."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

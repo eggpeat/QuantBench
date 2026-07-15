@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/crps_vectorization_and_scoring"
+description = "Implement Gaussian and empirical CRPS scoring with weighted vectorized reductions."
+requires_image = false
+keywords = ["numpy", "scoring", "crps", "probabilistic-forecasting", "vectorization"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["numpy", "scoring", "crps", "statistics", "performance"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_commit"
+
+[provenance]
+source_books = []
+source_concepts = ["continuous ranked probability score", "Gaussian CRPS closed form", "energy score identity", "sorted order statistics"]
+source_depth = "deep"
+source_citations = [
+  "kmedved/LightGBMLSS, commit 56d67fc26dd34bd9aca2aa978e3fbd84477a50ed (CRPS vectorization basis), https://github.com/kmedved/LightGBMLSS/commit/56d67fc26dd34bd9aca2aa978e3fbd84477a50ed",
+  "Tilmann Gneiting and Adrian E. Raftery (2007), Strictly Proper Scoring Rules, Prediction, and Estimation, Journal of the American Statistical Association 102(477), 359-378, equations (20) and (21), https://doi.org/10.1198/016214506000001437"
+]
+source_gaps = ["The benchmark adds a NumPy API and observation weighting around the cited empirical and Gaussian CRPS identities."]
+promotion_blockers = []
+task_design_note = "Seeded Terminal-Bench numerical task: compute weighted Gaussian and empirical CRPS without an M x N x N pairwise tensor; visible fixture uses seed 100."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

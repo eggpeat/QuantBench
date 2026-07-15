@@ -1,0 +1,1 @@
+This benchmark task is an independent exercise based on the public numerical concepts in kmedved/LightGBMLSS (commit 56d67fc26dd34bd9aca2aa978e3fbd84477a50ed). See task.toml for the source citation and URL. No upstream source files are redistributed in the public workspace.

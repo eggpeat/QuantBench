@@ -1,0 +1,322 @@
+{
+  "adaptive_conformal_intervals": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "0afef1e2b2f54098a7baf29fe5ab0bfb24c907d041dc1a75f2752aeb8d5831fb",
+    "image_id": "sha256:523b42c4d172db827b8fa981a971c06f5a49367f1325cd5b75b126921661b57f",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-adaptive_conformal_intervals:9695740ef74aa410"
+  },
+  "adaptive_ode_event_integration": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "218cbcff54b6a8614e4f11cb649eea6b3966db8c57a02a12deabaa23a2cba947",
+    "image_id": "sha256:6c295b826253cb53aac4d72783dc45d5228da4f61d88851dd01204484f6e662d",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-adaptive_ode_event_integration:7863e6540c31f054"
+  },
+  "async_odds_scraper_shutdown": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-async_odds_scraper_shutdown:5421b0a7dfa4d3af"
+  },
+  "bayesian_mcmc_rhat_diagnostic": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-bayesian_mcmc_rhat_diagnostic:92dcefc5514ec2cf"
+  },
+  "bitemporal_asof_join": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "218cbcff54b6a8614e4f11cb649eea6b3966db8c57a02a12deabaa23a2cba947",
+    "image_id": "sha256:26551f1dcf1a476e9ed1340848428c365c55b4348b68bd048e19a859c51c16b5",
+    "requirements_sha256": "301deb812d34d836acc0c1833d762e6619ec24eac28bed2888c6fd1f1ece8e4d",
+    "tag": "quant-bench-bitemporal_asof_join:4e136e3d0fe11ebd"
+  },
+  "crps_vectorization_and_scoring": {
+    "base": "python:3.12-slim-bookworm@sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b",
+    "base_digest": "sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b",
+    "dockerfile_sha256": "5c593b6cdae135cdc390340bc869167c698cfc9d5bcc0e889997531471db56cd",
+    "image_id": "sha256:97a341a1b462f84baaf2d76a6289093ba578112885d091e891a24e74b7b06612",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-crps_vectorization_and_scoring:367ef68de18f638e"
+  },
+  "data_quality_leakage_client_model": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-data_quality_leakage_client_model:dd15878a0dc196b0"
+  },
+  "distributional_boosting_boundary_stability": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "a9e99f2331f1dc0b780eaf10a8fe6855e4baf6871a644d06776d1b944f8dbf6d",
+    "image_id": "sha256:7fbe4612993a74012687ee878709dfa85e109c556e437d9a1d526866a6891bc7",
+    "requirements_sha256": "5c4f6e9521c6975f55ca3fafa87c2ed6662c2d750393b08de680d0ebf853fec6",
+    "tag": "quant-bench-distributional_boosting_boundary_stability:7ffd1b7fc63616fe"
+  },
+  "empirical_bayes_ctr_shrinkage": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-empirical_bayes_ctr_shrinkage:1bf57c7b3fdbe672"
+  },
+  "empirical_bayes_true_skill": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-empirical_bayes_true_skill:1934db09bfbc0f1b"
+  },
+  "event_driven_backtest_repair": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "3704495533a1f8c289e9d54823887b024122271ffdb275b4bcc5efefcdd1cdad",
+    "image_id": "sha256:fae8c518e0c9eae7174f878e5395afe986f2e0e67d920c4a77a89e9d03686ebd",
+    "requirements_sha256": "bf4dc0555928a3facf67b3370001388d4b65e69a071c339f8b201310bde4486a",
+    "tag": "quant-bench-event_driven_backtest_repair:c9690822f14597d6"
+  },
+  "feature_selection_knockoff_fdr": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "0afef1e2b2f54098a7baf29fe5ab0bfb24c907d041dc1a75f2752aeb8d5831fb",
+    "image_id": "sha256:523b42c4d172db827b8fa981a971c06f5a49367f1325cd5b75b126921661b57f",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-feature_selection_knockoff_fdr:44ebe09e88225af2"
+  },
+  "git_secret_alpha_purge": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "42cf3eca3b07da3c735fc78632b388907f8171930df3ec069ce4e8b3803eef47",
+    "image_id": "sha256:45ea6a72d0e6790e789b550c0986649bf25d3542d61138e8a6c512aa0dc600f6",
+    "requirements_sha256": "",
+    "tag": "quant-bench-git_secret_alpha_purge:fb69bb2f504bdc64"
+  },
+  "heteroscedastic_oof_calibration": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "a9e99f2331f1dc0b780eaf10a8fe6855e4baf6871a644d06776d1b944f8dbf6d",
+    "image_id": "sha256:7fbe4612993a74012687ee878709dfa85e109c556e437d9a1d526866a6891bc7",
+    "requirements_sha256": "5c4f6e9521c6975f55ca3fafa87c2ed6662c2d750393b08de680d0ebf853fec6",
+    "tag": "quant-bench-heteroscedastic_oof_calibration:735dddda6c97e6ca"
+  },
+  "incremental_feature_materialization": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "365dbb31bd38637824f765dc1b77d265c054971ea958f1e2e0c1155087d190e6",
+    "image_id": "sha256:58fb9ec1ddda4baefcf3eeb3f39894a14fcde50bce201f5245d7fddcd4006052",
+    "requirements_sha256": "",
+    "tag": "quant-bench-incremental_feature_materialization:cfc6dfecaa94aac3"
+  },
+  "incremental_schur_feature_selector": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "0afef1e2b2f54098a7baf29fe5ab0bfb24c907d041dc1a75f2752aeb8d5831fb",
+    "image_id": "sha256:48a831b0c755e39024d465176835fc77471ec9bf57f11f1a11793bcb24d93659",
+    "requirements_sha256": "301deb812d34d836acc0c1833d762e6619ec24eac28bed2888c6fd1f1ece8e4d",
+    "tag": "quant-bench-incremental_schur_feature_selector:b93b1c61dc4ae0c2"
+  },
+  "kalman_2d_market_tracker": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-kalman_2d_market_tracker:73e2b72f05a43937"
+  },
+  "kalman_live_market_filter": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-kalman_live_market_filter:55376de9c2c7a755"
+  },
+  "linear_residual_boosting_pipeline": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "476c7a423d41d2e86c939321dc0a64178c3d5e66e66cdc442e199ee07415f664",
+    "image_id": "sha256:4cd002f5063d8363c25f5cd9dfde122c39eb1954d378db4e994e15c4c632b022",
+    "requirements_sha256": "5c4f6e9521c6975f55ca3fafa87c2ed6662c2d750393b08de680d0ebf853fec6",
+    "tag": "quant-bench-linear_residual_boosting_pipeline:808ecc406b196b89"
+  },
+  "llm_news_batch_scheduler": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-llm_news_batch_scheduler:447a79019427f63e"
+  },
+  "market_log_latency_summary": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-market_log_latency_summary:421e0df9f3a76b44"
+  },
+  "odds_feed_data_merger": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-odds_feed_data_merger:bc8d878d540abc28"
+  },
+  "poker_hand_history_state_machine": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-poker_hand_history_state_machine:12d1d62a9524d5bc"
+  },
+  "poker_shove_fold_equity": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-poker_shove_fold_equity:4da139efbddae224"
+  },
+  "poker_side_pot_resolution_engine": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-poker_side_pot_resolution_engine:4791a02fa0c65455"
+  },
+  "portfolio_optimizer_constraints": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "218cbcff54b6a8614e4f11cb649eea6b3966db8c57a02a12deabaa23a2cba947",
+    "image_id": "sha256:6c295b826253cb53aac4d72783dc45d5228da4f61d88851dd01204484f6e662d",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-portfolio_optimizer_constraints:b99945843d26fc27"
+  },
+  "quant_cointegration_pairs_trade": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-quant_cointegration_pairs_trade:5caf847001698e57"
+  },
+  "quant_var_expected_shortfall": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-quant_var_expected_shortfall:0c5fa5887993bda5"
+  },
+  "range_equity_engine": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-range_equity_engine:559a047452191c12"
+  },
+  "sparse_linear_solver": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "218cbcff54b6a8614e4f11cb649eea6b3966db8c57a02a12deabaa23a2cba947",
+    "image_id": "sha256:6c295b826253cb53aac4d72783dc45d5228da4f61d88851dd01204484f6e662d",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-sparse_linear_solver:808ee99d84b5e2e1"
+  },
+  "sports_backtest_query_optimize": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sports_backtest_query_optimize:1a9dc8874efde492"
+  },
+  "sports_hold_vig_removal": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sports_hold_vig_removal:c1b5f66d93b6b2d8"
+  },
+  "sports_injury_steam_audit": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sports_injury_steam_audit:d82339fd1741c53e"
+  },
+  "sports_settlement_ledger_reconciliation": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sports_settlement_ledger_reconciliation:b2ac457194b960cc"
+  },
+  "sportsbook_parlay_synthetic_risk": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sportsbook_parlay_synthetic_risk:2bb403f022640d68"
+  },
+  "sqlite_wal_odds_recovery": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "dc33aead3ec3571cd7026d2fcec91c687cd6f71eb94343fbcd19380edfb9640d",
+    "image_id": "sha256:d2d2e8540f1de24ffa40a8ce4927a8b6705da4cd7126c1303c1e5d5d6a7094e9",
+    "requirements_sha256": "",
+    "tag": "quant-bench-sqlite_wal_odds_recovery:0abb6aa1b4f135cf"
+  },
+  "stability_selection_resampling": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "0afef1e2b2f54098a7baf29fe5ab0bfb24c907d041dc1a75f2752aeb8d5831fb",
+    "image_id": "sha256:48a831b0c755e39024d465176835fc77471ec9bf57f11f1a11793bcb24d93659",
+    "requirements_sha256": "301deb812d34d836acc0c1833d762e6619ec24eac28bed2888c6fd1f1ece8e4d",
+    "tag": "quant-bench-stability_selection_resampling:e7942b8462d49625"
+  },
+  "stan_to_python_football_prop_model": {
+    "base": "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "base_digest": "sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb",
+    "dockerfile_sha256": "d1f83b9adc70fc898fb5ca971b35c2462d3328daca83a14297e421058cf72c88",
+    "image_id": "sha256:0d79bab5a86a93c3180d8f3d3731a4823e7e9bd9adb8e80f3c4bb588b8629ca7",
+    "requirements_sha256": "",
+    "tag": "quant-bench-stan_to_python_football_prop_model:33c434b2b979e228"
+  },
+  "temporal_ep_weighted_likelihood": {
+    "base": "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "base_digest": "sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944",
+    "dockerfile_sha256": "be2e790360cc5977408cfb542ae33e31da09463b44544088e54b73cb2e6e33fa",
+    "image_id": "sha256:e5b10bf0a3fadfab551a333a7eacf9b09ea30d55062bf1bd4a1893ef44416773",
+    "requirements_sha256": "409c5565043fc3d27c55d9b533afb92bbed4eac071b06ecb0b2977d52f0011c5",
+    "tag": "quant-bench-temporal_ep_weighted_likelihood:799a09edcdf2d6c5"
+  },
+  "vectorized_fisher_preconditioner": {
+    "base": "python:3.12-slim-bookworm@sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b",
+    "base_digest": "sha256:8a7e7cc04fd3e2bd787f7f24e22d5d119aa590d429b50c95dfe12b3abe52f48b",
+    "dockerfile_sha256": "5c593b6cdae135cdc390340bc869167c698cfc9d5bcc0e889997531471db56cd",
+    "image_id": "sha256:2dc41192fcf97a01af5d9341a45cc35b9b65b528a0e167b1420fd07b8b0c1f95",
+    "requirements_sha256": "301deb812d34d836acc0c1833d762e6619ec24eac28bed2888c6fd1f1ece8e4d",
+    "tag": "quant-bench-vectorized_fisher_preconditioner:cf3a40c2f1ace25a"
+  }
+}

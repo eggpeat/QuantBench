@@ -1,0 +1,5 @@
+[
+  {"time": 1, "measurement": 102.0, "label": "normal_1"},
+  {"time": 2, "measurement": 150.0, "label": "outlier_2"},
+  {"time": 3, "measurement": 100.0, "label": "normal_3"}
+]

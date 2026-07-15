@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/adaptive_conformal_intervals"
+description = "Implement deterministic split-conformal calibration with grouped, temporal, and weighted quantiles."
+requires_image = false
+keywords = ["conformal", "prediction-interval", "calibration", "weighted-quantile", "time-series"]
+
+[metadata]
+difficulty = "hard"
+category = "probabilistic_ml"
+tags = ["conformal-prediction", "uncertainty", "calibration"]
+risk_level = "research"
+promotion_status = "promoted"
+source_status = "source_backed"
+promotion_blockers = []
+
+[provenance]
+source_books = []
+source_concepts = ["finite-sample split conformal prediction", "weighted empirical quantiles", "group and temporal calibration splits"]
+source_depth = "moderate"
+source_citations = [
+  "Romano, Patterson and Candès (2019), Conformalized Quantile Regression, arXiv:1905.03222, https://arxiv.org/abs/1905.03222.",
+  "kmedved/nllfit source revision eb219b07; parent revision used as deterministic implementation basis, https://github.com/kmedved/nllfit/tree/eb219b07."
+]
+source_gaps = ["The benchmark fixes the exact finite-sample rank and group/time split conventions in instruction.md."]
+task_design_note = "Seed-100 visible fixture and hidden alternate fixtures exercise every documented API boundary."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 2048
+storage_mb = 2048
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,50 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/heteroscedastic_oof_calibration"
+description = "Implement leakage-safe out-of-fold mean predictions and weighted Gaussian variance-scale calibration for heteroscedastic regression."
+requires_image = false
+keywords = ["heteroscedasticity", "out-of-fold", "cross-validation", "gaussian-nll", "calibration"]
+
+[metadata]
+difficulty = "hard"
+category = "data_science"
+tags = ["statistics", "cross-validation", "calibration", "numpy", "scikit-learn"]
+risk_level = "low"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = []
+source_concepts = ["out-of-fold residuals", "two-stage heteroscedastic regression", "Gaussian negative log likelihood", "weighted variance calibration"]
+source_depth = "moderate"
+source_citations = [
+  "kmedved/nllfit, commit 226fc232cb5b1e5a09b3142f1b94089aff95f902, hetero_nll/oof.py and hetero_nll/calibration.py (MIT), accessed 2026-07-12.",
+  "Caruana et al., Model Selection and Error Estimation, Machine Learning 2004, 54: 257-286, for leakage-safe cross-validation error estimates.",
+  "Gneiting and Raftery, Strictly Proper Scoring Rules, Prediction, and Estimation, JASA 2007, 102(477):359-378, for Gaussian logarithmic score calibration."
+]
+source_gaps = ["The source package does not specify deterministic group and expanding-window split policies; this task defines those policies explicitly."]
+promotion_blockers = []
+task_design_note = "Promoted quantitative benchmark task requiring deterministic ordinary, grouped, and time-ordered OOF prediction plus a closed-form weighted variance multiplier."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+
+[environment.env]
+
+[verifier.env]
+
+[solution.env]

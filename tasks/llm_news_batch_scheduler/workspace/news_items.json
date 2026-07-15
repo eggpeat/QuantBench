@@ -1,0 +1,74 @@
+[
+  {
+    "id": "doc_001",
+    "title": "AI Breakthrough in Quantum Computing",
+    "content": "Researchers have demonstrated a new quantum algorithm running on a noisy intermediate-scale quantum computer.",
+    "category": "tech"
+  },
+  {
+    "id": "doc_002",
+    "title": "Market Rally Follows Fed Decision",
+    "content": "Stocks surged today after the Federal Reserve announced it would hold interest rates steady.",
+    "category": "finance"
+  },
+  {
+    "id": "doc_003",
+    "title": "New Species of Frog Discovered in Andes",
+    "content": "Biologists exploring the remote cloud forests of the Andes have identified a tiny new species of glass frog.",
+    "category": "science"
+  },
+  {
+    "id": "doc_004",
+    "title": "Renewable Grid Share Hits Record High",
+    "content": "Solar and wind energy sources accounted for over 45% of the total electricity generation last month.",
+    "category": "energy"
+  },
+  {
+    "id": "doc_002",
+    "title": "Market Rally Follows Fed Decision",
+    "content": "Stocks surged today after the Federal Reserve announced it would hold interest rates steady.",
+    "category": "finance"
+  },
+  {
+    "id": "doc_005",
+    "title": "Deep Ocean Expedition Uncovers Hydrothermal Vent",
+    "content": "A research vessel mapping the deep sea floor found an active hydrothermal vent ecosystem in the Pacific.",
+    "category": "science"
+  },
+  {
+    "id": "doc_006",
+    "title": "Cybersecurity Warning Issued for IoT Devices",
+    "content": "National security agencies have released a joint advisory warning of active exploitation of IoT vulnerabilities.",
+    "category": "tech"
+  },
+  {
+    "id": "doc_007",
+    "title": "Clinical Trial Shows Promise for Alzheimer Treatment",
+    "content": "A new antibody therapy has demonstrated a significant reduction in cognitive decline during a Phase III trial.",
+    "category": "medicine"
+  },
+  {
+    "id": "doc_008",
+    "title": "Global Logistics Hub Expands Capacity",
+    "content": "One of the world's largest container terminals has completed a multi-billion dollar expansion program.",
+    "category": "logistics"
+  },
+  {
+    "id": "doc_009",
+    "title": "Electric Flight Startup Completes Maiden Voyage",
+    "content": "An aviation startup successfully flew its all-electric regional passenger aircraft prototype for 30 minutes.",
+    "category": "tech"
+  },
+  {
+    "id": "doc_001",
+    "title": "AI Breakthrough in Quantum Computing",
+    "content": "Researchers have demonstrated a new quantum algorithm running on a noisy intermediate-scale quantum computer.",
+    "category": "tech"
+  },
+  {
+    "id": "doc_010",
+    "title": "Urban Agriculture Projects Receive Grant Funding",
+    "content": "Municipal grants will support the establishment of ten new community-managed vertical farms.",
+    "category": "agriculture"
+  }
+]

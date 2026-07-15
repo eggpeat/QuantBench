@@ -1,0 +1,29 @@
+{
+  "games": [
+    {
+      "event_id": "game_no_edge",
+      "edge_points": 0.0,
+      "classification": "no_bet_no_edge"
+    },
+    {
+      "event_id": "game_double_count",
+      "edge_points": -0.5,
+      "classification": "no_bet_double_count"
+    },
+    {
+      "event_id": "game_stale_market",
+      "edge_points": -2.0,
+      "classification": "bet_stale_market"
+    },
+    {
+      "event_id": "game_fake_steam",
+      "edge_points": 0.0,
+      "classification": "watch_fake_steam"
+    },
+    {
+      "event_id": "game_confirmed_no_edge",
+      "edge_points": -0.2,
+      "classification": "no_bet_no_edge"
+    }
+  ]
+}

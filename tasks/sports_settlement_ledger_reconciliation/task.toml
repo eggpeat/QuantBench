@@ -1,0 +1,53 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/sports_settlement_ledger_reconciliation"
+description = "Reconcile a sports betting operator's internal ledger against external payment gateway settlements using precise fee rules, timezone alignments, and duplicate detection."
+requires_image = false
+keywords = ["sports-betting", "ledger", "reconciliation", "financial-audit", "money-impacting"]
+
+[metadata]
+difficulty = "medium"
+category = "sports_modeling"
+tags = ["sports-betting", "ledger", "reconciliation", "financial-audit", "money-impacting"]
+risk_level = "money_impacting"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = [
+  "source_books/558620857-The-Logic-of-Sports-Betting.pdf"
+]
+source_concepts = ["sportsbook operations", "payment processing and ledger settlement", "financial reconciliation"]
+source_depth = "moderate"
+source_citations = [
+  "The Logic of Sports Betting, read-extracted lines 122-167: explains sportsbook accounting, transaction tracking, deposits, withdrawals, and ledger settlements."
+]
+source_gaps = []
+
+promotion_blockers = []
+
+task_design_note = "Promoted Quant Bench task inspired by financial operations in sportsbooks. It tests the agent's ability to clean data, normalize IDs, apply specific payment fee models using exact bank rounding, match rows chronologically, identify duplicates, calculate net discrepancies, and handle timezone shifts. Expected output matches a verified public snapshot, and inline tests verify calculations on edge cases."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.13-slim-bookworm@sha256:129f9f5d5729767916d79f0021ba4fe56ff113332b08ef1213ecf529a9da7ebb"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,25 @@
+{"type": "START", "tx_id": 98, "prev_hash": "226387d306054b2da574b4d53efff7c0198e781837e14360de521b8acd184f79"}
+{"type": "OP", "sportsbook": "DraftKings", "market_id": "M_NFL_01", "outcome": "HOME", "price": 1.95, "timestamp": "2026-06-27T10:08:00.000Z"}
+{"type": "COMMIT", "tx_id": 98, "hash": "cc865e4d534fd29f6471ea2f80277d2748384b5ba84dbd4bb24bd89b45a162cc"}
+{"type": "START", "tx_id": 99, "prev_hash": "cc865e4d534fd29f6471ea2f80277d2748384b5ba84dbd4bb24bd89b45a162cc"}
+{"type": "OP", "sportsbook": "FanDuel", "market_id": "M_NFL_01", "outcome": "AWAY", "price": 1.91, "timestamp": "2026-06-27T10:09:00.000Z"}
+{"type": "COMMIT", "tx_id": 99, "hash": "615f057951ef066b14a21b34093b93b9c77ef66baff692aa2a6471d2ac478ca0"}
+{"type": "START", "tx_id": 100, "prev_hash": "615f057951ef066b14a21b34093b93b9c77ef66baff692aa2a6471d2ac478ca0"}
+{"type": "OP", "sportsbook": "BetMGM", "market_id": "M_NBA_01", "outcome": "AWAY", "price": 2.55, "timestamp": "2026-06-27T10:10:00.000Z"}
+{"type": "COMMIT", "tx_id": 100, "hash": "04d3183cc211fb146e64eebb38086ded5044b1001970b039129977a03702531b"}
+{"type": "START", "tx_id": 101, "prev_hash": "04d3183cc211fb146e64eebb38086ded5044b1001970b039129977a03702531b"}
+{"type": "OP", "sportsbook": "DraftKings", "market_id": "M_NFL_01", "outcome": "HOME", "price": 1.98, "timestamp": "2026-06-27T12:00:00.000Z"}
+{"type": "OP", "sportsbook": "DraftKings", "market_id": "M_NFL_01", "outcome": "AWAY", "price": 1.82, "timestamp": "2026-06-27T12:00:00.000Z"}
+{"type": "COMMIT", "tx_id": 101, "hash": "7df9162c3a992b9c19cc38c0d565ea64075712d43f7bf18f464c8e8789ffc77b"}
+{"type": "START", "tx_id": 102, "prev_hash": "7df9162c3a992b9c19cc38c0d565ea64075712d43f7bf18f464c8e8789ffc77b"}
+{"type": "OP", "sportsbook": "FanDuel", "market_id": "M_NBA_01", "outcome": "AWAY", "price": 2.7, "timestamp": "2026-06-27T12:05:00.000Z"}
+{"type": "COMMIT", "tx_id": 102, "hash": "2737df062f3aa592690acbca6d5bca44ef4dc03f63949be9a40a562fd1a8acf3"}
+{"type": "START", "tx_id": 103, "prev_hash": "2737df062f3aa592690acbca6d5bca44ef4dc03f63949be9a40a562fd1a8acf3"}
+{"type": "OP", "sportsbook": "BetMGM", "market_id": "M_MLB_01", "outcome": "HOME", "price": 2.15, "timestamp": "2026-06-27T12:10:00.000Z"}
+{"type": "OP", "sportsbook": "BetMGM", "market_id": "M_MLB_01", "outcome": "AWAY", "price": 1.75, "timestamp": "2026-06-27T12:10:00.000Z"}
+{"type": "COMMIT", "tx_id": 103, "hash": "49fa2766c7dc2f2390324ce3589d891f43504ebb5d22aff10697b5bf2b30d87f"}
+{"type": "START", "tx_id": 104, "prev_hash": "49fa2766c7dc2f2390324ce3589d891f43504ebb5d22aff10697b5bf2b30d87f"}
+{"type": "OP", "sportsbook": "DraftKings", "market_id": "M_NBA_01", "outcome": "HOME", "price": 1.48, "timestamp": "2026-06-27T12:15:00.000Z"}
+{"type": "COMMIT", "tx_id": 104, "hash": "d550da18acf78b14f56d722b655bdec66932b13f6b9ca6b99a8861ceb1fc3c58"}
+{"type": "START", "tx_id": 105, "prev_hash": "d550da18acf78b14f56d722b655bdec66932b13f6b9ca6b99a8861ceb1fc3c58"}
+{"type": "OP", "sportsbook": "FanDuel", "market_id": "M_NFL_01", "outcome": "HOME", "price": 2.05, "timestamp": "2026-06-27T12:20:00.000Z"}

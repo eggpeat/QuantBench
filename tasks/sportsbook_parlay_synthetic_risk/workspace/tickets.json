@@ -1,0 +1,98 @@
+[
+  {
+    "ticket_id": "ticket_one_leg",
+    "stake": 100.0,
+    "legs": [
+      {
+        "leg_id": "leg_1",
+        "american_odds": -150,
+        "true_win_prob": 0.60
+      }
+    ]
+  },
+  {
+    "ticket_id": "ticket_favorites_underdogs_mix",
+    "stake": 100.0,
+    "legs": [
+      {
+        "leg_id": "leg_1",
+        "american_odds": -200,
+        "true_win_prob": 0.65
+      },
+      {
+        "leg_id": "leg_2",
+        "american_odds": 150,
+        "true_win_prob": 0.42
+      },
+      {
+        "leg_id": "leg_3",
+        "american_odds": -110,
+        "true_win_prob": 0.53
+      }
+    ]
+  },
+  {
+    "ticket_id": "ticket_fair_off_board",
+    "stake": 100.0,
+    "legs": [
+      {
+        "leg_id": "leg_1",
+        "american_odds": 100,
+        "true_win_prob": 0.50
+      },
+      {
+        "leg_id": "leg_2",
+        "american_odds": -150,
+        "true_win_prob": 0.60
+      },
+      {
+        "leg_id": "leg_3",
+        "american_odds": -300,
+        "true_win_prob": 0.75
+      }
+    ]
+  },
+  {
+    "ticket_id": "ticket_short_pay",
+    "stake": 100.0,
+    "legs": [
+      {
+        "leg_id": "leg_1",
+        "american_odds": -110,
+        "true_win_prob": 0.50
+      },
+      {
+        "leg_id": "leg_2",
+        "american_odds": -110,
+        "true_win_prob": 0.50
+      },
+      {
+        "leg_id": "leg_3",
+        "american_odds": -110,
+        "true_win_prob": 0.50
+      }
+    ],
+    "offered_payout": 600.0
+  },
+  {
+    "ticket_id": "ticket_edge_compounding",
+    "stake": 100.0,
+    "legs": [
+      {
+        "leg_id": "leg_1",
+        "american_odds": 100,
+        "true_win_prob": 0.55
+      },
+      {
+        "leg_id": "leg_2",
+        "american_odds": 100,
+        "true_win_prob": 0.55
+      },
+      {
+        "leg_id": "leg_3",
+        "american_odds": 100,
+        "true_win_prob": 0.55
+      }
+    ]
+  }
+]

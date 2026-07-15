@@ -1,0 +1,36 @@
+{
+  "excluded_columns": {
+    "leakage": [
+      "churn_reason",
+      "next_transaction_amount"
+    ],
+    "target_contamination": [
+      "total_spend_full_history"
+    ],
+    "high_missingness": [
+      "device_type"
+    ]
+  },
+  "validation_split": {
+    "train_ids": [
+      "r1",
+      "r2",
+      "r3",
+      "r5"
+    ],
+    "validation_ids": [
+      "r4"
+    ]
+  },
+  "quality_metrics": {
+    "duplicate_ids_count": 1,
+    "unstable_ids_count": 1,
+    "future_timestamps_count": 1,
+    "label_leakage_detected": true
+  },
+  "metric_sanity": {
+    "train_size": 4,
+    "validation_size": 1,
+    "leakage_ratio_removed": 0.5
+  }
+}

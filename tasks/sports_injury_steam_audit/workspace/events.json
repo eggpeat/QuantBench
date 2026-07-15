@@ -1,0 +1,73 @@
+{
+  "games": [
+    {
+      "event_id": "game_no_edge",
+      "opening_line": -3.0,
+      "current_line": -3.0,
+      "model_fair_line": -3.0,
+      "audit_timestamp": "2026-06-26T15:00:00Z",
+      "injury_status": "none",
+      "news_timestamp": null,
+      "model_relies_on_injury_adjustment": false,
+      "line_moves": [
+        {"timestamp": "2026-06-26T10:00:00Z", "line": -3.0}
+      ]
+    },
+    {
+      "event_id": "game_double_count",
+      "opening_line": -3.0,
+      "current_line": -5.0,
+      "model_fair_line": -5.5,
+      "audit_timestamp": "2026-06-26T15:00:00Z",
+      "injury_status": "confirmed_material",
+      "news_timestamp": "2026-06-26T12:00:00Z",
+      "model_relies_on_injury_adjustment": true,
+      "line_moves": [
+        {"timestamp": "2026-06-26T10:00:00Z", "line": -3.0},
+        {"timestamp": "2026-06-26T13:00:00Z", "line": -5.0}
+      ]
+    },
+    {
+      "event_id": "game_stale_market",
+      "opening_line": -3.0,
+      "current_line": -3.0,
+      "model_fair_line": -5.0,
+      "audit_timestamp": "2026-06-26T15:00:00Z",
+      "injury_status": "confirmed_material",
+      "news_timestamp": "2026-06-26T12:00:00Z",
+      "model_relies_on_injury_adjustment": true,
+      "line_moves": [
+        {"timestamp": "2026-06-26T10:00:00Z", "line": -3.0}
+      ]
+    },
+    {
+      "event_id": "game_fake_steam",
+      "opening_line": -3.0,
+      "current_line": -3.0,
+      "model_fair_line": -3.0,
+      "audit_timestamp": "2026-06-26T15:00:00Z",
+      "injury_status": "unconfirmed_rumor",
+      "news_timestamp": "2026-06-26T12:00:00Z",
+      "model_relies_on_injury_adjustment": false,
+      "line_moves": [
+        {"timestamp": "2026-06-26T10:00:00Z", "line": -3.0},
+        {"timestamp": "2026-06-26T11:00:00Z", "line": -4.0},
+        {"timestamp": "2026-06-26T13:00:00Z", "line": -3.0}
+      ]
+    },
+    {
+      "event_id": "game_confirmed_no_edge",
+      "opening_line": -3.0,
+      "current_line": -5.0,
+      "model_fair_line": -5.2,
+      "audit_timestamp": "2026-06-26T15:00:00Z",
+      "injury_status": "confirmed_material",
+      "news_timestamp": "2026-06-26T12:00:00Z",
+      "model_relies_on_injury_adjustment": false,
+      "line_moves": [
+        {"timestamp": "2026-06-26T10:00:00Z", "line": -3.0},
+        {"timestamp": "2026-06-26T13:00:00Z", "line": -5.0}
+      ]
+    }
+  ]
+}

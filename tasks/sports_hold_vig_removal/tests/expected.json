@@ -1,0 +1,117 @@
+{
+  "bankroll": 1000.0,
+  "fractional_kelly": 0.25,
+  "markets": [
+    {
+      "market_id": "normal_spread_two_way",
+      "sum_implied": 1.047619,
+      "overround": 0.047619,
+      "hold": 0.045455,
+      "high_hold": false,
+      "outcomes": [
+        {
+          "name": "Harbor Hawks -3.5",
+          "american_odds": -110,
+          "decimal_odds": 1.909091,
+          "implied_probability": 0.52381,
+          "no_vig_probability": 0.5,
+          "model_probability": 0.51,
+          "ev_per_dollar": -0.026364,
+          "full_kelly": 0.0,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet"
+        },
+        {
+          "name": "Metro Foxes +3.5",
+          "american_odds": -110,
+          "decimal_odds": 1.909091,
+          "implied_probability": 0.52381,
+          "no_vig_probability": 0.5,
+          "model_probability": 0.49,
+          "ev_per_dollar": -0.064545,
+          "full_kelly": 0.0,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet"
+        }
+      ]
+    },
+    {
+      "market_id": "positive_edge_spread_two_way",
+      "sum_implied": 1.047619,
+      "overround": 0.047619,
+      "hold": 0.045455,
+      "high_hold": false,
+      "outcomes": [
+        {
+          "name": "Desert Owls -1.5",
+          "american_odds": -110,
+          "decimal_odds": 1.909091,
+          "implied_probability": 0.52381,
+          "no_vig_probability": 0.5,
+          "model_probability": 0.56,
+          "ev_per_dollar": 0.069091,
+          "full_kelly": 0.076,
+          "recommended_stake": 19.0,
+          "recommendation": "bet"
+        },
+        {
+          "name": "Lakeside Bears +1.5",
+          "american_odds": -110,
+          "decimal_odds": 1.909091,
+          "implied_probability": 0.52381,
+          "no_vig_probability": 0.5,
+          "model_probability": 0.44,
+          "ev_per_dollar": -0.16,
+          "full_kelly": 0.0,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet"
+        }
+      ]
+    },
+    {
+      "market_id": "high_hold_three_way_tie",
+      "sum_implied": 1.25,
+      "overround": 0.25,
+      "hold": 0.2,
+      "high_hold": true,
+      "outcomes": [
+        {
+          "name": "North City win",
+          "american_odds": 140,
+          "decimal_odds": 2.4,
+          "implied_probability": 0.416667,
+          "no_vig_probability": 0.333333,
+          "model_probability": 0.45,
+          "ev_per_dollar": 0.08,
+          "full_kelly": 0.057143,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet_high_hold"
+        },
+        {
+          "name": "Draw",
+          "american_odds": 140,
+          "decimal_odds": 2.4,
+          "implied_probability": 0.416667,
+          "no_vig_probability": 0.333333,
+          "model_probability": 0.3,
+          "ev_per_dollar": -0.28,
+          "full_kelly": 0.0,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet_high_hold"
+        },
+        {
+          "name": "South United win",
+          "american_odds": 140,
+          "decimal_odds": 2.4,
+          "implied_probability": 0.416667,
+          "no_vig_probability": 0.333333,
+          "model_probability": 0.25,
+          "ev_per_dollar": -0.4,
+          "full_kelly": 0.0,
+          "recommended_stake": 0.0,
+          "recommendation": "no_bet_high_hold"
+        }
+      ]
+    }
+  ]
+}

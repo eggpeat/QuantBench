@@ -1,0 +1,642 @@
+[
+  {
+    "hand_id": "100000001",
+    "table_name": "Redwood",
+    "button_seat": 3,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "PlayerA",
+        "chips": 200.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "PlayerB",
+        "chips": 150.0
+      },
+      {
+        "seat_number": 3,
+        "player_name": "PlayerC",
+        "chips": 100.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "PlayerA",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "PlayerB",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "PlayerC",
+        "action_type": "raise",
+        "amount": 6.0,
+        "to_amount": 6.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerA",
+        "action_type": "call",
+        "amount": 5.0,
+        "to_amount": 6.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerB",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "PlayerA",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "PlayerC",
+        "action_type": "bet",
+        "amount": 10.0,
+        "to_amount": 10.0
+      },
+      {
+        "street": "flop",
+        "player_name": "PlayerA",
+        "action_type": "call",
+        "amount": 10.0,
+        "to_amount": 10.0
+      },
+      {
+        "street": "turn",
+        "player_name": "PlayerA",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "turn",
+        "player_name": "PlayerC",
+        "action_type": "bet",
+        "amount": 20.0,
+        "to_amount": 20.0
+      },
+      {
+        "street": "turn",
+        "player_name": "PlayerA",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 0.0
+      }
+    ],
+    "uncalled_bet_returned": {
+      "player_name": "PlayerC",
+      "amount": 20.0
+    },
+    "total_pot": 34.0,
+    "rake": 0.0,
+    "winners": [
+      {
+        "player_name": "PlayerC",
+        "amount": 34.0,
+        "showed": false
+      }
+    ],
+    "valid": true,
+    "errors": []
+  },
+  {
+    "hand_id": "100000002",
+    "table_name": "Pine",
+    "button_seat": 1,
+    "small_blind": 0.5,
+    "big_blind": 1.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "Alice",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "Bob",
+        "chips": 120.0
+      },
+      {
+        "seat_number": 3,
+        "player_name": "Charlie",
+        "chips": 80.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "Bob",
+        "type": "small",
+        "amount": 0.5
+      },
+      {
+        "player_name": "Charlie",
+        "type": "big",
+        "amount": 1.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "Alice",
+        "action_type": "call",
+        "amount": 1.0,
+        "to_amount": 1.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "Bob",
+        "action_type": "call",
+        "amount": 0.5,
+        "to_amount": 1.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "Charlie",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 1.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Bob",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Charlie",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Alice",
+        "action_type": "bet",
+        "amount": 2.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Bob",
+        "action_type": "call",
+        "amount": 2.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Charlie",
+        "action_type": "raise",
+        "amount": 8.0,
+        "to_amount": 8.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Alice",
+        "action_type": "call",
+        "amount": 6.0,
+        "to_amount": 8.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Bob",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "turn",
+        "player_name": "Charlie",
+        "action_type": "bet",
+        "amount": 16.0,
+        "to_amount": 16.0
+      },
+      {
+        "street": "turn",
+        "player_name": "Alice",
+        "action_type": "call",
+        "amount": 16.0,
+        "to_amount": 16.0
+      },
+      {
+        "street": "river",
+        "player_name": "Charlie",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "river",
+        "player_name": "Alice",
+        "action_type": "bet",
+        "amount": 20.0,
+        "to_amount": 20.0
+      },
+      {
+        "street": "river",
+        "player_name": "Charlie",
+        "action_type": "call",
+        "amount": 20.0,
+        "to_amount": 20.0
+      }
+    ],
+    "uncalled_bet_returned": null,
+    "total_pot": 93.0,
+    "rake": 3.0,
+    "winners": [
+      {
+        "player_name": "Alice",
+        "amount": 90.0,
+        "showed": true
+      }
+    ],
+    "valid": true,
+    "errors": []
+  },
+  {
+    "hand_id": "100000003",
+    "table_name": "Maple",
+    "button_seat": 2,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "folds",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "calls",
+        "chips": 150.0
+      },
+      {
+        "seat_number": 3,
+        "player_name": "raises",
+        "chips": 200.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "folds",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "calls",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "raises",
+        "action_type": "raise",
+        "amount": 6.0,
+        "to_amount": 6.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "folds",
+        "action_type": "call",
+        "amount": 5.0,
+        "to_amount": 6.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "calls",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "folds",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "raises",
+        "action_type": "bet",
+        "amount": 8.0,
+        "to_amount": 8.0
+      },
+      {
+        "street": "flop",
+        "player_name": "folds",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 0.0
+      }
+    ],
+    "uncalled_bet_returned": {
+      "player_name": "raises",
+      "amount": 8.0
+    },
+    "total_pot": 14.0,
+    "rake": 0.0,
+    "winners": [
+      {
+        "player_name": "raises",
+        "amount": 14.0,
+        "showed": false
+      }
+    ],
+    "valid": true,
+    "errors": []
+  },
+  {
+    "hand_id": "100000004",
+    "table_name": "Oak",
+    "button_seat": 1,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "Player1",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "Player2",
+        "chips": 100.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "Player2",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "Player1",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "Player2",
+        "action_type": "call",
+        "amount": 1.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "Player1",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Player2",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Player1",
+        "action_type": "bet",
+        "amount": 5.0,
+        "to_amount": 5.0
+      },
+      {
+        "street": "flop",
+        "player_name": "Player2",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 0.0
+      }
+    ],
+    "uncalled_bet_returned": {
+      "player_name": "Player1",
+      "amount": 5.0
+    },
+    "total_pot": 4.0,
+    "rake": 0.0,
+    "winners": [
+      {
+        "player_name": "Player1",
+        "amount": 4.0,
+        "showed": false
+      }
+    ],
+    "valid": true,
+    "errors": []
+  },
+  {
+    "hand_id": "100000005",
+    "table_name": "Elm",
+    "button_seat": 1,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "PlayerA",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "PlayerB",
+        "chips": 100.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "PlayerB",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "PlayerA",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "PlayerB",
+        "action_type": "raise",
+        "amount": 4.0,
+        "to_amount": 5.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerA",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 2.0
+      }
+    ],
+    "uncalled_bet_returned": null,
+    "total_pot": 7.0,
+    "rake": 0.0,
+    "winners": [],
+    "valid": false,
+    "errors": [
+      "Player checking when facing a bet"
+    ]
+  },
+  {
+    "hand_id": "100000006",
+    "table_name": "Birch",
+    "button_seat": 1,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "PlayerA",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "PlayerB",
+        "chips": 100.0
+      },
+      {
+        "seat_number": 3,
+        "player_name": "PlayerC",
+        "chips": 100.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "PlayerB",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "PlayerC",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "PlayerA",
+        "action_type": "fold",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerB",
+        "action_type": "call",
+        "amount": 1.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerC",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 2.0
+      },
+      {
+        "street": "flop",
+        "player_name": "PlayerA",
+        "action_type": "check",
+        "amount": 0.0,
+        "to_amount": 0.0
+      },
+      {
+        "street": "flop",
+        "player_name": "PlayerB",
+        "action_type": "bet",
+        "amount": 2.0,
+        "to_amount": 2.0
+      }
+    ],
+    "uncalled_bet_returned": null,
+    "total_pot": 6.0,
+    "rake": 0.0,
+    "winners": [],
+    "valid": false,
+    "errors": [
+      "Player acting has already folded"
+    ]
+  },
+  {
+    "hand_id": "100000007",
+    "table_name": "Cedar",
+    "button_seat": 1,
+    "small_blind": 1.0,
+    "big_blind": 2.0,
+    "seats": [
+      {
+        "seat_number": 1,
+        "player_name": "PlayerA",
+        "chips": 10.0
+      },
+      {
+        "seat_number": 2,
+        "player_name": "PlayerB",
+        "chips": 100.0
+      }
+    ],
+    "blinds_posted": [
+      {
+        "player_name": "PlayerB",
+        "type": "small",
+        "amount": 1.0
+      },
+      {
+        "player_name": "PlayerA",
+        "type": "big",
+        "amount": 2.0
+      }
+    ],
+    "actions": [
+      {
+        "street": "preflop",
+        "player_name": "PlayerB",
+        "action_type": "raise",
+        "amount": 28.0,
+        "to_amount": 29.0
+      },
+      {
+        "street": "preflop",
+        "player_name": "PlayerA",
+        "action_type": "call",
+        "amount": 27.0,
+        "to_amount": 29.0
+      }
+    ],
+    "uncalled_bet_returned": null,
+    "total_pot": 39.0,
+    "rake": 0.0,
+    "winners": [],
+    "valid": false,
+    "errors": [
+      "Insufficient stack"
+    ]
+  }
+]

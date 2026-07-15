@@ -1,0 +1,53 @@
+schema_version = "1.3"
+artifacts = []
+
+[task]
+name = "quant-bench/event_driven_backtest_repair"
+description = "Repair an event-driven CSV backtester with UTC event ordering, corporate actions, no-lookahead fills, participation caps, and fee accounting."
+requires_image = false
+keywords = ["backtesting", "event-driven", "csv", "no-lookahead", "corporate-actions", "portfolio-accounting"]
+
+[metadata]
+difficulty = "hard"
+category = "quantitative_finance"
+tags = ["backtesting", "event-streams", "accounting", "corporate-actions", "csv"]
+risk_level = "money_impacting"
+promotion_status = "promoted"
+source_status = "source_backed"
+
+[provenance]
+source_books = [
+  "source_books/SQLite-Query-Optimization.pdf"
+]
+source_concepts = ["historical backtest event ordering", "market-event joins", "deterministic accounting", "index-safe historical data access"]
+source_depth = "moderate"
+source_citations = [
+  "quant-bench/sports_backtest_query_optimize (sports backtest benchmark task): preserves the historical-backtest provenance and deterministic fixture style used by this repair task.",
+  "SQLite Query Planner Documentation (sqlite.org/queryplanner.html): motivates deterministic, bounded historical event access rather than accidental unrestricted joins."
+]
+source_gaps = ["The benchmark adds CSV event-stream accounting, corporate actions, execution limits, and no-lookahead checks beyond the cited sports backtest query task."]
+promotion_blockers = []
+
+task_design_note = "Seeded Terminal-Bench quant task: repair a stub event-driven backtester. The visible fixture uses seed 100; hidden verifier cases vary UTC offsets, duplicate/conflicting events, splits, dividends, delayed signals, participation limits, and fees."
+
+[agent]
+timeout_sec = 3600.0
+
+[verifier]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+docker_image = "python:3.12-slim-bookworm@sha256:db8e83a44af476c636a6a753adace39ad37863b63c0afd2862db7bbafeeb3944"
+cpus = 1
+memory_mb = 1024
+storage_mb = 1024
+gpus = 0
+network_mode = "no-network"
+mcp_servers = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

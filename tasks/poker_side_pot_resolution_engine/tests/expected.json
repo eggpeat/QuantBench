@@ -1,0 +1,59 @@
+{
+  "settlements": [
+    {
+      "hand_id": "hand_001",
+      "payouts": {
+        "Alice": 300,
+        "Bob": 0,
+        "Charlie": 0
+      },
+      "conservation": {
+        "total_bets": 300,
+        "total_payouts": 300,
+        "is_conserved": true
+      }
+    },
+    {
+      "hand_id": "hand_002",
+      "payouts": {
+        "Player A": 0,
+        "Player B": 0,
+        "Player C": 1150,
+        "Player D": 100,
+        "Player E": 0
+      },
+      "conservation": {
+        "total_bets": 1250,
+        "total_payouts": 1250,
+        "is_conserved": true
+      }
+    },
+    {
+      "hand_id": "hand_003",
+      "payouts": {
+        "Player A": 217,
+        "Player B": 216,
+        "Player C": 0,
+        "Player D": 68
+      },
+      "conservation": {
+        "total_bets": 501,
+        "total_payouts": 501,
+        "is_conserved": true
+      }
+    },
+    {
+      "hand_id": "hand_004",
+      "payouts": {
+        "Player A": 250,
+        "Player B": 100,
+        "Player C": 0
+      },
+      "conservation": {
+        "total_bets": 350,
+        "total_payouts": 350,
+        "is_conserved": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "initial_mean": 100.0,
+  "initial_variance": 4.0,
+  "process_variance": 1.0,
+  "measurement_variance": 2.0,
+  "outlier_z": 3.0
+}
