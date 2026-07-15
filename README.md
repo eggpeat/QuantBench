@@ -26,12 +26,12 @@ pass rates, rather than a pooled average.
 | OpenAI GPT 5.6 Luna — `openai-codex/gpt-5.6-luna` (`xhigh`) | 92.5%, 82.5%, 92.5%, 90.0%, 92.5% | **92.5%** |
 | OpenAI GPT 5.6 Sol — `openai-codex/gpt-5.6-sol` (`max`) | 90.0%, 87.5%, 92.5%, 87.5%, 87.5% | **87.5%** |
 | OpenAI GPT 5.6 Terra — `openai-codex/gpt-5.6-terra` (`xhigh`) | 90.0%, 90.0%, 85.0%, 85.0%, 85.0% | **85.0%** |
-| Devin SWE 1.7 — `devin/swe-1-7` (`none`) | 80.0%, 77.5%, 77.5%, 80.0%, 80.0% | **80.0%** |
+| Cognition SWE 1.7 — `devin/swe-1-7` (`none`) | 80.0%, 77.5%, 77.5%, 80.0%, 80.0% | **80.0%** |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/results-distribution-dark.svg">
   <img src="assets/results-distribution-light.svg"
-       alt="Budgeted pass-rate distribution: five attempts per configuration with min–max range and median (OpenAI GPT 5.6 Luna 92.5%, OpenAI GPT 5.6 Sol 87.5%, OpenAI GPT 5.6 Terra 85.0%, Devin SWE 1.7 80.0%). Full values are in the adjacent table."
+       alt="Budgeted pass-rate distribution: five attempts per configuration with min–max range and median (OpenAI GPT 5.6 Luna 92.5%, OpenAI GPT 5.6 Sol 87.5%, OpenAI GPT 5.6 Terra 85.0%, Cognition SWE 1.7 80.0%). Full values are in the adjacent table."
        width="720">
 </picture>
 

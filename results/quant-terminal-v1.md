@@ -1,6 +1,6 @@
 # Quant Bench Report
 
-Generated: `2026-07-15T12:50:16+00:00`
+Generated: `2026-07-15T12:58:28+00:00`
 
 ## Leaderboard
 
@@ -9,7 +9,7 @@ Generated: `2026-07-15T12:50:16+00:00`
 | OpenAI GPT 5.6 Luna | `openai-codex/gpt-5.6-luna · xhigh · OMP` | 200/200 | yes | 92.5% | 82.5%–92.5% | 242.156 | 47.5385 |
 | OpenAI GPT 5.6 Sol | `openai-codex/gpt-5.6-sol · max · OMP` | 200/200 | yes | 87.5% | 87.5%–92.5% | 332.12 | 37.385 |
 | OpenAI GPT 5.6 Terra | `openai-codex/gpt-5.6-terra · xhigh · OMP` | 200/200 | yes | 85.0% | 85.0%–90.0% | 243.2305 | 47.807 |
-| Devin SWE 1.7 | `devin/swe-1-7 · none · OMP` | 200/200 | yes | 80.0% | 77.5%–80.0% | 549.67 | 98.059 |
+| Cognition SWE 1.7 | `devin/swe-1-7 · none · OMP` | 200/200 | yes | 80.0% | 77.5%–80.0% | 549.67 | 98.059 |
 
 ## OpenAI GPT 5.6 Luna
 
@@ -197,7 +197,7 @@ Configuration: `{"agents":["gpt-5-6-terra-xhigh"],"backend_provider":"openai-cod
 | temporal_ep_weighted_likelihood | 5 | 4 | 1 | 0 | 0 | 0.8 |
 | vectorized_fisher_preconditioner | 5 | 5 | 0 | 0 | 0 | 1 |
 
-## Devin SWE 1.7
+## Cognition SWE 1.7
 
 Configuration: `{"agents":["swe-1-7-devin"],"backend_provider":"devin","harness":"OMP","model":"devin/swe-1-7","thinking":"none"}`
 

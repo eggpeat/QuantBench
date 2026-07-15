@@ -1319,7 +1319,7 @@ _PUBLIC_MODEL_NAMES = {
     "openai-codex/gpt-5.6-luna": "OpenAI GPT 5.6 Luna",
     "openai-codex/gpt-5.6-sol": "OpenAI GPT 5.6 Sol",
     "openai-codex/gpt-5.6-terra": "OpenAI GPT 5.6 Terra",
-    "devin/swe-1-7": "Devin SWE 1.7",
+    "devin/swe-1-7": "Cognition SWE 1.7",
 }
 _CHART_PALETTES = {
     "dark": {

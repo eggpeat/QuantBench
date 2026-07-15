@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="461" viewBox="0 0 720 461" role="img" aria-labelledby="qbd-title qbd-desc" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <title id="qbd-title">Budgeted pass-rate distribution across 5 attempts, by agent configuration</title>
-<desc id="qbd-desc">OpenAI GPT 5.6 Luna: attempts 92.5%, 82.5%, 92.5%, 90.0%, 92.5%; median 92.5%. OpenAI GPT 5.6 Sol: attempts 90.0%, 87.5%, 92.5%, 87.5%, 87.5%; median 87.5%. OpenAI GPT 5.6 Terra: attempts 90.0%, 90.0%, 85.0%, 85.0%, 85.0%; median 85.0%. Devin SWE 1.7: attempts 80.0%, 77.5%, 77.5%, 80.0%, 80.0%; median 80.0%. Dots are individual attempts and stack where tied; the gold marker is the median; the cyan line is the min–max range. Pass-rate axis zoomed to 75.0–95.0%.</desc>
+<desc id="qbd-desc">OpenAI GPT 5.6 Luna: attempts 92.5%, 82.5%, 92.5%, 90.0%, 92.5%; median 92.5%. OpenAI GPT 5.6 Sol: attempts 90.0%, 87.5%, 92.5%, 87.5%, 87.5%; median 87.5%. OpenAI GPT 5.6 Terra: attempts 90.0%, 90.0%, 85.0%, 85.0%, 85.0%; median 85.0%. Cognition SWE 1.7: attempts 80.0%, 77.5%, 77.5%, 80.0%, 80.0%; median 80.0%. Dots are individual attempts and stack where tied; the gold marker is the median; the cyan line is the min–max range. Pass-rate axis zoomed to 75.0–95.0%.</desc>
 <line x1="16" y1="1" x2="704" y2="1" stroke="#D0D7DE" stroke-width="1"/>
 <text x="16" y="30" fill="#1F2328" font-size="16" font-weight="650">Budgeted pass rate across 5 attempts</text>
 <circle cx="174" cy="56" r="3.5" fill="#0E9BE0" stroke="#FFFFFF" stroke-width=".75"/>
@@ -55,7 +55,7 @@
 <circle cx="582.50" cy="281.50" r="4.5" fill="#0E9BE0" stroke="#FFFFFF" stroke-width=".75"><title>Attempt 2: 90.0%</title></circle>
 <polygon points="465.00,246 470.00,251 465.00,256 460.00,251" fill="#B45309"/>
 <line x1="16" y1="315.50" x2="704" y2="315.50" stroke="#D0D7DE" stroke-width=".75" opacity=".45"/>
-<text x="212" y="349" text-anchor="end" fill="#1F2328" font-size="12.5" font-weight="600">Devin SWE 1.7</text>
+<text x="212" y="349" text-anchor="end" fill="#1F2328" font-size="12.5" font-weight="600">Cognition SWE 1.7</text>
 <text x="212" y="368" text-anchor="end" fill="#B45309" font-size="15" font-weight="700">80.0%</text>
 <line x1="288.75" y1="353" x2="347.50" y2="353" stroke="#0E9BE0" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
 <line x1="347.50" y1="326" x2="347.50" y2="380" stroke="#B45309" stroke-width="2" stroke-linecap="round" opacity=".9"/>
