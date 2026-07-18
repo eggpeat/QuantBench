@@ -269,6 +269,18 @@ def _load_manifest_contract(path: Path | str) -> dict[str, Any]:
     accepted_run_manifest_sha256 = [manifest_sha256]
     if results_source_manifest_sha256 != manifest_sha256:
         accepted_run_manifest_sha256.append(results_source_manifest_sha256)
+    if isinstance(benchmark, dict) and "accepted_run_manifest_sha256" in benchmark:
+        additional_hashes = benchmark.get("accepted_run_manifest_sha256")
+        if (
+            not isinstance(additional_hashes, list)
+            or any(not isinstance(value, str) or not _SHA256_RE.fullmatch(value) for value in additional_hashes)
+        ):
+            raise ReportError(
+                "benchmark.accepted_run_manifest_sha256 must be an array of 64-character lowercase hexadecimal strings"
+            )
+        accepted_run_manifest_sha256.extend(
+            value for value in additional_hashes if value not in accepted_run_manifest_sha256
+        )
     try:
         manifest_label = manifest_path.relative_to(PROJECT_ROOT).as_posix()
     except ValueError:
@@ -1320,6 +1332,8 @@ _PUBLIC_MODEL_NAMES = {
     "openai-codex/gpt-5.6-sol": "OpenAI GPT 5.6 Sol",
     "openai-codex/gpt-5.6-terra": "OpenAI GPT 5.6 Terra",
     "devin/swe-1-7": "Cognition SWE 1.7",
+    "google-antigravity/gemini-3.5-flash": "Google Gemini 3.5 Flash",
+    "meta/muse-spark-1.1": "Meta Muse Spark 1.1",
 }
 _CHART_PALETTES = {
     "dark": {

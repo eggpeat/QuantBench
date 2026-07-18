@@ -15,23 +15,25 @@ selector, provider, thinking setting, harness, task image, and manifest).
 
 ## Published results
 
-The repository preserves four complete `quant-terminal-v1` result matrices.
-Each matrix covers the same 40 tasks across five independent attempts, and its
-preserved source runs share the historical digest declared by the publication
-manifest. The public headline is the median of the five per-attempt budgeted
-pass rates, rather than a pooled average.
+The repository preserves six complete `quant-terminal-v1` result matrices.
+Each matrix covers the same 40 tasks across five independent attempts. The
+publication manifest declares every exact source-manifest digest represented
+by the preserved runs. The public headline is the median of the five
+per-attempt budgeted pass rates, rather than a pooled average.
 
 | Agent configuration | Attempt pass rates (1→5) | Median attempt pass |
 |---|---:|---:|
 | OpenAI GPT 5.6 Luna — `openai-codex/gpt-5.6-luna` (`xhigh`) | 92.5%, 82.5%, 92.5%, 90.0%, 92.5% | **92.5%** |
+| Meta Muse Spark 1.1 — `meta/muse-spark-1.1` (`high`) | 87.5%, 90.0%, 82.5%, 87.5%, 85.0% | **87.5%** |
 | OpenAI GPT 5.6 Sol — `openai-codex/gpt-5.6-sol` (`max`) | 90.0%, 87.5%, 92.5%, 87.5%, 87.5% | **87.5%** |
 | OpenAI GPT 5.6 Terra — `openai-codex/gpt-5.6-terra` (`xhigh`) | 90.0%, 90.0%, 85.0%, 85.0%, 85.0% | **85.0%** |
 | Cognition SWE 1.7 — `devin/swe-1-7` (`none`) | 80.0%, 77.5%, 77.5%, 80.0%, 80.0% | **80.0%** |
+| Google Gemini 3.5 Flash — `google-antigravity/gemini-3.5-flash` (`high`) | 72.5%, 70.0%, 75.0%, 82.5%, 75.0% | **75.0%** |
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/results-distribution-dark.svg">
   <img src="assets/results-distribution-light.svg"
-       alt="Budgeted pass-rate distribution: five attempts per configuration with min–max range and median (OpenAI GPT 5.6 Luna 92.5%, OpenAI GPT 5.6 Sol 87.5%, OpenAI GPT 5.6 Terra 85.0%, Cognition SWE 1.7 80.0%). Full values are in the adjacent table."
+       alt="Budgeted pass-rate distribution: five attempts per configuration with min–max range and median (OpenAI GPT 5.6 Luna 92.5%, Meta Muse Spark 1.1 87.5%, OpenAI GPT 5.6 Sol 87.5%, OpenAI GPT 5.6 Terra 85.0%, Cognition SWE 1.7 80.0%, Google Gemini 3.5 Flash 75.0%). Full values are in the adjacent table."
        width="720">
 </picture>
 
@@ -45,10 +47,10 @@ counts as a non-pass in this summary.
 - [Machine-readable JSON](results/quant-terminal-v1.json)
 
 The checked-in manifest limits the public roster to completed configurations.
-The report accepts exactly the current publication digest for fresh runs or the
-declared historical digest for these preserved matrices, then binds execution
-to the exact configuration, Docker modes, and checked-in task image IDs.
-Partial runs are not part of the published comparison.
+The report accepts the current publication digest and only the explicitly
+declared source-manifest digests represented by preserved runs, then binds
+execution to the exact configuration, Docker modes, and checked-in task image
+IDs. Partial matrices are not part of the published comparison.
 
 ## Quickstart
 

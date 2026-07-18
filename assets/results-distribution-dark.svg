@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="461" viewBox="0 0 720 461" role="img" aria-labelledby="qbd-title qbd-desc" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="611" viewBox="0 0 720 611" role="img" aria-labelledby="qbd-title qbd-desc" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <title id="qbd-title">Budgeted pass-rate distribution across 5 attempts, by agent configuration</title>
-<desc id="qbd-desc">OpenAI GPT 5.6 Luna: attempts 92.5%, 82.5%, 92.5%, 90.0%, 92.5%; median 92.5%. OpenAI GPT 5.6 Sol: attempts 90.0%, 87.5%, 92.5%, 87.5%, 87.5%; median 87.5%. OpenAI GPT 5.6 Terra: attempts 90.0%, 90.0%, 85.0%, 85.0%, 85.0%; median 85.0%. Cognition SWE 1.7: attempts 80.0%, 77.5%, 77.5%, 80.0%, 80.0%; median 80.0%. Dots are individual attempts and stack where tied; the gold marker is the median; the cyan line is the min–max range. Pass-rate axis zoomed to 75.0–95.0%.</desc>
+<desc id="qbd-desc">OpenAI GPT 5.6 Luna: attempts 92.5%, 82.5%, 92.5%, 90.0%, 92.5%; median 92.5%. Meta Muse Spark 1.1: attempts 87.5%, 90.0%, 82.5%, 87.5%, 85.0%; median 87.5%. OpenAI GPT 5.6 Sol: attempts 90.0%, 87.5%, 92.5%, 87.5%, 87.5%; median 87.5%. OpenAI GPT 5.6 Terra: attempts 90.0%, 90.0%, 85.0%, 85.0%, 85.0%; median 85.0%. Cognition SWE 1.7: attempts 80.0%, 77.5%, 77.5%, 80.0%, 80.0%; median 80.0%. Google Gemini 3.5 Flash: attempts 72.5%, 70.0%, 75.0%, 82.5%, 75.0%; median 75.0%. Dots are individual attempts and stack where tied; the gold marker is the median; the cyan line is the min–max range. Pass-rate axis zoomed to 70.0–95.0%.</desc>
 <line x1="16" y1="1" x2="704" y2="1" stroke="#30363D" stroke-width="1"/>
 <text x="16" y="30" fill="#E6EDF3" font-size="16" font-weight="650">Budgeted pass rate across 5 attempts</text>
 <circle cx="174" cy="56" r="3.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"/>
@@ -11,60 +11,84 @@
 <line x1="441" y1="45" x2="441" y2="64" stroke="#F4AC41" stroke-width="2"/>
 <polygon points="441,40 446,45 441,50 436,45" fill="#F4AC41"/>
 <text x="452" y="60" fill="#8B949E" font-size="10.5">median</text>
-<line x1="230.00" y1="82" x2="230.00" y2="392" stroke="#30363D" stroke-width="1"/>
-<text x="230.00" y="425" text-anchor="middle" fill="#8B949E" font-size="10">75.0%</text>
-<line x1="347.50" y1="82" x2="347.50" y2="392" stroke="#30363D" stroke-width="1"/>
-<text x="347.50" y="425" text-anchor="middle" fill="#8B949E" font-size="10">80.0%</text>
-<line x1="465.00" y1="82" x2="465.00" y2="392" stroke="#30363D" stroke-width="1"/>
-<text x="465.00" y="425" text-anchor="middle" fill="#8B949E" font-size="10">85.0%</text>
-<line x1="582.50" y1="82" x2="582.50" y2="392" stroke="#30363D" stroke-width="1"/>
-<text x="582.50" y="425" text-anchor="middle" fill="#8B949E" font-size="10">90.0%</text>
-<line x1="700.00" y1="82" x2="700.00" y2="392" stroke="#30363D" stroke-width="1"/>
-<text x="700.00" y="425" text-anchor="middle" fill="#8B949E" font-size="10">95.0%</text>
-<line x1="230" y1="392" x2="700" y2="392" stroke="#30363D" stroke-width="1"/>
+<line x1="230.00" y1="82" x2="230.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="230.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">70.0%</text>
+<line x1="324.00" y1="82" x2="324.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="324.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">75.0%</text>
+<line x1="418.00" y1="82" x2="418.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="418.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">80.0%</text>
+<line x1="512.00" y1="82" x2="512.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="512.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">85.0%</text>
+<line x1="606.00" y1="82" x2="606.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="606.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">90.0%</text>
+<line x1="700.00" y1="82" x2="700.00" y2="542" stroke="#30363D" stroke-width="1"/>
+<text x="700.00" y="575" text-anchor="middle" fill="#8B949E" font-size="10">95.0%</text>
+<line x1="230" y1="542" x2="700" y2="542" stroke="#30363D" stroke-width="1"/>
 <text x="212" y="124" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">OpenAI GPT 5.6 Luna</text>
 <text x="212" y="143" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">92.5%</text>
-<line x1="406.25" y1="128" x2="641.25" y2="128" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-<line x1="641.25" y1="101" x2="641.25" y2="155" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-<circle cx="406.25" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 82.5%</title></circle>
-<circle cx="582.50" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 90.0%</title></circle>
-<circle cx="641.25" cy="121.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 92.5%</title></circle>
-<circle cx="641.25" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 92.5%</title></circle>
-<circle cx="641.25" cy="135.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 92.5%</title></circle>
-<polygon points="641.25,96 646.25,101 641.25,106 636.25,101" fill="#F4AC41"/>
+<line x1="465.00" y1="128" x2="653.00" y2="128" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="653.00" y1="101" x2="653.00" y2="155" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="465.00" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 82.5%</title></circle>
+<circle cx="606.00" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 90.0%</title></circle>
+<circle cx="653.00" cy="121.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 92.5%</title></circle>
+<circle cx="653.00" cy="128.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 92.5%</title></circle>
+<circle cx="653.00" cy="135.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 92.5%</title></circle>
+<polygon points="653.00,96 658.00,101 653.00,106 648.00,101" fill="#F4AC41"/>
 <line x1="16" y1="165.50" x2="704" y2="165.50" stroke="#30363D" stroke-width=".75" opacity=".45"/>
-<text x="212" y="199" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">OpenAI GPT 5.6 Sol</text>
+<text x="212" y="199" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">Meta Muse Spark 1.1</text>
 <text x="212" y="218" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">87.5%</text>
-<line x1="523.75" y1="203" x2="641.25" y2="203" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-<line x1="523.75" y1="176" x2="523.75" y2="230" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-<circle cx="523.75" cy="196.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 87.5%</title></circle>
-<circle cx="523.75" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 87.5%</title></circle>
-<circle cx="523.75" cy="210.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 87.5%</title></circle>
-<circle cx="582.50" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 90.0%</title></circle>
-<circle cx="641.25" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 92.5%</title></circle>
-<polygon points="523.75,171 528.75,176 523.75,181 518.75,176" fill="#F4AC41"/>
+<line x1="465.00" y1="203" x2="606.00" y2="203" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="559.00" y1="176" x2="559.00" y2="230" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="465.00" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 82.5%</title></circle>
+<circle cx="512.00" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 85.0%</title></circle>
+<circle cx="559.00" cy="199.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 87.5%</title></circle>
+<circle cx="559.00" cy="206.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 87.5%</title></circle>
+<circle cx="606.00" cy="203.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 90.0%</title></circle>
+<polygon points="559.00,171 564.00,176 559.00,181 554.00,176" fill="#F4AC41"/>
 <line x1="16" y1="240.50" x2="704" y2="240.50" stroke="#30363D" stroke-width=".75" opacity=".45"/>
-<text x="212" y="274" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">OpenAI GPT 5.6 Terra</text>
-<text x="212" y="293" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">85.0%</text>
-<line x1="465.00" y1="278" x2="582.50" y2="278" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-<line x1="465.00" y1="251" x2="465.00" y2="305" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-<circle cx="465.00" cy="271.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 85.0%</title></circle>
-<circle cx="465.00" cy="278.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 85.0%</title></circle>
-<circle cx="465.00" cy="285.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 85.0%</title></circle>
-<circle cx="582.50" cy="274.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 90.0%</title></circle>
-<circle cx="582.50" cy="281.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 90.0%</title></circle>
-<polygon points="465.00,246 470.00,251 465.00,256 460.00,251" fill="#F4AC41"/>
+<text x="212" y="274" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">OpenAI GPT 5.6 Sol</text>
+<text x="212" y="293" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">87.5%</text>
+<line x1="559.00" y1="278" x2="653.00" y2="278" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="559.00" y1="251" x2="559.00" y2="305" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="559.00" cy="271.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 87.5%</title></circle>
+<circle cx="559.00" cy="278.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 87.5%</title></circle>
+<circle cx="559.00" cy="285.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 87.5%</title></circle>
+<circle cx="606.00" cy="278.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 90.0%</title></circle>
+<circle cx="653.00" cy="278.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 92.5%</title></circle>
+<polygon points="559.00,246 564.00,251 559.00,256 554.00,251" fill="#F4AC41"/>
 <line x1="16" y1="315.50" x2="704" y2="315.50" stroke="#30363D" stroke-width=".75" opacity=".45"/>
-<text x="212" y="349" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">Cognition SWE 1.7</text>
-<text x="212" y="368" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">80.0%</text>
-<line x1="288.75" y1="353" x2="347.50" y2="353" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-<line x1="347.50" y1="326" x2="347.50" y2="380" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-<circle cx="288.75" cy="349.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 77.5%</title></circle>
-<circle cx="288.75" cy="356.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 77.5%</title></circle>
-<circle cx="347.50" cy="346.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 80.0%</title></circle>
-<circle cx="347.50" cy="353.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 80.0%</title></circle>
-<circle cx="347.50" cy="360.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 80.0%</title></circle>
-<polygon points="347.50,321 352.50,326 347.50,331 342.50,326" fill="#F4AC41"/>
-<text x="16" y="446" fill="#8B949E" font-size="9">Each dot is one of 5 attempts; tied attempts stack vertically. Pass-rate axis zoomed to 75.0–95.0%. No mean or aggregate count.</text>
-<line x1="16" y1="460" x2="704" y2="460" stroke="#30363D" stroke-width="1"/>
+<text x="212" y="349" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">OpenAI GPT 5.6 Terra</text>
+<text x="212" y="368" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">85.0%</text>
+<line x1="512.00" y1="353" x2="606.00" y2="353" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="512.00" y1="326" x2="512.00" y2="380" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="512.00" cy="346.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 85.0%</title></circle>
+<circle cx="512.00" cy="353.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 85.0%</title></circle>
+<circle cx="512.00" cy="360.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 85.0%</title></circle>
+<circle cx="606.00" cy="349.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 90.0%</title></circle>
+<circle cx="606.00" cy="356.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 90.0%</title></circle>
+<polygon points="512.00,321 517.00,326 512.00,331 507.00,326" fill="#F4AC41"/>
+<line x1="16" y1="390.50" x2="704" y2="390.50" stroke="#30363D" stroke-width=".75" opacity=".45"/>
+<text x="212" y="424" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">Cognition SWE 1.7</text>
+<text x="212" y="443" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">80.0%</text>
+<line x1="371.00" y1="428" x2="418.00" y2="428" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="418.00" y1="401" x2="418.00" y2="455" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="371.00" cy="424.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 77.5%</title></circle>
+<circle cx="371.00" cy="431.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 77.5%</title></circle>
+<circle cx="418.00" cy="421.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 80.0%</title></circle>
+<circle cx="418.00" cy="428.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 80.0%</title></circle>
+<circle cx="418.00" cy="435.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 80.0%</title></circle>
+<polygon points="418.00,396 423.00,401 418.00,406 413.00,401" fill="#F4AC41"/>
+<line x1="16" y1="465.50" x2="704" y2="465.50" stroke="#30363D" stroke-width=".75" opacity=".45"/>
+<text x="212" y="499" text-anchor="end" fill="#E6EDF3" font-size="12.5" font-weight="600">Google Gemini 3.5 Flash</text>
+<text x="212" y="518" text-anchor="end" fill="#F4AC41" font-size="15" font-weight="700">75.0%</text>
+<line x1="230.00" y1="503" x2="465.00" y2="503" stroke="#35CAFF" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+<line x1="324.00" y1="476" x2="324.00" y2="530" stroke="#F4AC41" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+<circle cx="230.00" cy="503.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 2: 70.0%</title></circle>
+<circle cx="277.00" cy="503.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 1: 72.5%</title></circle>
+<circle cx="324.00" cy="499.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 3: 75.0%</title></circle>
+<circle cx="324.00" cy="506.50" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 5: 75.0%</title></circle>
+<circle cx="465.00" cy="503.00" r="4.5" fill="#35CAFF" stroke="#0D1117" stroke-width=".75"><title>Attempt 4: 82.5%</title></circle>
+<polygon points="324.00,471 329.00,476 324.00,481 319.00,476" fill="#F4AC41"/>
+<text x="16" y="596" fill="#8B949E" font-size="9">Each dot is one of 5 attempts; tied attempts stack vertically. Pass-rate axis zoomed to 70.0–95.0%. No mean or aggregate count.</text>
+<line x1="16" y1="610" x2="704" y2="610" stroke="#30363D" stroke-width="1"/>
 </svg>

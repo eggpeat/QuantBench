@@ -531,13 +531,13 @@ harness = "OMP"
         rows = runner.get_agent_candidates(thinking_resolver=mock_thinking_resolver, slate="text-compatible")
 
         expected_count = len(runner.QUANT_BENCH_AGENT_CANDIDATES)
-        self.assertEqual(expected_count, 4)
+        self.assertEqual(expected_count, 6)
         self.assertEqual(len(mock_resolver_called), expected_count)
 
         names = [row["name"] for row in rows]
         self.assertEqual(
             set(names),
-            {"gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin"},
+            {"gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin", "gemini-3-5-flash-antigravity", "muse-spark-1-1"},
         )
 
         # Ensure rows include OMP harness, backend, and thinking fields
@@ -602,7 +602,7 @@ harness = "OMP"
         self.assertEqual(runner.QUANT_BENCH_TEXT_ONLY_HOLDOUTS, ())
         self.assertEqual(
             {candidate[0] for candidate in runner.QUANT_BENCH_AGENT_CANDIDATES},
-            {"gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin"},
+            {"gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin", "gemini-3-5-flash-antigravity", "muse-spark-1-1"},
         )
 
     def test_timeout_scale_default(self) -> None:
