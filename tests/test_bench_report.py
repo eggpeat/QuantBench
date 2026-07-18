@@ -51,10 +51,15 @@ class BenchReportTest(unittest.TestCase):
     def manifest_contract(self):
         with bench_report.DEFAULT_MANIFEST_PATH.open("rb") as handle:
             return tomllib.load(handle)
-    def tiny_manifest(self, root, lock_id="sha256:locked", source_hash=None):
+    def tiny_manifest(self, root, lock_id="sha256:locked", source_hash=None, accepted_hashes=None):
         manifest = Path(root) / "manifest.toml"
         source_declaration = (
             f"results_source_manifest_sha256 = \"{source_hash}\"\n" if source_hash is not None else ""
+        )
+        accepted_declaration = (
+            f"accepted_run_manifest_sha256 = {json.dumps(accepted_hashes)}\n"
+            if accepted_hashes is not None
+            else ""
         )
         manifest.write_text(
             "[task_sets]\nofficial = [\"t1\"]\n"
@@ -62,7 +67,7 @@ class BenchReportTest(unittest.TestCase):
             "[agent_sets]\nofficial = [\"a\"]\n"
             "[[agents]]\nname = \"a\"\nbackend_provider = \"p\"\n"
             "model = \"m\"\nthinking = \"high\"\nharness = \"OMP\"\n"
-            f"[benchmark]\nattempts = 1\n{source_declaration}",
+            f"[benchmark]\nattempts = 1\n{source_declaration}{accepted_declaration}",
             encoding="utf-8",
         )
         (manifest.parent / "image-lock.json").write_text(
@@ -618,6 +623,45 @@ class BenchReportTest(unittest.TestCase):
                         report["input"]["runs"][run_id]["execution"]["status_manifest_sha256"],
                         status_hash,
                     )
+    def test_additional_accepted_manifest_hashes_support_exact_recovery_sources(self):
+        source_hash = "a" * 64
+        recovery_hashes = ["b" * 64, "c" * 64]
+        with tempfile.TemporaryDirectory() as td:
+            manifest, publication_hash = self.tiny_manifest(
+                td, source_hash=source_hash, accepted_hashes=recovery_hashes
+            )
+            for run_id, status_hash in (
+                ("r-source", source_hash),
+                ("r-recovery-1", recovery_hashes[0]),
+                ("r-recovery-2", recovery_hashes[1]),
+                ("r-publication", publication_hash),
+            ):
+                with self.subTest(status_hash=status_hash):
+                    self.make_run(
+                        td,
+                        run_id,
+                        [self.strict_row(result_id=run_id)],
+                        status_fields=self.strict_status(status_hash),
+                    )
+                    report = bench_report.build_report(
+                        [run_id], td, expected_tasks=1, expected_attempts=1, manifest_path=manifest
+                    )
+                    self.assertTrue(report["comparable"])
+                    self.assertEqual(
+                        report["manifest"]["accepted_run_manifest_sha256"],
+                        [publication_hash, source_hash, *recovery_hashes],
+                    )
+
+    def test_malformed_additional_manifest_hash_declaration_is_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            manifest, _ = self.tiny_manifest(td, accepted_hashes=["A" * 64])
+            with self.assertRaisesRegex(
+                bench_report.ReportError, "accepted_run_manifest_sha256"
+            ):
+                bench_report.build_report(
+                    ["r"], td, expected_tasks=1, expected_attempts=1, manifest_path=manifest
+                )
+
     def test_malformed_results_source_manifest_hash_declaration_is_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             manifest, _ = self.tiny_manifest(td, source_hash="A" * 64)

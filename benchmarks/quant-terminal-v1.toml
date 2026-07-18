@@ -6,6 +6,11 @@ attempts = 5
 max_retries = 3
 timeout_scale = 1.0
 results_source_manifest_sha256 = "09fcd2fd2ac0e1370981d3efafc7d89e6280012735b65a5501422db6349d730a"
+accepted_run_manifest_sha256 = [
+  "edc8a0c61d3a5126d60409895875177d88154fada4e08d56420d6b084e1b9a7c",
+  "74ad069472bf31abfdeb11bfe3e10fcfb35b12857687bc7ba497280ddf215869",
+  "18531fd27e9f39dfcd0e8fda721aa315a8bd8837648580cc5b71d9f49af60f41",
+]
 
 [task_sets]
 official = [
@@ -66,7 +71,9 @@ completed_sol = ["gpt-5-6-sol"]
 completed_luna = ["gpt-5-6-luna"]
 completed_terra = ["gpt-5-6-terra"]
 completed_devin = ["swe-1-7-devin"]
-official = ["gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin"]
+completed_gemini_flash = ["gemini-3-5-flash-antigravity"]
+completed_meta_muse = ["muse-spark-1-1"]
+official = ["gpt-5-6-sol", "gpt-5-6-luna", "gpt-5-6-terra", "swe-1-7-devin", "gemini-3-5-flash-antigravity", "muse-spark-1-1"]
 
 [[tasks]]
 id = "sports_hold_vig_removal"
@@ -215,6 +222,22 @@ name = "swe-1-7-devin"
 model = "devin/swe-1-7"
 backend_provider = "devin"
 thinking = "none"
+harness = "OMP"
+metadata_confirmed = true
+
+[[agents]]
+name = "gemini-3-5-flash-antigravity"
+model = "google-antigravity/gemini-3.5-flash"
+backend_provider = "google-antigravity"
+thinking = "high"
+harness = "OMP"
+metadata_confirmed = true
+
+[[agents]]
+name = "muse-spark-1-1"
+model = "meta/muse-spark-1.1"
+backend_provider = "meta"
+thinking = "high"
 harness = "OMP"
 metadata_confirmed = true
 

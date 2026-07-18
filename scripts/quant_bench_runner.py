@@ -99,6 +99,8 @@ QUANT_BENCH_AGENT_CANDIDATES: tuple[tuple[str, str, str], ...] = (
     ("gpt-5-6-luna", "openai-codex/gpt-5.6-luna", "openai-codex"),
     ("gpt-5-6-terra", "openai-codex/gpt-5.6-terra", "openai-codex"),
     ("swe-1-7-devin", "devin/swe-1-7", "devin"),
+    ("gemini-3-5-flash-antigravity", "google-antigravity/gemini-3.5-flash", "google-antigravity"),
+    ("muse-spark-1-1", "meta/muse-spark-1.1", "meta"),
 )
 
 # Reserved for future completed text-only candidates. Unfinished benchmark

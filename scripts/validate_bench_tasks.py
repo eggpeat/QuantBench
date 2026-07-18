@@ -49,12 +49,16 @@ AGENT_ROWS = {
     "gpt-5-6-luna": ("openai-codex/gpt-5.6-luna", "openai-codex", "xhigh"),
     "gpt-5-6-terra": ("openai-codex/gpt-5.6-terra", "openai-codex", "xhigh"),
     "swe-1-7-devin": ("devin/swe-1-7", "devin", "none"),
+    "gemini-3-5-flash-antigravity": ("google-antigravity/gemini-3.5-flash", "google-antigravity", "high"),
+    "muse-spark-1-1": ("meta/muse-spark-1.1", "meta", "high"),
 }
 WAVES = {
     "completed_sol": ["gpt-5-6-sol"],
     "completed_luna": ["gpt-5-6-luna"],
     "completed_terra": ["gpt-5-6-terra"],
     "completed_devin": ["swe-1-7-devin"],
+    "completed_gemini_flash": ["gemini-3-5-flash-antigravity"],
+    "completed_meta_muse": ["muse-spark-1-1"],
     "official": list(AGENT_ROWS),
 }
 MUTANTS = {
@@ -152,6 +156,11 @@ def _validate_manifest(manifest_path: Path, manifest: dict[str, Any], errors: li
         "max_retries": 3,
         "timeout_scale": 1.0,
         "results_source_manifest_sha256": "09fcd2fd2ac0e1370981d3efafc7d89e6280012735b65a5501422db6349d730a",
+        "accepted_run_manifest_sha256": [
+            "edc8a0c61d3a5126d60409895875177d88154fada4e08d56420d6b084e1b9a7c",
+            "74ad069472bf31abfdeb11bfe3e10fcfb35b12857687bc7ba497280ddf215869",
+            "18531fd27e9f39dfcd0e8fda721aa315a8bd8837648580cc5b71d9f49af60f41",
+        ],
     }
     if benchmark != expected_benchmark:
         errors.append(f"benchmark contract mismatch: {benchmark!r}")
@@ -187,7 +196,7 @@ def _validate_manifest(manifest_path: Path, manifest: dict[str, Any], errors: li
     names = [row.get("name") for row in agents if isinstance(row, dict)]
     _require_unique([value for value in names if isinstance(value, str)], "agent name", errors)
     if len(agents) != len(AGENT_ROWS):
-        errors.append("manifest must declare exactly four completed agents")
+        errors.append(f"manifest must declare exactly {len(AGENT_ROWS)} completed agents")
     for row in agents:
         if not isinstance(row, dict):
             errors.append("agent row must be a table")

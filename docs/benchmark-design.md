@@ -158,8 +158,8 @@ attempt distribution because it is not a model outcome. A configuration is
 comparable only when all 200 expected cells are terminal, no cell is
 infrastructure-blocked, every row records Docker solve and verification, every
 task image matches the checked-in lock, and each source run matches one of the
-manifest's exact accepted digests: the current publication digest or its
-declared preserved-results digest.
+manifest's exact accepted digests: the current publication digest, the
+preserved-results digest, or an explicitly enumerated recovery-source digest.
 
 The report and README show all five raw budgeted attempt rates, their median,
 and their observed minimum–maximum span. The visualization uses discrete
@@ -195,8 +195,8 @@ A public comparison must:
 
 1. pass explicit run IDs to `scripts/bench_report.py`;
 2. include only configurations with a complete 40 × 5 terminal matrix;
-3. bind every source run to the current publication digest or the exact
-   preserved-results digest declared by that publication manifest;
+3. bind every source run to the current publication digest or an exact
+   preserved-results/recovery digest declared by that publication manifest;
 4. match row and status execution modes and image IDs to the checked-in lock;
 5. retain exact configuration and metric definitions;
 6. publish Markdown, machine-readable JSON, and theme-aware distribution SVGs;
@@ -205,10 +205,10 @@ A public comparison must:
    of version control.
 
 The public manifest intentionally lists only completed configurations and
-records the common historical digest used by their preserved run artifacts.
-The published report exposes the publication digest, preserved-results digest,
-and exact accepted digest set so the distinction is machine-readable. An
-unrelated digest still fails closed.
+records every historical or recovery-source digest represented by their
+preserved run artifacts. The published report exposes the publication digest,
+preserved-results digest, and exact accepted digest set so the distinction is
+machine-readable. An unrelated digest still fails closed.
 
 ## Validation workflow
 
