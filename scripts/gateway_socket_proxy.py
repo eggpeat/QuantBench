@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 import signal
+import select
 import socket
 import subprocess
 import sys
@@ -135,6 +136,20 @@ def _model_listing_response(allowed_model_selector: str) -> bytes:
         },
     )
 
+def _connection_close_request(request: bytes) -> bytes:
+    """Make the single authorized HTTP exchange self-terminating upstream."""
+    header_end = request.index(b"\r\n\r\n")
+    headers = request[:header_end].split(b"\r\n")
+    connection_headers = [
+        header for header in headers[1:] if header.lower().startswith(b"connection:")
+    ]
+    if len(connection_headers) == 1 and connection_headers[0].split(b":", 1)[1].strip().lower() == b"close":
+        return request
+    filtered = [
+        header for header in headers[1:] if not header.lower().startswith(b"connection:")
+    ]
+    return b"\r\n".join([headers[0], *filtered, b"Connection: close"]) + b"\r\n\r\n" + request[header_end + 4 :]
+
 
 def _serve_connection(
     incoming: socket.socket,
@@ -146,12 +161,7 @@ def _serve_connection(
         if decision == "listing":
             incoming.sendall(_model_listing_response(allowed_model_selector))
             return
-        outgoing.sendall(request)
-        outgoing.shutdown(socket.SHUT_WR)
-        try:
-            incoming.shutdown(socket.SHUT_RD)
-        except OSError:
-            pass
+        outgoing.sendall(_connection_close_request(request))
         _relay_response(outgoing, incoming)
     except PermissionError as exc:
         try:
@@ -172,9 +182,25 @@ def _serve_connection(
 
 
 def _relay_response(source: socket.socket, destination: socket.socket) -> None:
-    """Stream only the authorized request's response back to the caller."""
+    """Relay a response while propagating a downstream disconnect upstream."""
     while True:
-        chunk = source.recv(65536)
+        readable, _, _ = select.select([source, destination], [], [])
+        if destination in readable:
+            # Any bytes after the one authorized Content-Length request are
+            # outside this single-exchange bridge. Drain them so EOF remains
+            # observable instead of disabling cancellation monitoring.
+            try:
+                downstream = destination.recv(65536)
+            except OSError:
+                return
+            if not downstream:
+                return
+        if source not in readable:
+            continue
+        try:
+            chunk = source.recv(65536)
+        except OSError:
+            return
         if not chunk:
             return
         destination.sendall(chunk)

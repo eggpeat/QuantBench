@@ -1326,34 +1326,42 @@ harness = "OMP"
                 self.assertEqual(result.status, "PASS")
                 self.assertEqual(result.attempt_count, 2)
 
-                # Verify that runtime_metrics aggregates both attempts
+                # Semantic metrics describe only the accepted terminal attempt.
                 self.assertIsNotNone(result.runtime_metrics)
                 metrics = result.runtime_metrics
+                self.assertEqual(metrics["tokens"]["input"], 240)
+                self.assertEqual(metrics["tokens"]["output"], 100)
+                self.assertEqual(metrics["tokens"]["total"], 340)
+                self.assertEqual(metrics["latency"]["ttft_ms"], 300)
+                self.assertEqual(metrics["latency"]["provider_ms"], 1000)
+                self.assertEqual(metrics["cache"]["input_cached"], 40)
+                self.assertEqual(metrics["cache"]["input_total"], 240)
 
-                # input: (100 + 20) + (200 + 40) = 360
-                self.assertEqual(metrics["tokens"]["input"], 360)
-                # output: 50 + 100 = 150
-                self.assertEqual(metrics["tokens"]["output"], 150)
-                # total: 360 + 150 = 510
-                self.assertEqual(metrics["tokens"]["total"], 510)
-
-                # latency:
-                # ttft: average of 200 and 300 = 250
-                self.assertEqual(metrics["latency"]["ttft_ms"], 250)
-                # provider_ms: 500 + 1000 = 1500
-                self.assertEqual(metrics["latency"]["provider_ms"], 1500)
-
-                # cache:
-                # input_cached: 20 + 40 = 60
-                self.assertEqual(metrics["cache"]["input_cached"], 60)
-                # input_total: 360
-                self.assertEqual(metrics["cache"]["input_total"], 360)
+                # Attempted usage preserves observed retry cost but never
+                # presents that work as useful model throughput.
+                attempted = result.attempted_runtime_metrics
+                self.assertIsNotNone(attempted)
+                self.assertEqual(attempted["tokens"]["input"], 360)
+                self.assertEqual(attempted["tokens"]["output"], 150)
+                self.assertEqual(attempted["tokens"]["total"], 510)
+                self.assertEqual(attempted["latency"]["provider_ms"], 1500)
+                self.assertNotIn("throughput", attempted)
+                self.assertEqual(
+                    attempted["attempts"],
+                    {
+                        "runner_attempts": 2,
+                        "runner_retries": 1,
+                        "observed_failed_model_turns": 1,
+                        "failed_runner_attempts_without_usage": 0,
+                    },
+                )
 
         finally:
             runner.run_cmd = orig_run_cmd
             runner.run_omp_cmd = orig_run_omp_cmd
 
     def test_summarize_runtime_metrics(self) -> None:
+        from dataclasses import replace
         # Create some mock AttemptResults with live metrics
         metrics_1 = {
             "source": "provider_usage",
@@ -1361,7 +1369,8 @@ harness = "OMP"
             "tokens": {"input": 100, "output": 50, "reasoning_output": 0, "total": 150, "visible_output_est": 50},
             "cache": {"supported": True, "prompt_cache_hit": True, "input_cached": 20, "input_cache_write": 0, "input_uncached": 80, "input_total": 100, "cache_read_ratio": 0.2, "response_cache_hit": False},
             "throughput": {"output_tok_s": 50.0, "wall_output_tok_s": 50.0, "total_tok_s": 150.0},
-            "provider_route": "test-provider/model-a"
+            "provider_route": "test-provider/model-a",
+            "notes": {"accounting": "semantic_model_turns"},
         }
 
         metrics_2 = {
@@ -1370,7 +1379,8 @@ harness = "OMP"
             "tokens": {"input": 200, "output": 100, "reasoning_output": 0, "total": 300, "visible_output_est": 100},
             "cache": {"supported": True, "prompt_cache_hit": True, "input_cached": 40, "input_cache_write": 0, "input_uncached": 160, "input_total": 200, "cache_read_ratio": 0.2, "response_cache_hit": False},
             "throughput": {"output_tok_s": 50.0, "wall_output_tok_s": 50.0, "total_tok_s": 150.0},
-            "provider_route": "test-provider/model-a"
+            "provider_route": "test-provider/model-a",
+            "notes": {"accounting": "semantic_model_turns"},
         }
 
         # Mock results
@@ -1440,6 +1450,18 @@ harness = "OMP"
                 runtime_metrics=metrics_2,
             )
         ]
+        legacy_metrics = {
+            **metrics_1,
+            "tokens": {**metrics_1["tokens"], "input": 999, "total": 999},
+        }
+        legacy_metrics.pop("notes")
+        results.append(
+            replace(
+                results[0],
+                result_id="legacy",
+                runtime_metrics=legacy_metrics,
+            )
+        )
 
         summary = runner.summarize(results)
 
@@ -2597,6 +2619,30 @@ harness = "OMP"
                     "passed": True,
                     "agent_elapsed_sec": 2.0,
                     "verifier_elapsed_sec": 1.0,
+                    "runtime_metrics": {
+                        "tokens": {"total": 100},
+                        "throughput": {"total_tok_s": 10, "wall_output_tok_s": 5},
+                        "notes": {"accounting": "semantic_model_turns"},
+                    },
+                    "attempted_runtime_metrics": {"tokens": {"total": 120}},
+                },
+                {
+                    "result_id": "infra",
+                    "agent": "sol",
+                    "task_id": "task-b",
+                    "attempt_number": 1,
+                    "thinking": "max",
+                    "status": "INFRA_BLOCKED",
+                    "failure_code": "PROVIDER_TRANSPORT",
+                    "passed": False,
+                    "agent_elapsed_sec": 1.0,
+                    "verifier_elapsed_sec": 0.0,
+                    "runtime_metrics": {
+                        "tokens": {"total": 999},
+                        "throughput": {"total_tok_s": 999, "wall_output_tok_s": 999},
+                        "notes": {"accounting": "semantic_model_turns"},
+                    },
+                    "attempted_runtime_metrics": {"tokens": {"total": 999}},
                 },
             ]
             (fixed / "results.jsonl").write_text("\n".join(json.dumps(row) for row in rows) + "\n")
@@ -2604,7 +2650,10 @@ harness = "OMP"
             shakedown = artifact_root / "quant-v1-pilot-sol-rerun-1"
             shakedown.mkdir()
             (shakedown / "results.jsonl").write_text(json.dumps({**rows[-1], "result_id": "wrong"}) + "\n")
-            expected = {("quant-v1-pilot-sol", "sol", "task-a", "max", 1)}
+            expected = {
+                ("quant-v1-pilot-sol", "sol", "task-a", "max", 1),
+                ("quant-v1-pilot-sol", "sol", "task-b", "max", 1),
+            }
             with unittest.mock.patch.object(runner, "ARTIFACT_ROOT", artifact_root), unittest.mock.patch.object(
                 runner, "PILOT_RUN_IDS", {"quant-v1-pilot-sol": "completed_sol"}
             ), unittest.mock.patch.object(runner, "expected_pilot_matrix", return_value=expected):
@@ -2616,8 +2665,14 @@ harness = "OMP"
                     "\n".join(json.dumps(row) for row in wrong_rows) + "\n"
                 )
                 wrong_payload = json.loads(runner.write_combined_pilot_summary().read_text())
-            self.assertEqual(payload["latest_row_count"], 1)
-            self.assertEqual(payload["records"][0]["status"], "PASS")
+            self.assertEqual(payload["latest_row_count"], 2)
+            semantic_group = next(group for group in payload["groups"] if group["task"] == "task-a")
+            infra_group = next(group for group in payload["groups"] if group["task"] == "task-b")
+            self.assertEqual(semantic_group["total_tokens"], 100)
+            self.assertEqual(semantic_group["observed_attempted_tokens"], 120)
+            self.assertEqual(infra_group["total_tokens"], 0)
+            self.assertEqual(infra_group["observed_attempted_tokens"], 999)
+            self.assertEqual(infra_group["mean_provider_throughput"], None)
             self.assertEqual(payload["records"][0]["wall_time_sec"], 3.0)
             self.assertNotIn("quant-v1-pilot-sol-rerun-1", payload["fixed_run_ids"])
             self.assertFalse(wrong_payload["complete"])

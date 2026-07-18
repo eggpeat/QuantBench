@@ -255,6 +255,84 @@ class SandboxGatewayTests(unittest.TestCase):
         self.assertEqual(run["usage"]["cache_write_input_tokens"], 5)
         self.assertEqual(run["usage"]["ttft_ms"], 150)
         self.assertEqual(run["usage"]["generation_ms"], 700)
+        self.assertEqual(run["attempted_usage"], run["usage"])
+        self.assertEqual(run["omp_failed_assistant_message_count"], 0)
+
+    def test_omp_json_capture_separates_retried_error_usage(self) -> None:
+        error_turn = {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "content": [],
+                "usage": {"input": 100, "output": 25, "totalTokens": 125},
+                "duration": 500,
+                "ttft": 100,
+                "stopReason": "error",
+                "errorMessage": "transient provider failure",
+            },
+        }
+        accepted_turn = {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "content": [{"type": "text", "text": "accepted"}],
+                "usage": {"input": 200, "output": 50, "totalTokens": 250},
+                "duration": 1000,
+                "ttft": 200,
+                "stopReason": "stop",
+            },
+        }
+        run = {
+            "returncode": 0,
+            "elapsed_sec": 1.5,
+            "stdout": json.dumps(error_turn) + "\n" + json.dumps(accepted_turn) + "\n",
+            "stderr": "",
+        }
+
+        metrics_capture.capture_omp_json_stdout(run)
+        semantic = metrics_capture.runtime_metrics_for_run(run)
+        attempted = metrics_capture.attempted_runtime_metrics_for_run(run)
+
+        self.assertEqual(semantic["tokens"]["total"], 250)
+        self.assertEqual(semantic["latency"]["provider_ms"], 1000)
+        self.assertEqual(attempted["tokens"]["total"], 375)
+        self.assertEqual(attempted["latency"]["provider_ms"], 1500)
+        self.assertNotIn("throughput", attempted)
+        self.assertEqual(run["omp_failed_assistant_message_count"], 1)
+
+    def test_omp_json_capture_marks_usage_less_failed_retry(self) -> None:
+        error_turn = {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "content": [],
+                "stopReason": "error",
+                "errorMessage": "connection lost before usage",
+            },
+        }
+        accepted_turn = {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "content": "accepted",
+                "usage": {"input": 40, "output": 10, "totalTokens": 50},
+                "stopReason": "stop",
+            },
+        }
+        run = {
+            "returncode": 0,
+            "elapsed_sec": 1,
+            "stdout": json.dumps(error_turn) + "\n" + json.dumps(accepted_turn) + "\n",
+            "stderr": "OMP_USAGE_JSON="
+            + json.dumps({"source": "proxy_gateway", "input_tokens": 999, "output_tokens": 999}),
+        }
+
+        metrics_capture.capture_omp_json_stdout(run)
+        metrics = metrics_capture.runtime_metrics_for_run(run)
+
+        self.assertEqual(run["omp_failed_assistant_message_count"], 1)
+        self.assertEqual(metrics["tokens"]["total"], 50)
+        self.assertEqual(metrics["tokens"]["output"], 10)
 
     def test_omp_json_capture_preserves_provider_error_status(self) -> None:
         error_turn = {
@@ -291,6 +369,9 @@ class SandboxGatewayTests(unittest.TestCase):
         self.assertEqual(run["returncode"], 1)
         self.assertEqual(run["stderr"], "extension warning\nprovider 429 rate_limit_exceeded")
         self.assertEqual(run["omp_error_message"], "provider 429 rate_limit_exceeded")
+        self.assertNotIn("usage", run)
+        self.assertEqual(run["attempted_usage"]["input_tokens"], 1)
+        self.assertEqual(run["omp_failed_assistant_message_count"], 1)
 
     def test_omp_json_capture_preserves_nonterminal_error_message(self) -> None:
         assistant = {
@@ -357,8 +438,9 @@ class SandboxGatewayTests(unittest.TestCase):
 
         self.assertEqual(run["returncode"], 1)
         self.assertEqual(run["stderr"], "auth failed for provider")
-        self.assertEqual(run["usage"]["input_tokens"], 2)
-        self.assertEqual(run["usage"]["generation_ms"], 80)
+        self.assertNotIn("usage", run)
+        self.assertEqual(run["attempted_usage"]["input_tokens"], 2)
+        self.assertEqual(run["attempted_usage"]["generation_ms"], 80)
 
     def test_omp_json_capture_prefers_terminal_agent_end_error(self) -> None:
         tool_turn = {
@@ -389,7 +471,7 @@ class SandboxGatewayTests(unittest.TestCase):
             },
             "duration": 20,
             "ttft": 0,
-            "stopReason": "error",
+            "stopReason": "failed",
             "errorMessage": "tool follow-up provider 429",
         }
         run = {
@@ -409,8 +491,9 @@ class SandboxGatewayTests(unittest.TestCase):
         self.assertEqual(run["returncode"], 1)
         self.assertEqual(run["stdout"], "")
         self.assertEqual(run["stderr"], "tool follow-up provider 429")
-        self.assertEqual(run["usage"]["input_tokens"], 4)
+        self.assertEqual(run["usage"]["input_tokens"], 3)
         self.assertEqual(run["usage"]["output_tokens"], 2)
+        self.assertEqual(run["attempted_usage"]["input_tokens"], 4)
 
     def test_omp_json_capture_synthesizes_empty_error_message(self) -> None:
         assistant = {
@@ -494,6 +577,32 @@ class SandboxGatewayTests(unittest.TestCase):
         self.assertEqual(run["usage"]["input_tokens"], 7)
         self.assertEqual(run["usage"]["output_tokens"], 3)
         self.assertEqual(run["usage"]["total_tokens"], 10)
+
+    def test_oversized_agent_end_preserves_multiple_failed_turns(self) -> None:
+        failed_turn = {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "content": [],
+                "stopReason": "error",
+                "errorMessage": "transient provider failure",
+            },
+        }
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "agent.jsonl"
+            with path.open("wb") as handle:
+                handle.write((json.dumps(failed_turn) + "\n").encode())
+                handle.write((json.dumps(failed_turn) + "\n").encode())
+                handle.write(
+                    b'{"type":"agent_end","messages":["'
+                    + b"x" * 1_100_000
+                    + b'"],"stopReason":"aborted"}\n'
+                )
+            run = {"returncode": 0, "stdout": "", "stderr": ""}
+            metrics_capture.capture_omp_json_file(run, path)
+
+        self.assertEqual(run["omp_stop_reason"], "aborted")
+        self.assertEqual(run["omp_failed_assistant_message_count"], 2)
 
     def test_runtime_metrics_normalize_provider_usage_and_cache_reads(self) -> None:
         metrics = metrics_capture.runtime_metrics_for_run(
@@ -983,6 +1092,7 @@ providers:
             )
 
         allowed = request_for("gpt-5.6-sol")
+        forwarded = gateway_socket_proxy._connection_close_request(allowed)
         pipelined_neighbor = request_for("gpt-5.6-luna")
         response = b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}"
         client, incoming = socket.socketpair()
@@ -990,11 +1100,8 @@ providers:
         observed = bytearray()
 
         def backend_once() -> None:
-            while True:
-                chunk = backend.recv(4096)
-                if not chunk:
-                    break
-                observed.extend(chunk)
+            while len(observed) < len(forwarded):
+                observed.extend(backend.recv(len(forwarded) - len(observed)))
             backend.sendall(response)
             backend.close()
 
@@ -1008,7 +1115,6 @@ providers:
         proxy_worker.start()
         try:
             client.sendall(allowed + pipelined_neighbor)
-            client.shutdown(socket.SHUT_WR)
             received = bytearray()
             while True:
                 chunk = client.recv(4096)
@@ -1020,10 +1126,45 @@ providers:
         proxy_worker.join(timeout=2)
         backend_worker.join(timeout=2)
 
-        self.assertEqual(allowed, bytes(observed))
+        self.assertEqual(forwarded, bytes(observed))
         self.assertEqual(response, bytes(received))
         self.assertFalse(proxy_worker.is_alive())
         self.assertFalse(backend_worker.is_alive())
+
+    def test_gateway_socket_proxy_closes_upstream_when_client_disconnects(self) -> None:
+        import socket
+        import threading
+
+        selector = "openai-codex/gpt-5.6-sol:max"
+        body = json.dumps({"model": "gpt-5.6-sol"}, separators=(",", ":")).encode("utf-8")
+        request = (
+            b"POST /v1/responses HTTP/1.1\r\n"
+            b"Host: gateway\r\n"
+            + f"Content-Length: {len(body)}\r\n".encode("ascii")
+            + b"\r\n"
+            + body
+        )
+        client, incoming = socket.socketpair()
+        outgoing, backend = socket.socketpair()
+        proxy_worker = threading.Thread(
+            target=gateway_socket_proxy._serve_connection,
+            args=(incoming, outgoing, selector),
+            daemon=True,
+        )
+        proxy_worker.start()
+        client.sendall(request)
+        backend.settimeout(1)
+        self.assertEqual(
+            gateway_socket_proxy._connection_close_request(request),
+            backend.recv(4096),
+        )
+
+        client.sendall(b"ignored-pipelined-byte")
+        client.close()
+        self.assertEqual(b"", backend.recv(1))
+        backend.close()
+        proxy_worker.join(timeout=2)
+        self.assertFalse(proxy_worker.is_alive())
 
     def test_auth_gateway_socket_readiness_fails_dead_proxy(self) -> None:
         class DeadProxy:
@@ -1078,8 +1219,9 @@ providers:
 
         def backend_once() -> None:
             conn, _ = backend.accept()
-            while conn.recv(4096):
-                pass
+            observed = bytearray()
+            while len(observed) < len(request):
+                observed.extend(conn.recv(len(request) - len(observed)))
             conn.sendall(response)
             conn.close()
             backend.close()
@@ -1112,7 +1254,6 @@ providers:
             self.assertIsNotNone(client)
             assert client is not None
             client.sendall(request)
-            client.shutdown(socket.SHUT_WR)
             received = bytearray()
             while True:
                 chunk = client.recv(4096)

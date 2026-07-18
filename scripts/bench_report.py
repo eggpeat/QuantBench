@@ -650,7 +650,12 @@ def _duration(row: Mapping[str, Any]) -> float | None:
 
 def _metrics(row: Mapping[str, Any]) -> Mapping[str, Any]:
     value = row.get("runtime_metrics")
-    return value if isinstance(value, Mapping) else {}
+    if not isinstance(value, Mapping):
+        return {}
+    notes = value.get("notes")
+    if not isinstance(notes, Mapping) or notes.get("accounting") != "semantic_model_turns":
+        return {}
+    return value
 
 
 def _metric_group(row: Mapping[str, Any], group: str) -> Mapping[str, Any]:

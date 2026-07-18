@@ -215,6 +215,7 @@ class AttemptResult:
     attempt_count: int
     max_retries: int
     runtime_metrics: dict[str, Any] | None = None
+    attempted_runtime_metrics: dict[str, Any] | None = None
     attempt_number: int = 1
     total_attempts: int = 1
     result_id: str = ""
@@ -1517,7 +1518,9 @@ def run_attempt(
     else:
         attempt_dir = output_root / path_slug(agent.name) / path_slug(task.task_id)
     max_retries = max(0, max_retries)
-    all_attempt_metrics = []
+    all_attempt_metrics: list[dict[str, Any]] = []
+    observed_failed_model_turns = 0
+    failed_attempts_without_usage = 0
     reason = "initial attempt"
     for attempt in range(1, max_retries + 2):
         if attempt > 1:
@@ -1527,6 +1530,8 @@ def run_attempt(
                 flush=True,
             )
         copy_public_task_view(task, attempt_dir)
+        attempted_runtime_metrics = None
+        failed_model_turns = 0
         if dry_run:
             agent_result = CommandResult(0, False, 0.0, "dry run: agent skipped", "", [])
             verifier_result = CommandResult(0, False, 0.0, "dry run: verifier skipped", "", [])
@@ -1590,8 +1595,15 @@ def run_attempt(
                         model=agent.model,
                         auth_gateway_url=auth_gateway_url,
                     )
+                    attempted_runtime_metrics = omp_metrics_capture.attempted_runtime_metrics_for_run(
+                        run_dict,
+                        model=agent.model,
+                        auth_gateway_url=auth_gateway_url,
+                    )
+                    failed_model_turns = int(run_dict.get("omp_failed_assistant_message_count", 0))
                 else:
                     runtime_metrics = None
+                    attempted_runtime_metrics = None
                 if (
                     not oracle
                     and task.agent_timeout_sec is not None
@@ -1609,8 +1621,14 @@ def run_attempt(
             )
             passed, reason = result_reason(agent_result, verifier_result)
             status = result_status(passed, reason)
-        if runtime_metrics is not None:
-            all_attempt_metrics.append(runtime_metrics)
+        if attempted_runtime_metrics is not None:
+            all_attempt_metrics.append(attempted_runtime_metrics)
+            observed_failed_model_turns += failed_model_turns
+            if (
+                status == "INFRA_BLOCKED"
+                and attempted_runtime_metrics.get("tokens", {}).get("total") is None
+            ):
+                failed_attempts_without_usage += 1
         failure_code = _failure_value(agent_result.failure_code)
         if failure_code == FailureCode.NONE.value:
             failure_code = _failure_value(verifier_result.failure_code)
@@ -1623,14 +1641,22 @@ def run_attempt(
             } or reason in {"agent nonzero exit", "verifier build timeout", "verifier build failed"}
         )
         if not is_retryable or attempt >= max_retries + 1:
+            final_metrics = runtime_metrics
             if len(all_attempt_metrics) > 1:
-                final_metrics = omp_metrics_capture.runtime_metrics_summary(
-                    [{"runtime_metrics": m} for m in all_attempt_metrics]
+                final_attempted_metrics = omp_metrics_capture.attempted_runtime_metrics_summary(
+                    [{"runtime_metrics": metrics} for metrics in all_attempt_metrics]
                 )
             elif len(all_attempt_metrics) == 1:
-                final_metrics = all_attempt_metrics[0]
+                final_attempted_metrics = all_attempt_metrics[0]
             else:
-                final_metrics = None
+                final_attempted_metrics = None
+            if final_attempted_metrics is not None:
+                final_attempted_metrics["attempts"] = {
+                    "runner_attempts": attempt,
+                    "runner_retries": attempt - 1,
+                    "observed_failed_model_turns": observed_failed_model_turns,
+                    "failed_runner_attempts_without_usage": failed_attempts_without_usage,
+                }
 
             return AttemptResult(
                 ts=now_iso(),
@@ -1668,6 +1694,7 @@ def run_attempt(
                 attempt_count=attempt,
                 max_retries=max_retries,
                 runtime_metrics=final_metrics,
+                attempted_runtime_metrics=final_attempted_metrics,
                 attempt_number=attempt_number,
                 total_attempts=total_attempts,
                 result_id=f"{run_id}:{agent.name}:{task.task_id}:{attempt_number}:{rerun}:{int(time.time_ns())}",
@@ -1680,8 +1707,7 @@ def summarize(results: list[AttemptResult]) -> dict[str, Any]:
     # Append-only histories can contain superseded reruns; score only the
     # latest unsuperseded result for each logical trial.
     superseded = {row.supersedes_result_id for row in results if row.supersedes_result_id}
-    visible = [row for row in results if row.result_id not in superseded]
-    results = visible
+    results = [row for row in results if row.result_id not in superseded]
     by_agent: dict[str, dict[str, Any]] = {}
     by_task: dict[str, dict[str, Any]] = {}
     by_status: dict[str, int] = {}
@@ -1721,21 +1747,50 @@ def summarize(results: list[AttemptResult]) -> dict[str, Any]:
                 item["rejected"] += 1
         by_status[row.status] = by_status.get(row.status, 0) + 1
 
-    # Add runtime speed/token/cache summaries inside by_agent and by_task when live metrics exist
     for agent_name, item in by_agent.items():
-        agent_results = [r for r in results if r.agent == agent_name]
-        agent_metrics = [r.runtime_metrics for r in agent_results if r.runtime_metrics is not None]
-        if agent_metrics:
+        semantic_metrics = [
+            row.runtime_metrics
+            for row in semantic_scored
+            if row.agent == agent_name
+            and row.runtime_metrics is not None
+            and isinstance(row.runtime_metrics.get("notes"), dict)
+            and row.runtime_metrics["notes"].get("accounting") == "semantic_model_turns"
+        ]
+        if semantic_metrics:
             item["runtime_metrics"] = omp_metrics_capture.runtime_metrics_summary(
-                [{"runtime_metrics": m} for m in agent_metrics]
+                [{"runtime_metrics": metrics} for metrics in semantic_metrics]
+            )
+        attempted_metrics = [
+            row.attempted_runtime_metrics
+            for row in scored
+            if row.agent == agent_name and row.attempted_runtime_metrics is not None
+        ]
+        if attempted_metrics:
+            item["attempted_runtime_metrics"] = omp_metrics_capture.attempted_runtime_metrics_summary(
+                [{"runtime_metrics": metrics} for metrics in attempted_metrics]
             )
 
     for task_id, item in by_task.items():
-        task_results = [r for r in results if r.task_id == task_id]
-        task_metrics = [r.runtime_metrics for r in task_results if r.runtime_metrics is not None]
-        if task_metrics:
+        semantic_metrics = [
+            row.runtime_metrics
+            for row in semantic_scored
+            if row.task_id == task_id
+            and row.runtime_metrics is not None
+            and isinstance(row.runtime_metrics.get("notes"), dict)
+            and row.runtime_metrics["notes"].get("accounting") == "semantic_model_turns"
+        ]
+        if semantic_metrics:
             item["runtime_metrics"] = omp_metrics_capture.runtime_metrics_summary(
-                [{"runtime_metrics": m} for m in task_metrics]
+                [{"runtime_metrics": metrics} for metrics in semantic_metrics]
+            )
+        attempted_metrics = [
+            row.attempted_runtime_metrics
+            for row in scored
+            if row.task_id == task_id and row.attempted_runtime_metrics is not None
+        ]
+        if attempted_metrics:
+            item["attempted_runtime_metrics"] = omp_metrics_capture.attempted_runtime_metrics_summary(
+                [{"runtime_metrics": metrics} for metrics in attempted_metrics]
             )
 
     passed_count = sum(1 for row in scored if row.passed)
@@ -1757,13 +1812,28 @@ def summarize(results: list[AttemptResult]) -> dict[str, Any]:
         "by_task": by_task,
     }
 
-    # Add runtime speed/token/cache summaries at top-level when live metrics exist
-    top_metrics = [r.runtime_metrics for r in results if r.runtime_metrics is not None]
+    # Useful throughput includes semantic terminal results only. Attempted
+    # usage is reported separately and never receives throughput fields.
+    top_metrics = [
+        row.runtime_metrics
+        for row in semantic_scored
+        if row.runtime_metrics is not None
+        and isinstance(row.runtime_metrics.get("notes"), dict)
+        and row.runtime_metrics["notes"].get("accounting") == "semantic_model_turns"
+    ]
     if top_metrics:
         summary_dict["runtime_metrics"] = omp_metrics_capture.runtime_metrics_summary(
-            [{"runtime_metrics": m} for m in top_metrics]
+            [{"runtime_metrics": metrics} for metrics in top_metrics]
         )
-
+    attempted_metrics = [
+        row.attempted_runtime_metrics
+        for row in scored
+        if row.attempted_runtime_metrics is not None
+    ]
+    if attempted_metrics:
+        summary_dict["attempted_runtime_metrics"] = omp_metrics_capture.attempted_runtime_metrics_summary(
+            [{"runtime_metrics": metrics} for metrics in attempted_metrics]
+        )
     return summary_dict
 
 
@@ -1971,7 +2041,24 @@ def write_combined_pilot_summary() -> Path:
             except (OSError, json.JSONDecodeError):
                 run_states[run_id] = {"complete": False, "run_state": "unreadable"}
         for row in latest_unsuperseded_rows(run_root / "results.jsonl"):
-            metrics = row.get("runtime_metrics") if isinstance(row.get("runtime_metrics"), dict) else {}
+            candidate_metrics = row.get("runtime_metrics")
+            metric_notes = (
+                candidate_metrics.get("notes")
+                if isinstance(candidate_metrics, dict)
+                else None
+            )
+            metrics = (
+                candidate_metrics
+                if row.get("status") in {"PASS", "REJECT"}
+                and isinstance(metric_notes, dict)
+                and metric_notes.get("accounting") == "semantic_model_turns"
+                else {}
+            )
+            attempted_metrics = (
+                row.get("attempted_runtime_metrics")
+                if isinstance(row.get("attempted_runtime_metrics"), dict)
+                else {}
+            )
             records.append({
                 "wave": wave,
                 "run_id": run_id,
@@ -1984,6 +2071,11 @@ def write_combined_pilot_summary() -> Path:
                 "passed": bool(row.get("passed")),
                 "wall_time_sec": float(row.get("agent_elapsed_sec", 0.0) or 0.0) + float(row.get("verifier_elapsed_sec", 0.0) or 0.0),
                 "tokens": (metrics.get("tokens") or {}).get("total") if isinstance(metrics.get("tokens"), dict) else None,
+                "observed_attempted_tokens": (
+                    (attempted_metrics.get("tokens") or {}).get("total")
+                    if isinstance(attempted_metrics.get("tokens"), dict)
+                    else None
+                ),
                 "cache_ratio": (metrics.get("cache") or {}).get("cache_read_ratio") if isinstance(metrics.get("cache"), dict) else None,
                 "provider_throughput": (metrics.get("throughput") or {}).get("total_tok_s") if isinstance(metrics.get("throughput"), dict) else None,
                 "wall_throughput": (metrics.get("throughput") or {}).get("wall_output_tok_s") if isinstance(metrics.get("throughput"), dict) else None,
@@ -2012,6 +2104,11 @@ def write_combined_pilot_summary() -> Path:
             "median_wall_time_sec": _percentile(wall_times, 0.5),
             "p90_wall_time_sec": _percentile(wall_times, 0.9),
             "total_tokens": sum(row["tokens"] for row in rows if isinstance(row["tokens"], (int, float))),
+            "observed_attempted_tokens": sum(
+                row["observed_attempted_tokens"]
+                for row in rows
+                if isinstance(row["observed_attempted_tokens"], (int, float))
+            ),
             "mean_cache_ratio": _mean([float(row["cache_ratio"]) for row in rows if isinstance(row["cache_ratio"], (int, float))]),
             "mean_provider_throughput": _mean([float(row["provider_throughput"]) for row in rows if isinstance(row["provider_throughput"], (int, float))]),
             "mean_wall_throughput": _mean([float(row["wall_throughput"]) for row in rows if isinstance(row["wall_throughput"], (int, float))]),
@@ -2051,11 +2148,24 @@ def run_container_smoke(task: TaskSpec, image_id: str) -> CommandResult:
 
     class EchoHandler(socketserver.BaseRequestHandler):
         def handle(self) -> None:
-            while True:
+            request = bytearray()
+            expected_size: int | None = None
+            while expected_size is None or len(request) < expected_size:
                 data = self.request.recv(65536)
                 if not data:
                     return
-                self.request.sendall(data)
+                request.extend(data)
+                header_end = request.find(b"\r\n\r\n")
+                if header_end < 0:
+                    continue
+                content_length = 0
+                for header in request[:header_end].split(b"\r\n")[1:]:
+                    name, separator, value = header.partition(b":")
+                    if separator and name.strip().lower() == b"content-length":
+                        content_length = int(value.strip())
+                        break
+                expected_size = header_end + 4 + content_length
+            self.request.sendall(request[:expected_size])
 
     docker = shutil.which("docker")
     if docker is None:
@@ -2087,7 +2197,6 @@ def run_container_smoke(task: TaskSpec, image_id: str) -> CommandResult:
             request = {request!r}
             sock = socket.create_connection(("127.0.0.1", 8765), 2)
             sock.sendall(request)
-            sock.shutdown(socket.SHUT_WR)
             response = bytearray()
             while True:
                 chunk = sock.recv(65536)

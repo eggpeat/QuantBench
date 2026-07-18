@@ -46,7 +46,23 @@ class BenchReportTest(unittest.TestCase):
         return row
 
     def metrics(self, total=10, output_speed=5, wall_speed=4, cache=2):
-        return {"tokens": {"input": total, "output": total // 2, "total": total + total // 2}, "cache": {"input_cached": cache, "input_total": total}, "throughput": {"output_tok_s": output_speed, "wall_output_tok_s": wall_speed}}
+        return {
+            "tokens": {"input": total, "output": total // 2, "total": total + total // 2},
+            "cache": {"input_cached": cache, "input_total": total},
+            "throughput": {"output_tok_s": output_speed, "wall_output_tok_s": wall_speed},
+            "notes": {"accounting": "semantic_model_turns"},
+        }
+ 
+    def test_metrics_exclude_legacy_retry_ambiguous_telemetry(self):
+        legacy = {"runtime_metrics": {"tokens": {"total": 123}}}
+        current = {
+            "runtime_metrics": {
+                "tokens": {"total": 123},
+                "notes": {"accounting": "semantic_model_turns"},
+            }
+        }
+        self.assertEqual(bench_report._metrics(legacy), {})
+        self.assertEqual(bench_report._metrics(current), current["runtime_metrics"])
 
     def manifest_contract(self):
         with bench_report.DEFAULT_MANIFEST_PATH.open("rb") as handle:
@@ -354,7 +370,19 @@ class BenchReportTest(unittest.TestCase):
 
     def test_token_coverage_nulls_complete_totals_but_keeps_observed_sums(self):
         with tempfile.TemporaryDirectory() as td:
-            rows = [self.row(result_id="a", metrics=self.metrics(total=10)), self.row(result_id="b", task="t2", status="REJECT", metrics={"tokens": {"total": 4}, "cache": {"input_cached": 1}})]
+            rows = [
+                self.row(result_id="a", metrics=self.metrics(total=10)),
+                self.row(
+                    result_id="b",
+                    task="t2",
+                    status="REJECT",
+                    metrics={
+                        "tokens": {"total": 4},
+                        "cache": {"input_cached": 1},
+                        "notes": {"accounting": "semantic_model_turns"},
+                    },
+                ),
+            ]
             self.make_run(td, "r", rows)
             model = bench_report.build_report(["r"], td, expected_tasks=2, expected_attempts=1)["models"][0]
             self.assertIsNone(model["token_totals"]["input"])
@@ -366,8 +394,21 @@ class BenchReportTest(unittest.TestCase):
     def test_cache_ratio_coverage_counts_only_paired_rows(self):
         with tempfile.TemporaryDirectory() as td:
             rows = [
-                self.row(result_id="cached", metrics={"cache": {"input_cached": 4}}),
-                self.row(result_id="total", task="t2", metrics={"cache": {"input_total": 10}}),
+                self.row(
+                    result_id="cached",
+                    metrics={
+                        "cache": {"input_cached": 4},
+                        "notes": {"accounting": "semantic_model_turns"},
+                    },
+                ),
+                self.row(
+                    result_id="total",
+                    task="t2",
+                    metrics={
+                        "cache": {"input_total": 10},
+                        "notes": {"accounting": "semantic_model_turns"},
+                    },
+                ),
             ]
             self.make_run(td, "r", rows)
             model = bench_report.build_report(["r"], td, expected_tasks=2, expected_attempts=1)["models"][0]

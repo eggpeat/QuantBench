@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-RUNTIME_METRIC_VERSION = "runtime_metrics_v2_omp_usage_capture"
+RUNTIME_METRIC_VERSION = "runtime_metrics_v3_retry_accounting"
 RUNTIME_METRIC_KEYS = (
     "source",
     "latency",
@@ -103,7 +103,17 @@ def usage_from_metric_line(text: str) -> dict[str, Any] | None:
     return None
 
 
-def usage_payload_from_run(run: dict[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
+def usage_payload_from_run(
+    run: dict[str, Any],
+    *,
+    attempted: bool = False,
+) -> tuple[dict[str, Any] | None, str | None]:
+    omp_key = "attempted_usage" if attempted else "usage"
+    omp_usage = run.get(omp_key)
+    if attempted and isinstance(omp_usage, dict):
+        return omp_usage, "provider_usage"
+    if not attempted and run.get("omp_failed_assistant_message_count"):
+        return (omp_usage, "provider_usage") if isinstance(omp_usage, dict) else (None, None)
     for key, source in (
         ("provider_usage", "provider_usage"),
         ("proxy_usage", "proxy_usage"),
@@ -113,10 +123,10 @@ def usage_payload_from_run(run: dict[str, Any]) -> tuple[dict[str, Any] | None, 
             return value, source
     stderr_usage = usage_from_metric_line(str(run.get("stderr") or ""))
     if stderr_usage is not None:
-        return stderr_usage, "proxy_usage" if str(stderr_usage.get("source") or "").startswith("proxy") else "provider_usage"
-    value = run.get("usage")
-    if isinstance(value, dict):
-        return value, "provider_usage"
+        source = "proxy_usage" if str(stderr_usage.get("source") or "").startswith("proxy") else "provider_usage"
+        return stderr_usage, source
+    if isinstance(omp_usage, dict):
+        return omp_usage, "provider_usage"
     return None, None
 
 
@@ -215,7 +225,7 @@ def assistant_messages_from_omp_events(events: list[dict[str, Any]]) -> list[dic
         ]
         break
 
-    if agent_end_assistants and agent_end_assistants[-1].get("stopReason") in {"error", "aborted"}:
+    if agent_end_assistants and agent_end_assistants[-1].get("stopReason") in {"error", "failed", "aborted"}:
         return agent_end_assistants
     if message_end_assistants:
         return message_end_assistants
@@ -314,8 +324,12 @@ def iter_omp_jsonl_file(path: Path) -> Iterable[str]:
 def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
     message_final: dict[str, Any] | None = None
     message_usage: dict[str, Any] = {}
+    message_attempted_usage: dict[str, Any] = {}
+    message_failed_count = 0
     agent_final: dict[str, Any] | None = None
     agent_usage: dict[str, Any] = {}
+    agent_attempted_usage: dict[str, Any] = {}
+    agent_failed_count = 0
     event_count = 0
     parse_errors = 0
     for line in lines:
@@ -339,6 +353,7 @@ def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
                     "stopReason": stop_reason,
                     "errorMessage": event.get("errorMessage"),
                 }
+                agent_failed_count = 1
             event_count += 1
             continue
         if event_type == "oversize_json_event":
@@ -348,6 +363,7 @@ def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
                 "stopReason": "error",
                 "errorMessage": event.get("errorMessage"),
             }
+            agent_failed_count = 1
             event_count += 1
             continue
         event_count += 1
@@ -357,22 +373,34 @@ def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
             and isinstance(message, dict)
             and message.get("role") == "assistant"
         ):
-            _accumulate_omp_usage(message_usage, message)
+            _accumulate_omp_usage(message_attempted_usage, message)
+            if message.get("stopReason") not in {"error", "failed", "aborted"}:
+                _accumulate_omp_usage(message_usage, message)
+            else:
+                message_failed_count += 1
             message_final = message
         messages = event.get("messages")
         if event.get("type") == "agent_end" and isinstance(messages, list):
             current_usage: dict[str, Any] = {}
+            current_attempted_usage: dict[str, Any] = {}
             current_final: dict[str, Any] | None = None
+            current_failed_count = 0
             for item in messages:
                 if isinstance(item, dict) and item.get("role") == "assistant":
-                    _accumulate_omp_usage(current_usage, item)
+                    _accumulate_omp_usage(current_attempted_usage, item)
+                    if item.get("stopReason") not in {"error", "failed", "aborted"}:
+                        _accumulate_omp_usage(current_usage, item)
+                    else:
+                        current_failed_count += 1
                     current_final = item
             agent_usage = current_usage
+            agent_attempted_usage = current_attempted_usage
+            agent_failed_count = current_failed_count
             agent_final = current_final
 
     use_agent = (
         agent_final is not None
-        and agent_final.get("stopReason") in {"error", "aborted"}
+        and agent_final.get("stopReason") in {"error", "failed", "aborted"}
     )
     final_message = agent_final if use_agent else message_final or agent_final
     usage_state = (
@@ -381,6 +409,20 @@ def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
         else message_usage
         if message_final is not None
         else agent_usage
+    )
+    attempted_usage_state = (
+        agent_attempted_usage
+        if use_agent and agent_attempted_usage
+        else message_attempted_usage
+        if message_final is not None
+        else agent_attempted_usage
+    )
+    failed_count = (
+        max(agent_failed_count, message_failed_count)
+        if use_agent
+        else message_failed_count
+        if message_final is not None
+        else agent_failed_count
     )
     if event_count:
         run["omp_json_event_count"] = event_count
@@ -394,12 +436,16 @@ def _capture_omp_json_lines(run: dict[str, Any], lines: Iterable[str]) -> None:
     if usage is not None:
         run["omp_assistant_message_count"] = usage["omp_assistant_turns"]
         run["usage"] = usage
+    attempted_usage = _finalize_omp_usage(attempted_usage_state)
+    if attempted_usage is not None:
+        run["attempted_usage"] = attempted_usage
+    run["omp_failed_assistant_message_count"] = failed_count
 
     stop_reason = final_message.get("stopReason")
     error_message = final_message.get("errorMessage")
     if isinstance(stop_reason, str):
         run["omp_stop_reason"] = stop_reason
-    if stop_reason in {"error", "aborted"}:
+    if stop_reason in {"error", "failed", "aborted"}:
         error_text = error_message if isinstance(error_message, str) and error_message else f"Request {stop_reason}"
         run["omp_error_message"] = error_text
         existing_stderr = str(run.get("stderr") or "").rstrip()
@@ -564,8 +610,9 @@ def runtime_metrics_for_run(
     *,
     model: str | None = None,
     auth_gateway_url: str | None = None,
+    attempted: bool = False,
 ) -> dict[str, Any]:
-    usage, usage_source = usage_payload_from_run(run)
+    usage, usage_source = usage_payload_from_run(run, attempted=attempted)
     usage = usage or {}
     tokens = normalized_usage_tokens(usage)
     output_chars = token_count(run.get("omp_stdout_char_count"))
@@ -628,12 +675,31 @@ def runtime_metrics_for_run(
         "provider_route": runtime_provider_route(model, usage, auth_gateway_url),
         "notes": {
             "metric_version": RUNTIME_METRIC_VERSION,
+            "accounting": "semantic_model_turns",
             "provider_usage": "OMP JSON message_end usage or provider/proxy metric lines when exposed; otherwise null.",
             "output_tok_s": "Provider output tokens divided by provider duration when exposed; falls back to generation_ms.",
             "visible_output_est": "Fallback estimate from final captured stdout length.",
             "response_cache_hit": "Tracked separately from provider prompt-cache reads.",
         },
     }
+
+def attempted_runtime_metrics_for_run(
+    run: dict[str, Any],
+    *,
+    model: str | None = None,
+    auth_gateway_url: str | None = None,
+) -> dict[str, Any]:
+    metrics = runtime_metrics_for_run(
+        run,
+        model=model,
+        auth_gateway_url=auth_gateway_url,
+        attempted=True,
+    )
+    metrics.pop("throughput", None)
+    metrics["notes"]["accounting"] = (
+        "Observed attempted usage only; provider work without terminal usage is unobservable and not estimated."
+    )
+    return metrics
 
 
 def metric_section_value(metrics: dict[str, Any], section: str, key: str) -> Any:
@@ -786,6 +852,7 @@ def runtime_metrics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "provider_route": runtime_route_summary(metric_rows),
         "notes": {
             "metric_version": RUNTIME_METRIC_VERSION,
+            "accounting": "semantic_model_turns",
             "aggregation": "Sum only complete provider/proxy token coverage across current hardcoded gates; partial token totals stay null.",
             "coverage": {
                 "gate_count": len(metric_rows),
@@ -797,3 +864,28 @@ def runtime_metrics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "capability_scoring": "Runtime metrics are reported only; they do not change pass/fail or layered scores.",
         },
     }
+
+
+def attempted_runtime_metrics_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    metrics = runtime_metrics_summary(rows)
+    metrics.pop("throughput", None)
+    attempt_sections = [
+        row["runtime_metrics"].get("attempts")
+        for row in rows
+        if isinstance(row.get("runtime_metrics"), dict)
+        and isinstance(row["runtime_metrics"].get("attempts"), dict)
+    ]
+    if attempt_sections:
+        metrics["attempts"] = {
+            key: sum(int(section.get(key, 0)) for section in attempt_sections)
+            for key in (
+                "runner_attempts",
+                "runner_retries",
+                "observed_failed_model_turns",
+                "failed_runner_attempts_without_usage",
+            )
+        }
+    metrics["notes"]["accounting"] = (
+        "Observed attempted usage only; provider work without terminal usage is unobservable and not estimated."
+    )
+    return metrics
